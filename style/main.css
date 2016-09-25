@@ -1,0 +1,24 @@
+/*
+ * CSS styles for html and body as well as utility styles
+ *
+ */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: #000;
+}
+
+
+.no-select {
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
