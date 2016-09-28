@@ -12,6 +12,8 @@ var DrawingCanvas = function () {
     this.cvs = document.getElementById("drawing-canvas");
     this.ctx = this.cvs.getContext("2d");
 
+    this.fpsUtility = new FPSUtility();
+
     window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.resizeCanvas();
 }
@@ -22,7 +24,6 @@ DrawingCanvas.prototype.resizeCanvas = function () {
     this.cvs.height = window.innerHeight;
     this.render();
 }
-
 
 
 DrawingCanvas.prototype.render = function (time) {
@@ -37,7 +38,10 @@ DrawingCanvas.prototype.render = function (time) {
     this.ctx.strokeStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
     this.ctx.stroke();
 
+    this.fpsUtility.getFPS(time);
+
     window.requestAnimationFrame(this.render.bind(this));
+
 }
 
 
