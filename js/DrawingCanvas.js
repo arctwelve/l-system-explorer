@@ -28,6 +28,8 @@ DrawingCanvas.prototype.resizeCanvas = function () {
 
 DrawingCanvas.prototype.render = function (time) {
 
+    // render method needs a memoized set of words from the L-System parser
+
     this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
     this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
@@ -41,7 +43,6 @@ DrawingCanvas.prototype.render = function (time) {
     this.fpsUtility.getFPS(time);
 
     window.requestAnimationFrame(this.render.bind(this));
-
 }
 
 
