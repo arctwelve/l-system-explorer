@@ -12,6 +12,38 @@
  * drawing rules passed to the turtle graphics.
  *
  */
-var Rewriter = function (axiom, productions, steps) {
+var Rewriter = function (axiom) {
+
+    this.steps = 3;
+    this.axiom = axiom;
+    this.productions = [];
+}
+
+
+/*
+ * Sets the number of steps or interations that the axiom is rewritten
+ * with the productions. The default is three.
+ */
+Rewriter.prototype.setSteps = function (s) {
+    this.steps = s;
+}
+
+
+/*
+ * Adds a single production that will be rewritten into tne axiom. There
+ * may be more than one production. All the productions are rewritten into
+ * the axiom n number of iterations, determined by number set in the
+ * setSteps(...) method.
+ */
+Rewriter.prototype.addProduction = function (p) {
+    this.productions.push = p;
+}
+
+
+/*
+ * The axiom is finally derived in full here, by rewritting the axiom
+ * using the productions.
+ */
+Rewriter.prototype.derive = function () {
 
 }
