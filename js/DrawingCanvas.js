@@ -30,12 +30,12 @@ DrawingCanvas.prototype.render = function (time) {
     this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
     this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
-    this.ctx.beginPath();
+    /*this.ctx.beginPath();
     this.ctx.moveTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
     this.ctx.lineTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
 
     this.ctx.strokeStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
-    this.ctx.stroke();
+    this.ctx.stroke();*/
 
     window.requestAnimationFrame(this.render.bind(this));
 }

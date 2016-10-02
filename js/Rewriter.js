@@ -11,46 +11,60 @@
  */
 var Rewriter = function (a) {
 
+    this.axiom = a;
     this.steps = 3;
-    this.axiom = a.split("");
 
     this.productions = [];
-    this.words = [];
+    this.targets = [];
+    this.replacements = [];
+
+    this.words = null;
 }
 
 
-/*
- * Sets the number of steps or interations that the axiom is rewritten
- * with the productions. The default is three.
- */
-Rewriter.prototype.setSteps = function (s) {
-    this.steps = s;
-}
-
 
 /*
- * Adds a single production that will be rewritten into tne axiom. There
- * may be more than one production. All the productions are rewritten into
- * the axiom n number of iterations, determined by number set in the
- * setSteps(...) method.
+ * Adds a single production that will be rewritten into tne axiom. There may be more than one
+ * production. All the productions are rewritten into the axiom n number of iterations, determined
+ * by number set in the setSteps(...) method.
  */
 Rewriter.prototype.addProduction = function (p) {
-    this.productions.push = p;
+    this.productions.push(p);
 }
 
 
 /*
- * The axiom is finally derived in full here, by rewritting the axiom
- * using the productions.
+ * The axiom is finally derived in full here, by rewritting the axiom using the productions. All
+ * productions are applied in each step.
  */
 Rewriter.prototype.derive = function () {
 
-    for (var i = 0; i < this.productions.length; i++) {
+    var words = this.axiom;
+    var len = this.splitProductions();
 
-        // get the target and the replacement in the current production
-        var p = this.productions.split("->");
-        var target = p[0];
-        var replacement = p[1];
-
+    while (this.steps-- > 0) {
+        for (var j = 0; j < len; j++) {
+            var regex = new RegExp(this.targets[j], "g");
+            words = words.replace(regex, this.replacements[j]);
+        }
     }
+
+    console.log(words);
 }
+
+
+/*
+ * pre store the targets and replacements of the productions so the splits aren't repeated.
+ * Returns the number of productions
+ */
+Rewriter.prototype.splitProductions = function () {
+
+    var len = this.productions.length;
+    for (var i = 0; i < len; i++) {
+        var p = this.productions[i].split("->");
+        this.targets.push(p[0]);
+        this.replacements.push(p[1]);
+    }
+    return len;
+}
+
