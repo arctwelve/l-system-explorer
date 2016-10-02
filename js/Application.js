@@ -8,6 +8,9 @@
 var Application = function () {
     var controlPanel = new ControlPanel();
     var canvas = new DrawingCanvas();
+
+    var rewriter = new Rewriter();
+    rewriter.setAxiom("F")
 }
 
 

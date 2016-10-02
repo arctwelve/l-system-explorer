@@ -2,21 +2,20 @@
 
 
 /*
- * Rewriter class handles string rewrites of the L-System formal
- * language. Using L-System grammar rules, the results or 'words'are
- * returned as an array of steps.
+ * Rewriter class handles string rewrites of the L-System formal language. Using L-System grammar
+ * rules, the results or 'words'are returned as an array of steps.
  *
- * A single starting axiom is iterated by n number of steps. The
- * axiom is replaced by the producton grammars, simultaneously and
- * in parallel. The result creates an array of words that represents
- * drawing rules passed to the turtle graphics.
- *
+ * A single starting axiom is iterated by n number of steps. The axiom is replaced by the producton
+ * grammars, simultaneously and in parallel. The result creates an array of words that represents
+ * drawing rules which are passed to the graphics object.
  */
-var Rewriter = function (axiom) {
+var Rewriter = function (a) {
 
     this.steps = 3;
-    this.axiom = axiom;
+    this.axiom = a.split("");
+
     this.productions = [];
+    this.words = [];
 }
 
 
@@ -46,4 +45,12 @@ Rewriter.prototype.addProduction = function (p) {
  */
 Rewriter.prototype.derive = function () {
 
+    for (var i = 0; i < this.productions.length; i++) {
+
+        // get the target and the replacement in the current production
+        var p = this.productions.split("->");
+        var target = p[0];
+        var replacement = p[1];
+
+    }
 }
