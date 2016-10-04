@@ -17,8 +17,6 @@ var Rewriter = function (a) {
     this.productions = [];
     this.targets = [];
     this.replacements = [];
-
-    this.words = [];
 }
 
 
@@ -36,17 +34,29 @@ Rewriter.prototype.addProduction = function (p) {
  * The words array is derived in full here, by rewritting the axiom using the productions. All
  * productions are applied in each step, in parallel (i.e., we don't iterate over the replacements)
  */
-Rewriter.prototype.derive = function (app) {
+Rewriter.prototype.derive = function () {
 
     this.splitProductions();
 
-    for (var x = 0; x < this.axiom.length; x++) {
-        var word = this.axiom[x];
-        var idx = this.targets.indexOf(word);
-        this.words.push((idx > -1) ? this.replacements[idx] : word);
+    while (this.steps-- > 0) {
+        var words = [];
+        for (var x = 0; x < this.axiom.length; x++) {
+            var word = this.axiom[x];
+            var idx = this.targets.indexOf(word);
+            if (idx > -1) {
+                var repStr = this.replacements[idx];
+                for (var j = 0; j < repStr.length; j++) {
+                    words.push(repStr.charAt(j));
+                }
+            } else {
+                words.push(word);
+            }
+        }
+        this.axiom = words.slice();
     }
-    console.log(this.words);
 }
+
+
 
 
 /*
