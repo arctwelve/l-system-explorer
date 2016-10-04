@@ -35,23 +35,30 @@ Rewriter.prototype.addProduction = function (p) {
 
 /*
  * The axiom is finally derived in full here, by rewritting the axiom using the productions. All
- * productions are applied in each step.
+ * productions are applied in each step, in parallel
  */
-Rewriter.prototype.derive = function () {
+Rewriter.prototype.derive = function (app) {
 
-    var words = this.axiom;
-    var len = this.splitProductions();
+    var temp = "";
+    var words = this.axiom = "L-R-L";
+    var numProductions = this.splitProductions();
 
-    while (this.steps-- > 0) {
-        for (var j = 0; j < len; j++) {
-            var regex = new RegExp(this.targets[j], "g");
-            words = words.replace(regex, this.replacements[j]);
-        }
+    var temp = "";
+
+    for (var x = 0; x < words.length; x++) {
+
+        var word = words.charAt(x);
+        temp += getReplacementMatch(word)
+
     }
-
-    console.log(words);
+    console.log(temp);
+    app.elemDiv.textContent = "";
 }
 
+
+Rewriter.prototype.getReplacementMatch = function () {
+
+}
 
 /*
  * pre store the targets and replacements of the productions so the splits aren't repeated.
