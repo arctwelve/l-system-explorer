@@ -11,16 +11,15 @@
  */
 var Rewriter = function (a) {
 
-    this.axiom = a;
+    this.axiom = a.split("");
     this.steps = 3;
 
     this.productions = [];
     this.targets = [];
     this.replacements = [];
 
-    this.words = null;
+    this.words = [];
 }
-
 
 
 /*
@@ -34,44 +33,30 @@ Rewriter.prototype.addProduction = function (p) {
 
 
 /*
- * The axiom is finally derived in full here, by rewritting the axiom using the productions. All
- * productions are applied in each step, in parallel
+ * The words array is derived in full here, by rewritting the axiom using the productions. All
+ * productions are applied in each step, in parallel (i.e., we don't iterate over the replacements)
  */
 Rewriter.prototype.derive = function (app) {
 
-    var temp = "";
-    var words = this.axiom = "L-R-L";
-    var numProductions = this.splitProductions();
+    this.splitProductions();
 
-    var temp = "";
-
-    for (var x = 0; x < words.length; x++) {
-
-        var word = words.charAt(x);
-        temp += getReplacementMatch(word)
-
+    for (var x = 0; x < this.axiom.length; x++) {
+        var word = this.axiom[x];
+        var idx = this.targets.indexOf(word);
+        this.words.push((idx > -1) ? this.replacements[idx] : word);
     }
-    console.log(temp);
-    app.elemDiv.textContent = "";
+    console.log(this.words);
 }
 
-
-Rewriter.prototype.getReplacementMatch = function () {
-
-}
 
 /*
- * pre store the targets and replacements of the productions so the splits aren't repeated.
- * Returns the number of productions
+ * Split the productions into targets(left of ->) and replacements(right of ->)
  */
 Rewriter.prototype.splitProductions = function () {
-
-    var len = this.productions.length;
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.productions.length; i++) {
         var p = this.productions[i].split("->");
         this.targets.push(p[0]);
         this.replacements.push(p[1]);
     }
-    return len;
 }
 
