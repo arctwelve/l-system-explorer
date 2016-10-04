@@ -11,7 +11,7 @@ var Application = function () {
     var rewriter = new Rewriter("R");
     rewriter.addProduction("L->R+L+R");
     rewriter.addProduction("R->L-R-L");
-    rewriter.derive(8);
+    rewriter.derive(9);
 
     console.log(rewriter.words.toString().replace(/,/g, ""));
 }
