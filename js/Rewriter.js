@@ -12,11 +12,9 @@
 var Rewriter = function (a) {
 
     this.axiom = a.split("");
-    this.steps = 3;
-
     this.productions = [];
-    this.targets = [];
-    this.replacements = [];
+    this.words = this.axiom.slice();
+
 }
 
 
@@ -34,37 +32,32 @@ Rewriter.prototype.addProduction = function (p) {
  * The words array is derived in full here, by rewritting the axiom using the productions. All
  * productions are applied in each step, in parallel (i.e., we don't iterate over the replacements)
  */
-Rewriter.prototype.derive = function () {
+Rewriter.prototype.derive = function (steps) {
 
-    this.splitProductions();
+    var targets = [];
+    var replacements = [];
+    this.splitProductions(targets, replacements);
 
-    while (this.steps-- > 0) {
-        var words = [];
-        for (var x = 0; x < this.axiom.length; x++) {
-            var word = this.axiom[x];
-            var idx = this.targets.indexOf(word);
-            if (idx > -1) {
-                var repStr = this.replacements[idx];
-                for (var j = 0; j < repStr.length; j++) {
-                    words.push(repStr.charAt(j));
-                }
-            } else {
-                words.push(word);
-            }
+    while (steps-- > 0) {
+        var temp = [];
+        for (var x = 0; x < this.words.length; x++) {
+            var word = this.words[x];
+            var idx = targets.indexOf(word);
+            temp = temp.concat((idx > -1) ? replacements[idx] : word);
         }
-        this.axiom = words.slice();
+        this.words = temp.slice();
     }
 }
 
 
 /*
- * Split the productions into targets(left of ->) and replacements(right of ->)
+ * Split the productions into targets(left of ->) and an array of replacements(right of ->)
  */
-Rewriter.prototype.splitProductions = function () {
+Rewriter.prototype.splitProductions = function (t, r) {
     for (var i = 0; i < this.productions.length; i++) {
         var p = this.productions[i].split("->");
-        this.targets.push(p[0]);
-        this.replacements.push(p[1]);
+        t.push(p[0]);
+        r.push(p[1].split(""));
     }
 }
 
