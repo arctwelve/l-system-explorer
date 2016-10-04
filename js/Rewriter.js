@@ -57,8 +57,6 @@ Rewriter.prototype.derive = function () {
 }
 
 
-
-
 /*
  * Split the productions into targets(left of ->) and replacements(right of ->)
  */
