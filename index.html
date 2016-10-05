@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="l-system explorer">
-    <meta name="keywords" content="l-system, alec cove, lindenmayer, spa, javascript, procedural, graphics, html, css">
+    <meta name="keywords" content="l-system, alec cove, lindenmayer, single page app, javascript, procedural, graphics, html, css">
     <meta name="author" content="Alec Cove">
 
     <title>L-System Explorer</title>
@@ -15,8 +15,6 @@
     <link href="style/control-panel.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:600|Material+Icons" rel="stylesheet">
 
-    <!-- intentional placement, block rendering until require.js is loaded -->
-    <script data-main="js/app/main" src="js/lib/require.js"></script>
 </head>
 
 <body>
@@ -30,10 +28,11 @@
         </div>
     </div>
 
-
     <div id="drawing-canvas-container">
         <canvas id="drawing-canvas"></canvas>
     </div>
+
+    <script data-main="js/app/main" src="js/lib/require.js"></script>
 
 </body>
 </html>

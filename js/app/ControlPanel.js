@@ -4,8 +4,8 @@
 /*
  * Control panel object. Persists on the left side in open or closed drawer state.
  */
-
 define(function () {
+
 
     var ControlPanel = function () {
 
@@ -19,8 +19,7 @@ define(function () {
 
 
     /*
-     * Event handler for the toggle tab click. Slides the panel
-     * drawer in or out. Animation is handled by CSS.
+     * Event handler for the toggle tab click. Slides the panel drawer in / out. Animation is CSS.
      */
     ControlPanel.prototype.toggleControls = function () {
 
@@ -34,5 +33,6 @@ define(function () {
     }
 
 
+    // return reference so the object can be instantiated after required as a module
     return ControlPanel;
 });
