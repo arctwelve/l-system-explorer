@@ -11,25 +11,35 @@
     <script>
         function getAsset() {
 
+
+            // create dynamic iframe and style element, adding the style to the document head
             var assetFrame = document.createElement('iframe');
+            var styleElement = document.createElement('style');
+            var headNode = document.querySelector("head");
+            headNode.appendChild(styleElement);
+
+
+            // add the dynamic iframe and load the asset page
             document.body.appendChild(assetFrame);
             assetFrame.src = "assets.html";
+
+
+            // after it's loaded
             assetFrame.onload = function () {
 
                 var parent = this.parentElement;
-
                 var iframeDoc = this.contentDocument || this.contentWindow.document;
 
+                // get css text of the style in the asset page and append to the parent page style
+                var assetStyleElement = iframeDoc.querySelector("style");
+                var assetStyleElementText = assetStyleElement.textContent;
+                styleElement.appendChild(document.createTextNode(assetStyleElementText));
 
-                var styleNode = iframeDoc.querySelector("style");
+                // clone the button from then imported assets page
                 var cloneBtn = iframeDoc.getElementById("generate-btn").cloneNode(true);
 
                 parent.removeChild(this);
-
-                parent.appendChild(styleNode);
                 parent.appendChild(cloneBtn);
-
-
             }
         }
 
