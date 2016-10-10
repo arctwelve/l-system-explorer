@@ -22,7 +22,7 @@ define(function (require) {
         rewriter.addProduction("R->L-R-L");
         rewriter.derive(5);
 
-        console.log(rewriter.words.toString().replace(/,/g, ""));
+        //console.log(rewriter.words.toString().replace(/,/g, ""));
     }
 
     // return reference so the object can be instantiated after required as a module

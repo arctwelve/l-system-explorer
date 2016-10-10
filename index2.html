@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+
+
+    <script>
+        function getAsset() {
+
+            var assetFrame = document.createElement('iframe');
+            document.body.appendChild(assetFrame);
+            assetFrame.src = "assets.html";
+            assetFrame.onload = function () {
+
+                var parent = this.parentElement;
+
+                var iframeDoc = this.contentDocument || this.contentWindow.document;
+
+
+                var styleNode = iframeDoc.querySelector("style");
+                var cloneBtn = iframeDoc.getElementById("generate-btn").cloneNode(true);
+
+                parent.removeChild(this);
+
+                parent.appendChild(styleNode);
+                parent.appendChild(cloneBtn);
+
+
+            }
+        }
+
+        window.onload = getAsset;
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

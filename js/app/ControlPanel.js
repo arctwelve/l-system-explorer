@@ -11,9 +11,10 @@ define(function () {
 
         this.isOpen = true;
 
-        this.panel = document.getElementById("control-panel")
-        this.toggleTab = document.getElementById("control-panel-toggle-tab");
+        this.panel = document.getElementById("control-panel");
+        this.loadAssets("assets.html");
 
+        this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
     }
 
@@ -30,6 +31,29 @@ define(function () {
             this.panel.style.left = "0px";
             this.isOpen = true;
         }
+    }
+
+
+    /*
+     * Dynamically writes a hidden iframe to the document
+     */
+    ControlPanel.prototype.loadAssets = function (assetSrc) {
+
+        var assetFrame = document.createElement('iframe');
+        assetFrame.id = "asset-container"
+        this.panel.appendChild(assetFrame);
+        assetFrame.src = assetSrc;
+
+        assetFrame.style.position = 'absolute';
+        assetFrame.style.left = "500px";
+        assetFrame.style.top = "100px";
+
+        var xx = document.getElementById('asset-container').contentWindow.document.getElementById('generate-btn')
+        //var innerDoc = assetFrame.contentDocument || assetFrame.contentWindow.document;
+        //var dkbutton = innerDoc.getElementById("generate-btn");
+        console.log(xx);
+        //this.panel.adoptNode(this.darkButton);
+        ///this.darkButton.style.left = "100px";
     }
 
 
