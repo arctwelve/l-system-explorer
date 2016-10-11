@@ -44,7 +44,7 @@ define(function () {
         var targets = [];
         var replacements = [];
         this.splitProductions(targets, replacements);
-        var end = Date.now();
+
 
         while (steps-- > 0) {
             var temp = [];
@@ -56,6 +56,7 @@ define(function () {
             this.words = temp.slice();
         }
 
+        var end = Date.now();
         console.log("derive() took " + (end - start) + " ms");
     }
 
