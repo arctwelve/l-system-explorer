@@ -20,7 +20,7 @@ define(function () {
 
 
     /*
-     * Event handler for the toggle tab click. Slides the panel drawer in / out. Animation is CSS.
+     * Event handler for the toggle tab click. Slides the panel drawer in / out. Animation is CSS
      */
     ControlPanel.prototype.toggleControls = function () {
 
@@ -39,6 +39,7 @@ define(function () {
      */
     ControlPanel.prototype.loadAssets = function (assetSrc) {
 
+        /*
         var assetFrame = document.createElement('iframe');
         assetFrame.id = "asset-container"
         this.panel.appendChild(assetFrame);
@@ -47,11 +48,12 @@ define(function () {
         assetFrame.style.position = 'absolute';
         assetFrame.style.left = "500px";
         assetFrame.style.top = "100px";
+        */
 
-        var xx = document.getElementById('asset-container').contentWindow.document.getElementById('generate-btn')
+        //var xx = document.getElementById('asset-container').contentWindow.document.getElementById('generate-btn')
         //var innerDoc = assetFrame.contentDocument || assetFrame.contentWindow.document;
         //var dkbutton = innerDoc.getElementById("generate-btn");
-        console.log(xx);
+        //console.log(xx);
         //this.panel.adoptNode(this.darkButton);
         ///this.darkButton.style.left = "100px";
     }

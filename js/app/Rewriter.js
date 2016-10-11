@@ -28,6 +28,8 @@ define(function () {
      */
     Rewriter.prototype.addProduction = function (p) {
         this.productions.push(p);
+
+        //TODO:Split on add, not derive
     }
 
 
@@ -37,10 +39,13 @@ define(function () {
      */
     Rewriter.prototype.derive = function (steps) {
 
+        var start = Date.now();
+
         var targets = [];
         var replacements = [];
         this.splitProductions(targets, replacements);
-
+        var end = Date.now();
+        console.log("derive() took " + (end - start) + " ms");
         while (steps-- > 0) {
             var temp = [];
             for (var x = 0; x < this.words.length; x++) {
@@ -50,6 +55,8 @@ define(function () {
             }
             this.words = temp.slice();
         }
+
+
     }
 
 
