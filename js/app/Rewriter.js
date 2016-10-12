@@ -15,29 +15,45 @@ define(function () {
     var Rewriter = function (a) {
 
         this.axiom = a.split("");
-        this.productions = [];
+        this.productions = {};
         this.words = this.axiom.slice();
 
     }
 
 
     /*
-     * Adds a single production that will be rewritten into tne axiom. There may be more than one
-     * production. All the productions are rewritten into the axiom n number of iterations, determined
-     * by number set in the setSteps(...) method.
+     * Fill production object with properties of each production added
      */
     Rewriter.prototype.addProduction = function (p) {
-        this.productions.push(p);
 
-        //TODO:Split on add, not derive
+        var pa = p.split("->");
+        this.productions[pa[0]] = pa[1];
+    }
+
+
+    /*
+     *
+     */
+    Rewriter.prototype.derive = function (steps) {
+
+        var start = Date.now();
+
+
+        for (var i = 0; i < this.steps; i++) {
+
+        }
+
+        var end = Date.now();
+        console.log("derive() took " + (end - start) + " ms");
     }
 
 
     /*
      * The words array is derived in full here, by rewritting the axiom using the productions. All
-     * productions are applied in each step, in parallel (i.e., we don't iterate over the replacements)
+     * productions are applied in each step, in parallel (i.e., we don't iterate over the
+     * replacements)
      */
-    Rewriter.prototype.derive = function (steps) {
+    Rewriter.prototype.derive_slow = function (steps) {
 
         var start = Date.now();
 
