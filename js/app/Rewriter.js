@@ -12,12 +12,10 @@
 define(function () {
 
 
-    var Rewriter = function (a) {
-
-        this.axiom = a.split("");
+    var Rewriter = function (axiom) {
         this.productions = {};
-        this.words = this.axiom.slice();
-
+        this.words = axiom;
+        this.numProductions = 0;
     }
 
 
@@ -28,21 +26,34 @@ define(function () {
 
         var pa = p.split("->");
         this.productions[pa[0]] = pa[1];
+        this.numProductions++;
     }
 
 
     /*
+     * Builds the string of words, going through the productions and replacing the words in each
+     * iteration. The words list begins with the axiom.
+     *
+     *
      *
      */
     Rewriter.prototype.derive = function (steps) {
 
         var start = Date.now();
 
+        for (var i = 0; i < steps; i++) {
 
-        for (var i = 0; i < this.steps; i++) {
+            var temp = "";
 
+            for (var j = 0; j < this.words.length; j++) {
+                var match = this.words.charAt(j);
+                var successor = this.productions[match];
+                temp += (successor == null) ? match : successor;
+            }
+            this.words = temp;
         }
 
+        console.log("this.words: " + this.words);
         var end = Date.now();
         console.log("derive() took " + (end - start) + " ms");
     }

@@ -17,15 +17,11 @@ define(function (require) {
         var controlPanel = new ControlPanel();
         var canvas = new DrawingCanvas();
 
-        /*var rewriter = new Rewriter("R");
-        rewriter.addProduction("L->R+L+R");
-        rewriter.addProduction("R->L-R-L");
-        rewriter.derive(5);*/
-
         var rewriter = new Rewriter("X");
         rewriter.addProduction("X->F[+X][-X]FX");
         rewriter.addProduction("F->FF");
-        rewriter.derive(7);
+        rewriter.derive(15);
+
 
         //console.log(rewriter.words.toString().replace(/,/g, ""));
     }
