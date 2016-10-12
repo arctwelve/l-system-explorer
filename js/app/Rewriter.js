@@ -15,7 +15,6 @@ define(function () {
     var Rewriter = function (axiom) {
         this.productions = {};
         this.words = axiom;
-        this.numProductions = 0;
     }
 
 
@@ -26,16 +25,12 @@ define(function () {
 
         var pa = p.split("->");
         this.productions[pa[0]] = pa[1];
-        this.numProductions++;
     }
 
 
     /*
      * Builds the string of words, going through the productions and replacing the words in each
-     * iteration. The words list begins with the axiom.
-     *
-     *
-     *
+     * iteration. The words list begins with the axiom set in this object's constructor.
      */
     Rewriter.prototype.derive = function (steps) {
 
@@ -51,36 +46,6 @@ define(function () {
                 temp += (successor == null) ? match : successor;
             }
             this.words = temp;
-        }
-
-        console.log("this.words: " + this.words);
-        var end = Date.now();
-        console.log("derive() took " + (end - start) + " ms");
-    }
-
-
-    /*
-     * The words array is derived in full here, by rewritting the axiom using the productions. All
-     * productions are applied in each step, in parallel (i.e., we don't iterate over the
-     * replacements)
-     */
-    Rewriter.prototype.derive_slow = function (steps) {
-
-        var start = Date.now();
-
-        var targets = [];
-        var replacements = [];
-        this.splitProductions(targets, replacements);
-
-
-        while (steps-- > 0) {
-            var temp = [];
-            for (var x = 0; x < this.words.length; x++) {
-                var word = this.words[x];
-                var idx = targets.indexOf(word);
-                temp = temp.concat((idx > -1) ? replacements[idx] : word);
-            }
-            this.words = temp.slice();
         }
 
         var end = Date.now();

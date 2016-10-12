@@ -20,7 +20,7 @@ define(function (require) {
         var rewriter = new Rewriter("X");
         rewriter.addProduction("X->F[+X][-X]FX");
         rewriter.addProduction("F->FF");
-        rewriter.derive(15);
+        rewriter.derive(13); //ms: 750ms
 
 
         //console.log(rewriter.words.toString().replace(/,/g, ""));
