@@ -29,12 +29,12 @@ define(function () {
 
 
     /*
-     * Derives the string of words, going through the productions and replacing the words in each
-     * iteration. The words list begins with the axiom set in this object's constructor.
+     * Derives the string of words, going through the productions and replacing the words in
+     * each iteration. The words list begins with the axiom set in this object's constructor.
+     * All production rewrites are applied in parallel, simultaneously replacing each matching
+     * characters in a word.
      */
     Rewriter.prototype.derive = function (steps) {
-
-        var start = Date.now();
 
         for (var i = 0; i < steps; i++) {
 
@@ -47,9 +47,6 @@ define(function () {
             }
             this.words = temp;
         }
-
-        var end = Date.now();
-        console.log("derive() took " + (end - start) + " ms");
     }
 
 

@@ -3,6 +3,8 @@
 
 /*
  * Main application object for the L-Systems Explorer.
+ *
+ * TODO: look into 'ignored' words = symbols that don't get drawn if they are specificed
  */
 define(function (require) {
 
@@ -20,9 +22,9 @@ define(function (require) {
         var rewriter = new Rewriter("X");
         rewriter.addProduction("X->F[+X][-X]FX");
         rewriter.addProduction("F->FF");
-        rewriter.derive(13); //13 steps = ms: 750ms
+        rewriter.derive(7);
 
-        //console.log(rewriter.words.toString().replace(/,/g, ""));
+        console.log(rewriter.words.toString().replace(/,/g, ""));
     }
 
     // return reference so the object can be instantiated after required as a module
