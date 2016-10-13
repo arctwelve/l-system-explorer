@@ -29,7 +29,7 @@ define(function () {
 
 
     /*
-     * Builds the string of words, going through the productions and replacing the words in each
+     * Derives the string of words, going through the productions and replacing the words in each
      * iteration. The words list begins with the axiom set in this object's constructor.
      */
     Rewriter.prototype.derive = function (steps) {
@@ -43,7 +43,7 @@ define(function () {
             for (var j = 0; j < this.words.length; j++) {
                 var match = this.words.charAt(j);
                 var successor = this.productions[match];
-                temp += (successor == null) ? match : successor;
+                temp += successor ? successor: match;
             }
             this.words = temp;
         }
