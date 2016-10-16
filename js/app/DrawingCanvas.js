@@ -28,8 +28,6 @@ define(function () {
 
     DrawingCanvas.prototype.render = function (time) {
 
-        // render method needs a memoized set of words from the L-System Rewriter
-
         this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
@@ -56,3 +54,49 @@ define(function () {
     // return reference so the object can be instantiated after required as a module
     return DrawingCanvas;
 });
+
+/*
+private function renderInstruction (instr:String):void {
+
+			var c:Cursor;
+
+			switch(instr) {
+                // these should be default
+				case 'R' :
+				case 'L' : // edge rewriting
+				case 'F' :
+                case 'X' : // node rewriting
+                case 'Y' :
+					px = px + d * Math.cos(rad);
+					py = py + d * Math.sin(rad);
+					sprite.graphics.lineTo(px, py);
+					break;
+				case 'S' : //lowercase f
+					px = px + d * Math.cos(rad);
+					py = py + d * Math.sin(rad);
+					sprite.graphics.moveTo(px, py);
+					break;
+				case '-' :
+					rad += a;
+					break;
+				case '+' :
+					rad -= a;
+					break;
+				case '[':
+					c = new Cursor(px, py, rad);
+					stack.push(c);
+					break;
+				case ']':
+					c = stack.pop();
+					px = c.px;
+					py = c.py;
+					rad = c.rad;
+					sprite.graphics.moveTo(px, py);
+					break;
+				default :
+					trace("unknown command: " + instr);
+			}
+		}
+	}
+
+    */

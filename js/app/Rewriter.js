@@ -36,9 +36,8 @@ define(function () {
      */
     Rewriter.prototype.derive = function (steps) {
 
+        var temp = "";
         for (var i = 0; i < steps; i++) {
-
-            var temp = "";
 
             for (var j = 0; j < this.words.length; j++) {
                 var match = this.words.charAt(j);
@@ -46,18 +45,7 @@ define(function () {
                 temp += successor ? successor: match;
             }
             this.words = temp;
-        }
-    }
-
-
-    /*
-     * Split the productions into targets(left of ->) and an array of replacements(right of ->)
-     */
-    Rewriter.prototype.splitProductions = function (t, r) {
-        for (var i = 0; i < this.productions.length; i++) {
-            var p = this.productions[i].split("->");
-            t.push(p[0]);
-            r.push(p[1].split(""));
+            temp = "";
         }
     }
 

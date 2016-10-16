@@ -4,7 +4,7 @@
 /*
  * Main application object for the L-Systems Explorer.
  *
- * TODO: look into 'ignored' words = symbols that don't get drawn if they are specificed
+ * TODO: 'ignored' words = symbols that don't get drawn if they are specificed (i.e., defaults)
  */
 define(function (require) {
 
