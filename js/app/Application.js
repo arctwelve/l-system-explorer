@@ -12,7 +12,7 @@ define(function (require) {
     var ControlPanel =  require('app/ControlPanel');
     var DrawingCanvas = require('app/DrawingCanvas');
     var Rewriter =      require('app/Rewriter');
-    var AssetLoader =   require('app/AssetLoader');
+
 
 
     var Application = function () {
@@ -24,12 +24,6 @@ define(function (require) {
         rewriter.addProduction("X->F[+X][-X]FX");
         rewriter.addProduction("F->FF");
         //rewriter.derive(7);
-
-        var assetLoader = new AssetLoader();
-        var cloneElement = assetLoader.load("assets.html");
-        console.log(cloneElement);
-
-        //console.log(rewriter.words.toString().replace(/,/g, ""));
     }
 
     // return reference so the object can be instantiated after required as a module

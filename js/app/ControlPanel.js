@@ -4,18 +4,21 @@
 /*
  * Control panel object. Persists on the left side in open or closed drawer state.
  */
-define(function () {
+define(function (require) {
+
+
+    var AssetLoader = require('app/AssetLoader');
 
 
     var ControlPanel = function () {
 
         this.isOpen = true;
-
         this.panel = document.getElementById("control-panel");
-        this.loadAssets("assets.html");
 
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
+
+        this.loadAssets("assets.html");
     }
 
 
@@ -35,10 +38,11 @@ define(function () {
 
 
     /*
-     * Dynamically writes a hidden iframe to the document
+     *
      */
     ControlPanel.prototype.loadAssets = function (assetSrc) {
-        // gutted: see index2.html for a prototype iframe type loader
+        var assetLoader = new AssetLoader();
+        assetLoader.load("assets.html", "dark-btn", this.panel);
     }
 
 
