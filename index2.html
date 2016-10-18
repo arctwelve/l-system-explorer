@@ -28,6 +28,9 @@
             // create dynamic iframe and style element, adding the style element to the document
             // head of the importing page
             var assetFrame = document.createElement('iframe');
+            assetFrame.style.position = "absolute";
+            assetFrame.style.left = "-2000px";
+
             var styleElement = document.createElement('style');
             var headNode = document.querySelector("head");
             headNode.appendChild(styleElement);
@@ -49,8 +52,10 @@
                 var assetStyleElementText = assetStyleElement.textContent;
                 styleElement.appendChild(document.createTextNode(assetStyleElementText));
 
-                // clone the button from then imported assets page
-                var cloneBtn = iframeDoc.getElementById("generate-btn").cloneNode(true);
+
+                // clone the button from the imported assets page
+                var cloneBtn = iframeDoc.getElementById("dark-btn").cloneNode(true);
+
 
                 parent.removeChild(this);
                 parent.appendChild(cloneBtn);
