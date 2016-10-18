@@ -10,7 +10,6 @@ define(function () {
 
     var AssetLoader = function () {
         this.assetPage = null;
-        this.elements = [];
     }
 
 

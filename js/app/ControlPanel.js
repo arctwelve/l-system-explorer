@@ -18,7 +18,7 @@ define(function (require) {
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
-        this.loadAssets("assets.html");
+        this.loadAssets();
     }
 
 
@@ -40,7 +40,7 @@ define(function (require) {
     /*
      *
      */
-    ControlPanel.prototype.loadAssets = function (assetSrc) {
+    ControlPanel.prototype.loadAssets = function () {
         var assetLoader = new AssetLoader();
         assetLoader.load("assets.html", "dark-btn", this.panel);
     }
