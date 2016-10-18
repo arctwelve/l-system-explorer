@@ -8,16 +8,20 @@
     <title>Test</title>
 
 
-    /*
-     * prototype for SPA loading one asset page, with multiple assets. asset page only needs
-     * containers and styles and should preview alone in the browser w/o server (key benefit).
-     *
-     * once assets are loaded the styles are moved to the head of parent page (the page that
-     * loaded the assets). assets themselves are cloned (need to clarify where/how/when/if).
-     * and temporary loading iframe and asset page are removed from memory (assumption on the
-     * asset page re memory, but the loading iframe is definitely removed from the DOM).
-     */
+
+
     <script>
+
+       /*
+        * prototype for SPA loading one asset page, with multiple assets. asset page only needs
+        * containers and styles and should preview alone in the browser w/o server (key benefit).
+        *
+        * once assets are loaded the styles are moved to the head of parent page (the page that
+        * loaded the assets). assets themselves are cloned (need to clarify where/how/when/if).
+        * and temporary loading iframe and asset page are removed from memory (assumption on the
+        * asset page re memory, but the loading iframe is definitely removed from the DOM).
+        */
+
         function getAsset() {
 
 

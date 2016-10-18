@@ -38,24 +38,7 @@ define(function () {
      * Dynamically writes a hidden iframe to the document
      */
     ControlPanel.prototype.loadAssets = function (assetSrc) {
-
-        /*
-        var assetFrame = document.createElement('iframe');
-        assetFrame.id = "asset-container"
-        this.panel.appendChild(assetFrame);
-        assetFrame.src = assetSrc;
-
-        assetFrame.style.position = 'absolute';
-        assetFrame.style.left = "500px";
-        assetFrame.style.top = "100px";
-        */
-
-        //var xx = document.getElementById('asset-container').contentWindow.document.getElementById('generate-btn')
-        //var innerDoc = assetFrame.contentDocument || assetFrame.contentWindow.document;
-        //var dkbutton = innerDoc.getElementById("generate-btn");
-        //console.log(xx);
-        //this.panel.adoptNode(this.darkButton);
-        ///this.darkButton.style.left = "100px";
+        // gutted: see index2.html for a prototype iframe type loader
     }
 
 
