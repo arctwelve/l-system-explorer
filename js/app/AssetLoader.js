@@ -14,8 +14,9 @@ define(function () {
 
 
     /*
-     * Appends a temporary iframe to the doc when the asset page is loaded. A style node is
-     * also created in the head of the importing document to store styles from the asset page
+     * Appends a temporary offscreen iframe to the doc when the asset page is loaded. A style
+     * node is also created in the head of the importing document to store styles from the
+     *  asset page
      */
     AssetLoader.prototype.load = function (assetPage, assetID, container) {
 
