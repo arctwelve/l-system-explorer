@@ -53,13 +53,8 @@ define(function () {
         var iframeDocStyleNode = iframeDoc.querySelector("style");
         this.styleElement.appendChild(document.createTextNode(iframeDocStyleNode.textContent));
 
-        // clone the element from the imported assets page
         var cloneElement = iframeDoc.getElementById(this.assetID).cloneNode(true);
-
-        // kill the temp iframe
         parent.removeChild(this.tempFrame);
-
-        // place the cloned element
         this.container.appendChild(cloneElement);
     }
 
