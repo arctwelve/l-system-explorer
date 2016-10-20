@@ -7,7 +7,7 @@
 define(function (require) {
 
 
-    var AssetLoader = require('app/AssetLoader');
+    var PushButton = require('app/PushButton');
 
 
     var ControlPanel = function () {
@@ -18,7 +18,7 @@ define(function (require) {
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
-        this.loadAssets();
+        var pushButton = new PushButton("dark-btn", "dark-btn-1");
     }
 
 
@@ -36,14 +36,6 @@ define(function (require) {
         }
     }
 
-
-    /*
-     *
-     */
-    ControlPanel.prototype.loadAssets = function () {
-        var assetLoader = new AssetLoader();
-        assetLoader.load("assets.html", "dark-btn", this.panel);
-    }
 
 
     // return reference so the object can be instantiated after required as a module
