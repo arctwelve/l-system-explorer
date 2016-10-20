@@ -7,14 +7,16 @@
  */
 define(function () {
 
+
     var TEMPLATES = "/templates/";
 
 
     var TemplateLoader = function (templateName, elementID) {
+
         this.templatePage = TEMPLATES + templateName + ".html";
         this.templateClass = "." + templateName;
+        this.loadEvent = elementID + "-load-event";
 
-        this.elementID = elementID;
         this.createLoaderFrame();
     }
 
@@ -54,10 +56,9 @@ define(function () {
         var iframeDocStyleNode = iframeDoc.querySelector("style");
         this.styleElement.appendChild(document.createTextNode(iframeDocStyleNode.textContent));
 
-        var cloneElement = iframeDoc.querySelector(this.templateClass).cloneNode(true);
+        this.domElement = iframeDoc.querySelector(this.templateClass).cloneNode(true);
         parent.removeChild(this.tempFrame);
-
-        // throw event
+        window.dispatchEvent(new Event(this.loadEvent));
     }
 
 

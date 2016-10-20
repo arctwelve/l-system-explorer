@@ -7,15 +7,19 @@
 define(function (require) {
 
 
-    var AssetLoader = require('app/AssetLoader');
+    var TemplateLoader = require('app/TemplateLoader');
 
 
     var PushButton = function (template, container) {
+
+        var loader = new TemplateLoader("dark-btn", "darkbuttonA");
         this.domElement = null;
-        var assetLoader = new AssetLoader("dark-btn", "darkbuttonA");
-        assetLoader.addEventListener('pickety', function () {
-            alert("pectorual");
-        })
+
+
+        // would addEventListener be better in TemplateLoader instead of using window
+        window.addEventListener(loader.loadEvent, function (e) {
+                 alert ("loader DomElement " + loader.domElement);
+        });
 
     }
 
