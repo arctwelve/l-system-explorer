@@ -10,16 +10,9 @@ define(function (require) {
     var TemplateLoader = require('app/TemplateLoader');
 
 
-    var PushButton = function (template, container) {
+    var PushButton = function (parentContainer, templateName) {
 
-        var loader = new TemplateLoader("dark-btn", "darkbuttonA");
-        this.domElement = null;
-
-
-        // would addEventListener be better in TemplateLoader instead of using window
-        window.addEventListener(loader.loadEvent, function (e) {
-                 alert ("loader DomElement " + loader.domElement);
-        });
+        var loader = new TemplateLoader(parentContainer, templateName);
 
     }
 

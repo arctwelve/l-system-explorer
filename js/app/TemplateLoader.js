@@ -8,15 +8,15 @@
 define(function () {
 
 
-    var TEMPLATES = "/templates/";
+    var TEMPLATE_DIR = "/templates/";
 
 
-    var TemplateLoader = function (templateName, elementID) {
+    var TemplateLoader = function (container, templateName) {
 
-        this.templatePage = TEMPLATES + templateName + ".html";
+        this.template = TEMPLATE_DIR + templateName + ".html";
         this.templateClass = "." + templateName;
-        this.loadEvent = elementID + "-load-event";
 
+        this.container = container;
         this.createLoaderFrame();
     }
 
@@ -38,7 +38,7 @@ define(function () {
 
         // append the dynamic iframe and load the template page
         document.body.appendChild(this.tempFrame);
-        this.tempFrame.src = this.templatePage;
+        this.tempFrame.src = this.template;
         this.tempFrame.onload = this.loadTemplate.bind(this);
     }
 
@@ -58,7 +58,7 @@ define(function () {
 
         this.domElement = iframeDoc.querySelector(this.templateClass).cloneNode(true);
         parent.removeChild(this.tempFrame);
-        window.dispatchEvent(new Event(this.loadEvent));
+        this.container.appendChild(this.domElement);
     }
 
 

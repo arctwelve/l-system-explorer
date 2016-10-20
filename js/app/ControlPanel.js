@@ -18,9 +18,7 @@ define(function (require) {
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
-
-        // RETURN A DOM ELEMENT WITH ID: dark-btn-1
-        var pushButton = new PushButton("dark-btn", "dark-btn-1");
+        var pushButton = new PushButton(this.panel, "dark-btn");
     }
 
 
@@ -39,7 +37,5 @@ define(function (require) {
     }
 
 
-
-    // return reference so the object can be instantiated after required as a module
     return ControlPanel;
 });
