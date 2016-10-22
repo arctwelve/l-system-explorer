@@ -9,14 +9,17 @@ define(function () {
 
 
     var TEMPLATE_DIR = "/templates/";
+    var TEMPLATE_EXT = ".html";
+    var TEMPLATE_PRF = ".";
 
 
-    var TemplateLoader = function (container, templateName) {
+    var TemplateLoader = function (container, templateName, callbackFunction) {
 
-        this.template = TEMPLATE_DIR + templateName + ".html";
-        this.templateClass = "." + templateName;
+        this.nameReferences(templateName);
 
         this.container = container;
+        this.callback = callbackFunction;
+
         this.createLoaderFrame();
     }
 
@@ -56,11 +59,22 @@ define(function () {
         var iframeDocStyleNode = iframeDoc.querySelector("style");
         this.styleElement.appendChild(document.createTextNode(iframeDocStyleNode.textContent));
 
-        this.domElement = iframeDoc.querySelector(this.templateClass).cloneNode(true);
+        var domElement = iframeDoc.querySelector(this.templateClass).cloneNode(true);
         parent.removeChild(this.tempFrame);
-        this.container.appendChild(this.domElement);
+        this.container.appendChild(domElement);
+
+        this.callback(domElement);
     }
 
+
+    /*
+     * Sets automatic names for file and class references
+     */
+    TemplateLoader.prototype.nameReferences = function(templateName) {
+        this.template = TEMPLATE_DIR + templateName + TEMPLATE_EXT;
+        this.templateClass = TEMPLATE_PRF + templateName;
+
+    }
 
     return TemplateLoader;
 });

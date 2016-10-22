@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="l-system explorer">
-    <meta name="keywords" content="l-system, alec cove, lindenmayer, single page app, javascript, procedural, graphics, html, css">
+    <meta name="keywords" content="l-system, alec cove, emergence, lindenmayer, single page app,
+                                   emergent processes, javascript, procedural, graphics, html,
+                                   css, algorithmic botany, self-organization">
     <meta name="author" content="Alec Cove">
 
     <title>L-System Explorer</title>
@@ -13,18 +15,23 @@
     <link href="style/main.css" rel="stylesheet">
     <link href="style/canvas.css" rel="stylesheet">
     <link href="style/control-panel.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:600|Material+Icons" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Material+Icons"
+          rel="stylesheet">
 
 </head>
 
 <body>
-   <div id="control-panel">
+    <div id="control-panel">
         <div id="control-panel-toggle-tab">
             <i class="material-icons md-dark vert-align no-select">settings</i>
         </div>
         <div id="control-panel-header">
         </div>
         <div id="control-panel-body">
+            <div id="production-1">
+                <input type="text" class="input-text-lg"  spellcheck="false">
+            </div>
         </div>
     </div>
 
@@ -32,8 +39,8 @@
         <canvas id="drawing-canvas"></canvas>
     </div>
 
-
-   <script data-main="js/app/main" src="js/lib/require.js"></script>
+    <script data-main="js/app/main" src="js/lib/require.js"></script>
 
 </body>
+
 </html>

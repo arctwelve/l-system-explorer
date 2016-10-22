@@ -18,7 +18,10 @@ define(function (require) {
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
-        var pushButton = new PushButton(this.panel, "dark-btn");
+        //this.pushButton = new PushButton("dark-btn");
+        //this.pushButton.moveTo(10,10);
+
+
     }
 
 
