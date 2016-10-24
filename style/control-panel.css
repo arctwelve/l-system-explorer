@@ -1,6 +1,5 @@
 /*
  * CSS styles for the sliding drawer control panel and the elements within
- *
  */
 #control-panel {
     position: absolute;
@@ -70,12 +69,17 @@ i.vert-align:hover {
     text-align: center;
 }
 
-
+.prod-input {
+    position: absolute;
+    top:250px;
+    left:40px;
+    width: calc(100% - 50px);
+}
 
 .prod-input-label {
     position: relative;
+    top:10px;
     left:5px;
-    margin-bottom: 6px;
     font-family: 'Montserrat', sans-serif;
     font-size: 1em;
     color:#cccccc;
@@ -83,12 +87,11 @@ i.vert-align:hover {
     text-align: left;
 }
 
-.prod-input {
-    position: absolute;
-    top:300px;
-    left:40px;
-    width:100%;
-   /* text-align: center;*/
+.prod-btn {
+    position: relative;
+    display: inline-block;
+    top:20px;
+    left:-4px;
 }
 
 .input-text-lg {
