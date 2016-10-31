@@ -10,7 +10,7 @@ define(function (require) {
     var PushButton = require('app/PushButton');
 
 
-    var ControlPanel = function () {
+    var ControlPanel = function (app) {
 
         this.isOpen = true;
         this.panel = document.getElementById("control-panel");
@@ -18,8 +18,10 @@ define(function (require) {
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
-        //this.pushButton = new PushButton("dark-btn");
-        //this.pushButton.moveTo(10,10);
+        this.pushButton = new PushButton("btn-generate");
+        this.pushButton.addEventListener("click", function() {
+            app.generate();
+        });
 
 
     }

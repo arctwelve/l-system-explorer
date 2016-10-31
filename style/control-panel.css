@@ -152,3 +152,26 @@ i.button-label:hover {
     width: 100%;
     height: 32px;
 }
+
+.btn-rect {
+    position: absolute;
+    top:425px;
+    left:40px;
+    cursor:pointer;
+}
+
+.btn-rect-label {
+    position: relative;
+    top: 36px;
+    left: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    color: #cccccc;
+    font-weight: 400;
+    padding: 1.8em;
+    margin: -1.8em;
+}
+
+.btn-rect-label:hover {
+    color: #6699cc;
+}

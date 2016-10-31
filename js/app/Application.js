@@ -17,8 +17,8 @@ define(function (require) {
 
     var Application = function () {
 
-        var controlPanel = new ControlPanel();
-        var canvas = new DrawingCanvas();
+        var controlPanel = new ControlPanel(this);
+        this.canvas = new DrawingCanvas();
 
         var rewriter = new Rewriter("X");
         rewriter.addProduction("X->F[+X][-X]FX");
@@ -26,6 +26,11 @@ define(function (require) {
         //rewriter.derive(7);
     }
 
-    // return reference so the object can be instantiated after required as a module
+
+    Application.prototype.generate =  function() {
+        this.canvas.render();
+    }
+
+
     return Application;
 });
