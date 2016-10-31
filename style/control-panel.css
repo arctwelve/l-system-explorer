@@ -33,15 +33,11 @@
 }
 
 .material-icons.md-light {
-    color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.material-icons.md-36 {
-    font-size: 36px;
-}
-
-.material-icons.md-48 {
-    font-size: 48px;
+.material-icons.md-24 {
+    font-size: 24px;
 }
 
 i.vert-align {
@@ -50,18 +46,13 @@ i.vert-align {
     vertical-align: middle;
 }
 
-i.vert-align:hover {
-    color: #6699cc;
-    cursor: pointer;
-}
-
 i.button-label {
     position:absolute;
-    top:7px;
-    left:8px;
+    top:6px;
+    left:6px;
 }
 
-i.button-label:hover {
+i.vert-align:hover, i.button-label:hover {
     color: #6699cc;
     cursor: pointer;
 }
@@ -78,13 +69,10 @@ i.button-label:hover {
 #panel-title {
     position: relative;
     top:9px;
-
     border: 1px solid #838383;
     border-radius: 4px;
-
     margin: 0 15px 0 15px;
     padding:5px;
-
     font-family: 'Montserrat', sans-serif;
     font-size: .9em;
     color:#666666;
@@ -94,65 +82,71 @@ i.button-label:hover {
 
 .axiom-input-area {
     position: absolute;
-    top:90px;
+    top:75px;
     left:40px;
     width: calc(100% - 50px);
 }
 
-.axiom-input-label {
+.input-label {
     position: relative;
     top:10px;
     left:5px;
-    margin-bottom: 18px;
     font-family: 'Montserrat', sans-serif;
     font-size: 1em;
     color:#cccccc;
     font-weight: 700;
     text-align: left;
+    margin-bottom: 5px;
+}
+
+.input-label.mgb {
+    margin-bottom: 16px;
 }
 
 .input-text {
-
     border:0;
-    height: 50px;
-    width: 80px;
-
+    height: 35px;
+    width: 65px;
     outline: none;
     text-indent: 10px;
     background: url(/img/input_bg.png) no-repeat 100% 100%;
-
     font-family: 'Montserrat', sans-serif;
     font-size: 1em;
-    color:#cccccc;
+    color:#ffffff;
     font-weight: 700;
+    margin-left: 2px;
 }
 
 .input-text.large {
-    width: calc(100% - 80px);
+    width: calc(100% - 65px);
 }
 
 .prod-input-area {
     position: absolute;
-    top:230px;
+    top:180px;
     left:40px;
     width: calc(100% - 50px);
-}
-
-.prod-input-label {
-    position: relative;
-    top:10px;
-    left:5px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
-    color:#cccccc;
-    font-weight: 700;
-    text-align: left;
 }
 
 .prod-btn {
     position: relative;
     display: inline-block;
-    top:20px;
-    left:-4px;
+    top:12px;
+    left:-5px;
 }
 
+.prod-btn img {
+    width:36px;
+}
+
+.separator {
+    position: absolute;
+    top:400px;
+    left:14px;
+    width: calc(100% - 28px);
+}
+
+.separator img {
+    width: 100%;
+    height: 32px;
+}
