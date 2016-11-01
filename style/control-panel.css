@@ -163,13 +163,13 @@ i.button-label:hover {
 .btn-rect-label {
     position: relative;
     top: 36px;
-    left: 12px;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.9em;
+    text-align: center;
     color: #cccccc;
     font-weight: 400;
-    padding: 1.8em;
-    margin: -1.8em;
+    padding: 16px  1px;
+    margin: -16px -1px;
 }
 
 .btn-rect-label:hover {
