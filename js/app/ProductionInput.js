@@ -23,9 +23,9 @@ define(function () {
     /*
      * Event handler for "add" button clicks. Creates a cloned field and prepends it to the DOM
      */
-    ProductionInput.prototype.cloneElement = function() {
+    ProductionInput.prototype.cloneElement = function(e) {
 
-        if (this.fieldCount >= MAX_FIELDS) return;
+        if (e.target.tagName !== 'I' || this.fieldCount >= MAX_FIELDS) return;
 
         var clone = this.element.cloneNode(true);
         clone.getElementsByClassName("button-label")[0].innerHTML = "remove";
@@ -39,8 +39,10 @@ define(function () {
     /*
      * Event handler for "remove" buttons - removes field from the DOM and decrements field count
      */
-    ProductionInput.prototype.removeElement = function(evt) {
-        var elem = evt.target.parentElement.parentElement;
+    ProductionInput.prototype.removeElement = function(e) {
+
+        if (e.target.tagName !== 'I') return;
+        var elem = e.target.parentElement.parentElement;
         elem.parentElement.removeChild(elem);
         this.fieldCount--;
     }

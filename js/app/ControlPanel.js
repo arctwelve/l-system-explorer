@@ -20,7 +20,7 @@ define(function (require) {
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
         this.axiomField = document.getElementById("input-axiom");
-        this.prodInput = new ProductionInput("prod-input-0");
+        this.prodInput = new ProductionInput("prod-input");
 
         this.generateBtn = new PushButton("btn-generate");
         this.generateBtn.addEventListener("click", function() {
