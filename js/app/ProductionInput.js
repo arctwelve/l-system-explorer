@@ -2,7 +2,8 @@
 
 
 /*
- * An input field with an add or remove button at the end
+ * An input field with an add or remove button at the end. Allows user to enter an l-system
+ * production value
  */
 define(function (require) {
 
