@@ -15,6 +15,7 @@ define(function () {
 
         this.fieldCount = 1;
         this.element = document.getElementById(elementId);
+        this.element.className += " fadeInDown";
         this.elementBtn = this.element.getElementsByClassName("prod-btn")[0];
         this.elementBtn.addEventListener("click", this.cloneElement.bind(this));
     }
@@ -27,13 +28,15 @@ define(function () {
 
         if (e.target.tagName !== 'I' || this.fieldCount >= MAX_FIELDS) return;
 
+        if (this.element.className.indexOf("animated") === -1) {
+            this.element.className += " animated"
+        }
+
         var clone = this.element.cloneNode(true);
         clone.getElementsByClassName("button-label")[0].innerHTML = "remove";
         clone.addEventListener("click", this.removeElement.bind(this));
 
         this.element.parentElement.appendChild(clone);
-        this.element.className += " animated fadeInDown";
-
         this.fieldCount++
     }
 
@@ -44,6 +47,7 @@ define(function () {
     ProductionInput.prototype.removeElement = function(e) {
 
         if (e.target.tagName !== 'I') return;
+
         var elem = e.target.parentElement.parentElement;
         elem.parentElement.removeChild(elem);
         this.fieldCount--;
