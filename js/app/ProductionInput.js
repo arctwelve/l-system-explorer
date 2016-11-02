@@ -11,15 +11,14 @@ define(function (require) {
     var ProductionInput = function (elementId) {
 
         this.element = document.getElementById(elementId);
-        this.elementBtn = this.element.getElementsByTagName("img")[0];
-        this.elementBtn.addEventListener("click", this.buttonClick.bind(this));
+        this.elementBtn = this.element.getElementsByClassName("prod-btn")[0];
+        this.elementBtn.addEventListener("click", this.buttonDown.bind(this));
     }
 
 
-    ProductionInput.prototype.buttonClick = function() {
+    ProductionInput.prototype.buttonDown = function() {
         // determine the type of button (add or remove)
-        var str = this
-
+        console.log(this.element.className)
     }
 
 
