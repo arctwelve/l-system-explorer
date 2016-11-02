@@ -18,6 +18,7 @@ define(function (require) {
 
     ProductionInput.prototype.buttonClick = function() {
         // determine the type of button (add or remove)
+        var str = this
 
     }
 
