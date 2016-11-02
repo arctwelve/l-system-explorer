@@ -30,7 +30,9 @@ define(function () {
         var clone = this.element.cloneNode(true);
         clone.getElementsByClassName("button-label")[0].innerHTML = "remove";
         clone.addEventListener("click", this.removeElement.bind(this));
-        this.element.parentElement.insertBefore(clone, this.element);
+
+        this.element.parentElement.appendChild(clone);
+        this.element.className += " animated fadeInDown";
 
         this.fieldCount++
     }
