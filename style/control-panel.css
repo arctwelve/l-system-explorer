@@ -125,7 +125,7 @@ i.button-label:hover {
 
 .prod-input-area {
     position: absolute;
-    top: 180px;
+    top: 175px;
     left: 40px;
     width: calc(100% - 50px);
 }

@@ -18,12 +18,25 @@ define(function (require) {
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
-        this.pushButton = new PushButton("btn-generate");
-        this.pushButton.addEventListener("click", function() {
+        this.axiomField = document.getElementById("input-axiom");
+
+        this.generateBtn = new PushButton("btn-generate");
+        this.generateBtn.addEventListener("click", function() {
             app.generate();
         });
+    }
 
 
+    /*
+     * Getters and setters
+     */
+    ControlPanel.prototype = {
+        get axiom() {
+            return this.axiomField.value;
+        },
+        set axiom(val) {
+            this.axiomField.value = val;
+        }
     }
 
 

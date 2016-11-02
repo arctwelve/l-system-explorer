@@ -17,8 +17,8 @@ define(function (require) {
 
     var Application = function () {
 
-        var controlPanel = new ControlPanel(this);
         this.canvas = new DrawingCanvas();
+        this.controlPanel = new ControlPanel(this);
 
         var rewriter = new Rewriter("X");
         rewriter.addProduction("X->F[+X][-X]FX");
@@ -28,7 +28,11 @@ define(function (require) {
 
 
     Application.prototype.generate =  function() {
-        this.canvas.render();
+
+        var axiom =  this.controlPanel.axiom;
+        console.log(axiom);
+
+        //this.canvas.render();
     }
 
 

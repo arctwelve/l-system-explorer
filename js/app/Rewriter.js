@@ -3,9 +3,9 @@
 
 /*
  * Rewriter class handles string rewrites of the L-System formal language. Using L-System grammar
- * rules, the results or 'words'are returned as an array of steps.
+ * rules, the results, or 'words', are returned as an array of steps.
  *
- * A single starting axiom is iterated by n number of steps. The axiom is replaced by the producton
+ * A single starting axiom is iterated by n number of steps. The axiom is replaced by the production
  * grammars, simultaneously and in parallel. The result creates an array of words that represents
  * drawing rules which are passed to the graphics object.
  */
@@ -42,7 +42,7 @@ define(function () {
             for (var j = 0; j < this.words.length; j++) {
                 var match = this.words.charAt(j);
                 var successor = this.productions[match];
-                temp += successor ? successor: match;
+                temp += successor ? successor : match;
             }
             this.words = temp;
             temp = "";
@@ -50,6 +50,5 @@ define(function () {
     }
 
 
-    // return reference so the object can be instantiated after required as a module
     return Rewriter;
 });

@@ -2,7 +2,9 @@
 
 
 /*
- * Object represents a push button.
+ * Object represents a rectangular push button.
+ *
+ * TODO: add label as constructor arg
  */
 define(function (require) {
 
