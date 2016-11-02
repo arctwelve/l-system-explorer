@@ -8,6 +8,7 @@ define(function (require) {
 
 
     var PushButton = require('app/PushButton');
+    var ProductionInput = require('app/ProductionInput');
 
 
     var ControlPanel = function (app) {
@@ -19,6 +20,7 @@ define(function (require) {
         this.toggleTab.addEventListener("click", this.toggleControls.bind(this));
 
         this.axiomField = document.getElementById("input-axiom");
+        this.prodInput = new ProductionInput("prod-input-0");
 
         this.generateBtn = new PushButton("btn-generate");
         this.generateBtn.addEventListener("click", function() {
