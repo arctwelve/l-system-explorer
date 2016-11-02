@@ -141,6 +141,11 @@ i.button-label:hover {
     width: 36px;
 }
 
+.prod-transition {
+    transform: translateY(10px);
+    transition: transform 2s;
+}
+
 .separator {
     position: absolute;
     top: 400px;
