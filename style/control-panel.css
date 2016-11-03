@@ -111,7 +111,7 @@ i.button-label:hover {
     width: 65px;
     outline: none;
     text-indent: 10px;
-    background: url(/img/input_bg.png) no-repeat 100% 100%;
+    background: url(/img/input-bg.png) no-repeat 100% 100%;
     font-family: 'Montserrat', sans-serif;
     font-size: 1em;
     color: #ffffff;
