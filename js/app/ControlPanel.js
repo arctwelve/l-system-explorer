@@ -22,7 +22,7 @@ define(function (require) {
         this.axiomField = document.getElementById("input-axiom");
         this.prodInput = new ProductionInput("prod-input");
 
-        this.generateBtn = new PushButton("btn-generate");
+        this.generateBtn = new PushButton("btn-generate", "GENERATE");
         this.generateBtn.addEventListener("click", function() {
             app.generate();
         });
