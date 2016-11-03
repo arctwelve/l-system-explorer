@@ -175,3 +175,18 @@ i.button-label:hover {
 .btn-rect-label:hover {
     color: #6699cc;
 }
+
+.toggle-track {
+    position: absolute;
+    top:443px;
+    left:170px;
+    width:190px;
+    background: url(/img/toggle-track.png) no-repeat;
+    background-size: 100% 67px;
+}
+
+.toggle-knob {
+    position: relative;
+    top:2px;
+    left:2px;
+}
