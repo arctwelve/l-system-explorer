@@ -4,7 +4,7 @@
 /*
  * Object represents a rectangular push button
  */
-define(function (require) {
+define(function () {
 
 
     var PushButton = function (element, labelText) {

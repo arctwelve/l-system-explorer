@@ -45,6 +45,10 @@
     font-size: 24px;
 }
 
+.material-icons.md-30 {
+    font-size: 30px;
+}
+
 .material-icons.md-36 {
     font-size: 36px;
 }
@@ -61,15 +65,15 @@ i.button-label {
     left: 6px;
 }
 
-i.button-label-36 {
+i.button-label-30 {
     position: absolute;
-    top: 7px;
-    left: 12px;
+    top: 11px;
+    left: 17px;
 }
 
 i.vert-align:hover,
 i.button-label:hover,
-i.button-label-36:hover {
+i.button-label-30:hover {
     color: #6699cc;
     cursor: pointer;
 }
@@ -191,9 +195,9 @@ i.button-label-36:hover {
     color: #6699cc;
 }
 
-.toggle-track {
+.toggle-button {
     position: absolute;
-    top:443px;
+    top:442px;
     left:170px;
     width:190px;
     background: url(/img/toggle-track.png) no-repeat;
@@ -204,4 +208,5 @@ i.button-label-36:hover {
     position: relative;
     top:2px;
     left:2px;
+    transition: left .4s ease-in-out;
 }
