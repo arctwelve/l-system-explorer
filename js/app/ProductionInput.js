@@ -4,6 +4,9 @@
 /*
  * An input field with an add or remove button at the end. Allows user to enter an l-system
  * production value. Handles it's own siblings, adding or removing them.
+ *
+ * TODO: Add animation when removing field
+ *
  */
 define(function () {
 
