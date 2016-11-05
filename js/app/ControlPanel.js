@@ -1,11 +1,9 @@
-"use strict";
-
-
 /*
  * Control panel object. Persists on the left side in open or closed drawer state.
  */
 define(function (require) {
 
+    "use strict";
 
     var PushButton = require('app/PushButton');
     var ToggleButton = require('app/ToggleButton');
@@ -29,8 +27,7 @@ define(function (require) {
         });
 
         this.stepToggleButton = new ToggleButton("step-toggle-button");
-
-    }
+    };
 
 
     /*
@@ -43,7 +40,7 @@ define(function (require) {
         set axiom(val) {
             this.axiomField.value = val;
         }
-    }
+    };
 
 
     /*
@@ -58,7 +55,7 @@ define(function (require) {
             this.panel.style.left = "0px";
             this.isOpen = true;
         }
-    }
+    };
 
 
     return ControlPanel;

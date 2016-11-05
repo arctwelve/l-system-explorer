@@ -1,11 +1,9 @@
-"use strict";
-
-
 /*
  * Object represents a sliding rectangular toggle button
  */
 define(function () {
 
+    "use strict";
 
     var ToggleButton = function (elementID) {
 
@@ -15,17 +13,17 @@ define(function () {
         this.elementBtn = this.element.getElementsByClassName("toggle-knob")[0];
 
         this.element.addEventListener("click", this.toggleKnob.bind(this));
-    }
+    };
 
 
     /*
      * Allows external methods to act as handlers for events on the toggle
      */
     ToggleButton.prototype.addEventListener = function (event, callbackFunction) {
-        if (this.element != null) {
+        if (this.element !== null) {
             this.element.addEventListener(event, callbackFunction);
         }
-    }
+    };
 
 
     /*
@@ -40,7 +38,7 @@ define(function () {
             this.elementBtn.style.left = "2px";
             this.showSteps = true;
         }
-    }
+    };
 
     return ToggleButton;
 });

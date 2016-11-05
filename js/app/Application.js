@@ -1,6 +1,3 @@
-"use strict";
-
-
 /*
  * Main application object for the L-Systems Explorer.
  *
@@ -8,11 +5,11 @@
  */
 define(function (require) {
 
+    "use strict";
 
     var ControlPanel =  require('app/ControlPanel');
     var DrawingCanvas = require('app/DrawingCanvas');
     var Rewriter =      require('app/Rewriter');
-
 
 
     var Application = function () {
@@ -24,7 +21,7 @@ define(function (require) {
         rewriter.addProduction("X->F[+X][-X]FX");
         rewriter.addProduction("F->FF");
         //rewriter.derive(7);
-    }
+    };
 
 
     Application.prototype.generate =  function() {
@@ -33,7 +30,7 @@ define(function (require) {
         console.log(axiom);
 
         //this.canvas.render();
-    }
+    };
 
 
     return Application;

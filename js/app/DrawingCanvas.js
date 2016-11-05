@@ -1,12 +1,10 @@
-"use strict";
-
-
 /*
  * Drawing canvas object. Takes up entire window, including space underneath control panel. Object
  * wraps the html canvas -- the reference to it (this.obj) is grabbed in the constructor.
  */
 define(function () {
 
+    "use strict";
 
     var DrawingCanvas = function () {
 
@@ -16,14 +14,14 @@ define(function () {
 
         window.addEventListener('resize', this.resizeCanvas.bind(this));
         this.resizeCanvas();
-    }
+    };
 
 
     DrawingCanvas.prototype.resizeCanvas = function () {
         this.cvs.width = window.innerWidth;
         this.cvs.height = window.innerHeight;
         //this.render();
-    }
+    };
 
 
     DrawingCanvas.prototype.render = function (time) {
@@ -39,7 +37,7 @@ define(function () {
         this.ctx.stroke();
 
         window.requestAnimationFrame(this.render.bind(this));
-    }
+    };
 
 
     DrawingCanvas.prototype.getRandInt = function (min, max) {
@@ -47,7 +45,7 @@ define(function () {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
-    }
+    };
 
 
     // return reference so the object can be instantiated after required as a module

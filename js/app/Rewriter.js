@@ -1,6 +1,3 @@
-"use strict";
-
-
 /*
  * Rewriter class handles string rewrites of the L-System formal language. Using L-System grammar
  * rules, the results, or 'words', are returned as an array of steps.
@@ -11,11 +8,12 @@
  */
 define(function () {
 
+    "use strict";
 
     var Rewriter = function (axiom) {
         this.productions = {};
         this.words = axiom;
-    }
+    };
 
 
     /*
@@ -25,7 +23,7 @@ define(function () {
 
         var pa = p.split("->");
         this.productions[pa[0]] = pa[1];
-    }
+    };
 
 
     /*
@@ -47,7 +45,7 @@ define(function () {
             this.words = temp;
             temp = "";
         }
-    }
+    };
 
 
     return Rewriter;
