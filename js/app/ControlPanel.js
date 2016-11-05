@@ -47,7 +47,7 @@ define(function (require) {
 
 
     /*
-     * Event handler for the toggle tab click. Slides the panel drawer in / out. Animation is CSS
+     * Handler for the toggle tab click. Slides the panel drawer in / out. Animation is CSS
      */
     ControlPanel.prototype.toggleControlPanel = function () {
 

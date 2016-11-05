@@ -73,7 +73,7 @@ i.button-label-30 {
 
 i.vert-align:hover,
 i.button-label:hover,
-i.button-label-30:hover {
+.toggle-button:hover i.button-label-30 {
     color: #6699cc;
     cursor: pointer;
 }
@@ -208,5 +208,5 @@ i.button-label-30:hover {
     position: relative;
     top:2px;
     left:2px;
-    transition: left .4s ease-in-out;
+    transition: left .3s ease-in-out;
 }
