@@ -18,7 +18,7 @@ define(function () {
         this.fieldCount = 1;
         this.element = document.getElementsByClassName(elementClassName)[0];
 
-        //this.initAnimation("fadeInDown");
+        this.initAnimation("fadeInDown");
         this.elementBtn = this.element.getElementsByClassName("prod-btn")[0];
         this.elementBtn.addEventListener("click", this.cloneElement.bind(this));
     };
@@ -31,7 +31,7 @@ define(function () {
 
         if (e.target.tagName !== 'I' || this.fieldCount >= MAX_FIELDS) return;
 
-        //this.enableAnimation();
+        this.enableAnimation();
 
         var clone = this.element.cloneNode(true);
         clone.getElementsByClassName("button-label")[0].innerHTML = "remove";
