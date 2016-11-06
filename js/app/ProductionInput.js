@@ -9,9 +9,7 @@ define(function () {
 
     "use strict";
 
-
     var MAX_FIELDS = 4;
-
 
     var ProductionInput = function (elementClassName) {
 
