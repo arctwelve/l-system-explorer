@@ -15,8 +15,6 @@ define(function () {
 
         this.fieldCount = 1;
         this.element = document.getElementsByClassName(elementClassName)[0];
-
-        this.initAnimation("fadeInDown");
         this.elementBtn = this.element.getElementsByClassName("prod-btn")[0];
         this.elementBtn.addEventListener("click", this.cloneElement.bind(this));
     };
@@ -29,13 +27,15 @@ define(function () {
 
         if (e.target.tagName !== 'I' || this.fieldCount >= MAX_FIELDS) return;
 
-        this.enableAnimation();
-
         var clone = this.element.cloneNode(true);
         clone.getElementsByClassName("button-label")[0].innerHTML = "remove";
         clone.addEventListener("click", this.removeElement.bind(this));
 
+        clone.position = this.fieldCount;
         this.element.parentElement.appendChild(clone);
+        var space = this.getVerticalSpacing();
+        clone.style.top = space + "px";
+
         this.fieldCount++;
     };
 
@@ -47,27 +47,28 @@ define(function () {
 
         if (e.target.tagName !== 'I') return;
 
+        var clone = e.target.parentElement.parentElement;
+        clone.style.top = "24px";
+        clone.style.top = this.topStart;
+
         var elem = e.target.parentElement.parentElement;
-        elem.parentElement.removeChild(elem);
+        clone.addEventListener('transitionend', function() {
+            elem.parentElement.removeChild(clone);
+        });
+
         this.fieldCount--;
-    };
-
-
-    /*
-     * Helper method for initializing animation
-     */
-    ProductionInput.prototype.initAnimation = function(animationStyle) {
-        this.element.className += " " + animationStyle;
     };
 
 
     /*
      * Helper method for enabling animation
      */
-    ProductionInput.prototype.enableAnimation = function() {
-        if (this.element.className.indexOf("animated") === -1) {
-            this.element.className += " animated";
-        }
+    ProductionInput.prototype.getVerticalSpacing = function() {
+        var top = window.getComputedStyle(this.element).top;
+        var height = window.getComputedStyle(this.element).height;
+        var result = parseInt(top, 10) + (parseInt(height, 10) * this.fieldCount);
+
+        return result;
     };
 
 

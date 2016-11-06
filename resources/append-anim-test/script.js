@@ -10,8 +10,6 @@ function cloneButton () {
     clone = elem.cloneNode(true);
 
     elem.parentElement.appendChild(clone);
-
-    clone.style.top = elem.style.top;
     clone.children[0].style.backgroundColor = "#ff0000";
 
     window.getComputedStyle(elem).top;
@@ -25,7 +23,6 @@ function cloneButton () {
 function removeButton () {
 
     clone.style.top = "200px";
-
     clone.style.top = elem.style.top;
 
     clone.addEventListener('transitionend', function() {

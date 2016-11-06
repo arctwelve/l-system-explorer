@@ -117,7 +117,6 @@ i.button-label:hover,
     color: #cccccc;
     font-weight: 700;
     text-align: left;
-    margin-bottom: 5px;
 }
 
 .input-label.mgb {
@@ -147,6 +146,14 @@ i.button-label:hover,
     top: 175px;
     left: 40px;
     width: calc(100% - 50px);
+}
+
+.prod-input {
+    position:absolute;
+    top:24px;
+    width:350px;
+    height:47px;
+    transition: top .7s ease-in-out;
 }
 
 .prod-btn {
