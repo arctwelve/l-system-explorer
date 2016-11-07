@@ -1,5 +1,5 @@
 var slotSpaceY = 50;
-
+var clickLock = false;
 
 function cloneButton () {
 
@@ -15,7 +15,12 @@ function cloneButton () {
     slotClone.addEventListener("click", this.removeSlot);
 }
 
+
+
 function removeSlot (evt) {
+
+    if (clickLock) return;
+    clickLock = true;
 
     var slots = document.getElementsByClassName("slot-rect");
     var targetSlot = evt.target.parentElement;
@@ -38,6 +43,8 @@ function removeSlot (evt) {
         var slotY = parseInt(window.getComputedStyle(slot).top, 10);
         slot.style.top = (slotY - slotSpaceY) + "px";
     }
+
+    clickLock = false;
 }
 
 
@@ -48,39 +55,3 @@ function getElementIndex(el) {
 
 
 
-    /*
-
-    for (var i = 0; i < slots.length; i++) {
-        if (slots[i] === targetSlot) {
-            slots[i]
-        }
-    }
-    */
-
-
-  /*
-    var rembtn = evt.target.parentElement;
-    var rembtnSib = rembtn.nextElementSibling;
-
-
-    var btnContainer = rembtn.parentElement;
-    var btnList = btnContainer.getElementsByClassName("box-rect-outer");
-
-
-    rembtnSib.style.top = rembtn.style.top;
-    var pork = 10;
-    while (e = rembtn.nextSibling) {
-        e.style.top = pork -= 10;
-    }
-
-    rembtn.style.top = elem.style.top;
-
-
-
-    rembtn.addEventListener('transitionend', function() {
-        //var i = Array.prototype.indexOf.call(btnList, this);
-        //var m = this.nextSibling;
-        elem.parentElement.removeChild(this);
-
-
-    });*/
