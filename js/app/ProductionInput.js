@@ -14,7 +14,9 @@ define(function () {
     var ProductionInput = function (elementClassName) {
 
         this.fieldCount = 1;
-        this.element = document.getElementsByClassName(elementClassName)[0];
+        this.className = elementClassName;
+
+        this.element = document.getElementsByClassName(this.className)[0];
         this.elementBtn = this.element.getElementsByClassName("prod-btn")[0];
         this.elementBtn.addEventListener("click", this.cloneElement.bind(this));
     };
@@ -33,27 +35,28 @@ define(function () {
 
         clone.position = this.fieldCount;
         this.element.parentElement.appendChild(clone);
-        var space = this.getVerticalSpacing();
-        clone.style.top = space + "px";
+        this.space = this.getVerticalSpacing();
+        clone.style.top = this.space + "px";
 
         this.fieldCount++;
     };
 
 
     /*
-     * Event handler for "remove" buttons - removes field from the DOM and decrements field count
+     * Event handler for "remove" buttons - removes field from the DOM and decrements field count.
+     * Also adjusts remaining fields: this wouldn't be necessary with relative positioning but
+     * we'd lose the css animation.
      */
     ProductionInput.prototype.removeElement = function(e) {
 
         if (e.target.tagName !== 'I') return;
 
         var clone = e.target.parentElement.parentElement;
-        clone.style.top = "24px";
-        clone.style.top = this.topStart;
+        var container = clone.parentElement;
+        clone.style.top = this.top;
 
-        var elem = e.target.parentElement.parentElement;
         clone.addEventListener('transitionend', function() {
-            elem.parentElement.removeChild(clone);
+            container.removeChild(clone);
         });
 
         this.fieldCount--;
@@ -64,9 +67,9 @@ define(function () {
      * Helper method for enabling animation
      */
     ProductionInput.prototype.getVerticalSpacing = function() {
-        var top = window.getComputedStyle(this.element).top;
+        this.top = window.getComputedStyle(this.element).top;
         var height = window.getComputedStyle(this.element).height;
-        var result = parseInt(top, 10) + (parseInt(height, 10) * this.fieldCount);
+        var result = parseInt(this.top, 10) + (parseInt(height, 10) * this.fieldCount);
 
         return result;
     };
