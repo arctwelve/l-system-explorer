@@ -17,14 +17,6 @@ function cloneButton () {
 
 function removeSlot (evt) {
 
-    /*
-     * All you have to do is
-     * 1. Slide the target up to the first slot, then remove the target
-     * 2. Slide up any siblings below the target up the size of a slot
-     *
-     * THE END
-     *
-     */
     var slots = document.getElementsByClassName("slot-rect");
     var targetSlot = evt.target.parentElement;
 
@@ -35,16 +27,16 @@ function removeSlot (evt) {
     targetSlot.style.top = firstSlotY + "px";
 
     targetSlot.addEventListener('transitionend', function() {
-        this.parentElement.removeChild(this);
+        if (this.parentElement) this.parentElement.removeChild(this);
     });
 
     for (var j = targetSlotIndex; j < slots.length; j++) {
+
         var slot = slots[j];
         slot.children[0].style.backgroundColor = "#ff00ff";
-        var slotY = parseInt(window.getComputedStyle(slot).top, 10);
-        var goalY = slotY - slotSpaceY;
 
-        slot.style.top = goalY + "px";
+        var slotY = parseInt(window.getComputedStyle(slot).top, 10);
+        slot.style.top = (slotY - slotSpaceY) + "px";
     }
 }
 
