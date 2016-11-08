@@ -1,7 +1,6 @@
 /*
  * CSS styles for the sliding drawer control panel and the elements within
  */
-
 #control-panel {
     position: absolute;
     top: 0;
@@ -153,7 +152,7 @@ i.button-label:hover,
     top:24px;
     width:350px;
     height:47px;
-    transition: top .7s ease-in-out;
+    transition: top .3s ease-in-out;
 }
 
 .prod-btn {

@@ -39,6 +39,7 @@ define(function () {
 
         var slotCloneY = parseInt(window.getComputedStyle(slotClone).top, 10);
         slotClone.style.top = slotCloneY + this.slotSpaceY + "px";
+
         var cloneButton = slotClone.getElementsByClassName("prod-btn")[0];
         cloneButton.firstElementChild.innerHTML = "remove";
 
@@ -75,6 +76,7 @@ define(function () {
 
         var firstSlotY = parseInt(window.getComputedStyle(firstSlot).top, 10);
         targetSlot.style.top = firstSlotY + "px";
+
 
         targetSlot.addEventListener('transitionend', function() {
             if (this.parentElement) this.parentElement.removeChild(this);
