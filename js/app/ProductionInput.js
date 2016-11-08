@@ -38,7 +38,7 @@ define(function () {
 
         slotClone.firstElementChild.value = "";
         lastSlot.parentElement.appendChild(slotClone);
-        setZIndexPositions(slots);
+        this.setZIndexPositions(slots);
 
         var slotCloneY = parseInt(window.getComputedStyle(slotClone).top, 10);
         slotClone.style.top = slotCloneY + this.slotSpaceY + "px";
@@ -91,7 +91,7 @@ define(function () {
             slot.style.top = (slotY - this.slotSpaceY) + "px";
         }
 
-        setZIndexPositions(slots);
+        this.setZIndexPositions(slots);
         this.numSlots--;
     };
 
