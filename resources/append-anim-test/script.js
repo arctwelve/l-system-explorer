@@ -26,7 +26,7 @@ function cloneButton () {
     lastSlot.parentElement.appendChild(slotClone);
 
     slotClone.children[0].style.backgroundColor = "#ff0000";
-    slotCloneY = parseInt(window.getComputedStyle(slotClone).top, 10);
+    var slotCloneY = parseInt(window.getComputedStyle(slotClone).top, 10);
     slotClone.style.top = slotCloneY + slotSpaceY + "px";
 
     slotClone.addEventListener("click", this.removeSlot);
