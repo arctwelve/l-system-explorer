@@ -38,11 +38,7 @@ define(function () {
 
         slotClone.firstElementChild.value = "";
         lastSlot.parentElement.appendChild(slotClone);
-
-        // fix z indices
-        for (var i = 0; i < slots.length; i++) {
-            if (slots[i]) slots[i].style.zIndex = (slots.length - i).toString();
-        }
+        setZIndexPositions(slots);
 
         var slotCloneY = parseInt(window.getComputedStyle(slotClone).top, 10);
         slotClone.style.top = slotCloneY + this.slotSpaceY + "px";
@@ -95,11 +91,7 @@ define(function () {
             slot.style.top = (slotY - this.slotSpaceY) + "px";
         }
 
-        // fix z indices
-        for (var i = 0; i < slots.length; i++) {
-            if (slots[i]) slots[i].style.zIndex = (slots.length - i).toString();
-        }
-
+        setZIndexPositions(slots);
         this.numSlots--;
     };
 
@@ -110,6 +102,16 @@ define(function () {
     ProductionInput.prototype.getElementIndex = function (el) {
         for (var i = 0; el = el.previousElementSibling; i++); // jshint ignore:line
         return (i - 1);
+    };
+
+
+    /*
+     * Helper method to set the zIndices of all the input slots
+     */
+    ProductionInput.prototype.setZIndexPositions = function (slotList) {
+        for (var i = 0; i < slotList.length; i++) {
+            if (slotList[i]) slotList[i].style.zIndex = (slotList.length - i).toString();
+        }
     };
 
 
