@@ -34,6 +34,8 @@ function cloneButton () {
     slotClone.addEventListener('transitionend', function() {
         isClickLock = false;
     });
+
+    maxSlots++;
 }
 
 
