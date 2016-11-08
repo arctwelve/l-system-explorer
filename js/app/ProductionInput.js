@@ -35,7 +35,14 @@ define(function () {
         var slots = document.getElementsByClassName(this.className);
         var lastSlot = slots[slots.length - 1];
         var slotClone = lastSlot.cloneNode(true);
+
+        slotClone.firstElementChild.value = "";
         lastSlot.parentElement.appendChild(slotClone);
+
+        // fix z indices
+        for (var i = 0; i < slots.length; i++) {
+            if (slots[i]) slots[i].style.zIndex = (slots.length - i).toString();
+        }
 
         var slotCloneY = parseInt(window.getComputedStyle(slotClone).top, 10);
         slotClone.style.top = slotCloneY + this.slotSpaceY + "px";
@@ -43,7 +50,7 @@ define(function () {
         var cloneButton = slotClone.getElementsByClassName("prod-btn")[0];
         cloneButton.firstElementChild.innerHTML = "remove";
 
-        slotClone.addEventListener('transitionend', (function() {
+        slotClone.addEventListener('transitionend', (function () {
             this.isClickLock = false;
         }).bind(this));
 
@@ -75,7 +82,7 @@ define(function () {
         targetSlot.style.top = firstSlotY + "px";
 
         // after the transition animation is complete, remove the target and unblock clicks
-        targetSlot.addEventListener('transitionend', function() {
+        targetSlot.addEventListener('transitionend', function () {
             if (this.parentElement) this.parentElement.removeChild(this);
             this.isClickLock = false;
         });
@@ -100,8 +107,8 @@ define(function () {
     /*
      * Helper method to get the index of an element within a group of ordered siblings
      */
-    ProductionInput.prototype.getElementIndex = function(el) {
-        for (var i = 0; el = el.previousElementSibling; i++);  // jshint ignore:line
+    ProductionInput.prototype.getElementIndex = function (el) {
+        for (var i = 0; el = el.previousElementSibling; i++); // jshint ignore:line
         return (i - 1);
     };
 
