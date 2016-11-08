@@ -32,7 +32,7 @@ define(function () {
 
         this.isClickLock = true;
 
-        var slots = document.getElementsByClassName("prod-input");
+        var slots = document.getElementsByClassName(this.className);
         var lastSlot = slots[slots.length - 1];
         var slotClone = lastSlot.cloneNode(true);
         lastSlot.parentElement.appendChild(slotClone);
@@ -48,10 +48,8 @@ define(function () {
         }).bind(this));
 
         cloneButton.addEventListener("click", this.removeInputSlot.bind(this));
-
         this.numSlots++;
     };
-
 
 
     /*
@@ -62,31 +60,37 @@ define(function () {
         if (this.isClickLock) return;
         this.isClickLock = true;
 
-        var slots = document.getElementsByClassName("prod-input");
         var targetBtn = e.target.parentElement;
+        var slots = document.getElementsByClassName(this.className);
 
         if (targetBtn.className.indexOf("prod-btn") === -1) {
             this.isClickLock = false;
             return;
         }
 
+        // move the target to the location of the first slot, before it's removed
         var firstSlot = slots[0];
         var targetSlot = targetBtn.parentElement;
-        var targetSlotIndex = this.getElementIndex(targetSlot);
-
         var firstSlotY = parseInt(window.getComputedStyle(firstSlot).top, 10);
         targetSlot.style.top = firstSlotY + "px";
 
-
+        // after the transition animation is complete, remove the target and unblock clicks
         targetSlot.addEventListener('transitionend', function() {
             if (this.parentElement) this.parentElement.removeChild(this);
             this.isClickLock = false;
         });
 
+        // move up slots below the target
+        var targetSlotIndex = this.getElementIndex(targetSlot);
         for (var j = targetSlotIndex; j < slots.length; j++) {
             var slot = slots[j];
             var slotY = parseInt(window.getComputedStyle(slot).top, 10);
             slot.style.top = (slotY - this.slotSpaceY) + "px";
+        }
+
+        // fix z indices
+        for (var i = 0; i < slots.length; i++) {
+            if (slots[i]) slots[i].style.zIndex = (slots.length - i).toString();
         }
 
         this.numSlots--;
