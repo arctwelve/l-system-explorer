@@ -43,7 +43,7 @@ define(function (require) {
 
     /*
      * Retrieves the data from the control panel. That includes the axiom,
-     * 1 to 4 production fields, the step toggle and any other data
+     * 1 to 4 production fields, the step switch state and any other data
      * represented by the choices of the user in the control panel
      */
     ControlPanel.prototype.getData = function () {
@@ -63,7 +63,7 @@ define(function (require) {
             this.panel.style.left = "-400px";
             this.isOpen = false;
         } else {
-            this.panel.style.left = "0px";
+            this.panel.style.left = "0";
             this.isOpen = true;
         }
     };
