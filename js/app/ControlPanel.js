@@ -22,23 +22,10 @@ define(function (require) {
             app.generate();
         });
 
-        this.pinput = new ProductionInput("prod-input");
-        this.axiomField = document.getElementById("input-axiom");
         this.stepSwitch = new SlidingSwitch("step-switch");
+        this.axiomField = document.getElementById("input-axiom");
+        this.productionList = new ProductionInput("prod-input");
     };
-
-
-    /*
-     * Getter and setter for the axiom value
-     */
-    Object.defineProperty(ControlPanel.prototype, 'axiom', {
-        get: function () {
-            return this.axiomField.value;
-        },
-        set: function (val) {
-            this.axiomField.value = val;
-        }
-    });
 
 
     /*
@@ -48,9 +35,26 @@ define(function (require) {
      */
     ControlPanel.prototype.getData = function () {
         var dataObj = {};
-        dataObj.axiom = this.axiom;
+        dataObj.axiom = this.getAxiom();
+        dataObj.productions = this.getProductions();
 
         return dataObj;
+    };
+
+
+    /*
+     * Returns the value of the axiom field and error notification
+     */
+    ControlPanel.prototype.getAxiom = function () {
+        return this.axiomField.value;
+    };
+
+
+    /*
+     * Returns the value of the production fields as an array, errors and collapsing unused fields
+     */
+    ControlPanel.prototype.getProductions = function () {
+        return this.productionList.getValues();
     };
 
 

@@ -117,5 +117,19 @@ define(function () {
     };
 
 
+    /*
+     * Method retrieves the production data as an array of strings. Any oprhaned field are
+     * animated out.
+     */
+    ProductionInput.prototype.getValues = function () {
+        var values = [];
+        var slotList = document.getElementsByClassName(this.className);
+        for (var i = 0; i < slotList.length; i++) {
+            values.push(slotList[i].firstElementChild.value);
+        }
+        return values;
+    };
+
+
     return ProductionInput;
 });
