@@ -6,7 +6,7 @@ define(function (require) {
     "use strict";
 
     var PushButton = require('app/PushButton');
-    var ToggleButton = require('app/ToggleButton');
+    var SlidingSwitch = require('app/SlidingSwitch');
     var ProductionInput = require('app/ProductionInput');
 
 
@@ -14,32 +14,44 @@ define(function (require) {
 
         this.isOpen = true;
         this.panel = document.getElementById("control-panel");
-
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControlPanel.bind(this));
 
-        this.axiomField = document.getElementById("input-axiom");
+        this.generateBtn = new PushButton("btn-generate", "GENERATE");
         this.prodInput = new ProductionInput("prod-input");
 
-        this.generateBtn = new PushButton("btn-generate", "GENERATE");
-        this.generateBtn.addEventListener("click", function() {
+        this.generateBtn.addEventListener("click", function () {
             app.generate();
         });
 
-        this.stepToggleButton = new ToggleButton("step-toggle-button");
+        this.axiomField = document.getElementById("input-axiom");
+        this.stepSwitch = new SlidingSwitch("step-switch");
     };
 
 
     /*
-     * Getters and setters
+     * Getter and setter for the axiom value
      */
-    ControlPanel.prototype = {
-        get axiom() {
+    Object.defineProperty(ControlPanel.prototype, 'axiom', {
+        get: function () {
             return this.axiomField.value;
         },
-        set axiom(val) {
+        set: function (val) {
             this.axiomField.value = val;
         }
+    });
+
+
+    /*
+     * Retrieves the data from the control panel. That includes the axiom,
+     * 1 to 4 production fields, the step toggle and any other data
+     * represented by the choices of the user in the control panel
+     */
+    ControlPanel.prototype.getData = function () {
+        var dataObj = {};
+        dataObj.axiom = this.axiom;
+
+        return dataObj;
     };
 
 
@@ -56,7 +68,6 @@ define(function (require) {
             this.isOpen = true;
         }
     };
-
 
     return ControlPanel;
 });

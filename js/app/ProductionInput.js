@@ -23,7 +23,7 @@ define(function () {
 
     /*
      * Event handler for "add" button clicks. Creates a clone input slot and appends it to the DOM.
-     * The right-side button on the new clone slot is changed to a remove button, visually and
+     * The right-side button on the new clone slot is changed to a remove (-) button, visually and
      * functionally.
      */
     ProductionInput.prototype.cloneInputSlot = function (e) {
@@ -56,7 +56,8 @@ define(function () {
 
 
     /*
-     * Removes the selected input slot and moves up any siblings below it
+     * Handler for the new (+) button click. Removes the selected input slot and moves up any
+     * siblings below it.
      */
     ProductionInput.prototype.removeInputSlot = function (e) {
 
@@ -106,7 +107,8 @@ define(function () {
 
 
     /*
-     * Helper method to set the zIndices of all the input slots
+     * Helper method to set the z indices of the input slots. This causes a moving slot to
+     * slide out, or slide in, from underneath the slot above it.
      */
     ProductionInput.prototype.setZIndexPositions = function (slotList) {
         for (var i = 0; i < slotList.length; i++) {

@@ -1,0 +1,86 @@
+p {
+  margin:1em 0;
+}
+
+.triangle-border {
+  position:relative;
+  padding:15px;
+  margin:1em 0 3em;
+  border:5px solid #336699;
+  color:#333;
+  background:#cc;
+  border-radius:10px;
+  width:250px;
+}
+
+.triangle-border:before {
+  content:"";
+  position:absolute;
+  bottom:-20px;
+  left:40px;
+  border-width:20px 20px 0;
+  border-style:solid;
+  border-color:#336699 transparent;
+}
+
+.triangle-border:after {
+  content:"";
+  position:absolute;
+  bottom:-13px;
+  left:47px;
+  border-width:13px 13px 0;
+  border-style:solid;
+  border-color:#fff transparent;
+}
+
+
+.triangle-border.top:before {
+  top:-20px;
+  bottom:auto;
+  left:auto;
+  right:40px;
+  border-width:0 20px 20px;
+}
+
+.triangle-border.top:after {
+  top:-13px;
+  bottom:auto;
+  left:auto;
+  right:47px;
+  border-width:0 13px 13px;
+}
+
+.triangle-border.left:before {
+  top:10px;
+  bottom:auto;
+  left:-30px;
+  border-width:15px 30px 15px 0;
+  border-color:transparent #336699;
+}
+
+.triangle-border.left:after {
+  top:16px;
+  bottom:auto;
+  left:-21px;
+  border-width:9px 21px 9px 0;
+  border-color:transparent #fff;
+}
+
+.triangle-border.right:before {
+  top:10px;
+  bottom:auto;
+  left:auto;
+  right:-30px;
+  border-width:15px 0 15px 30px;
+  border-color:transparent #336699;
+}
+
+.triangle-border.right:after {
+  top:16px;
+  bottom:auto;
+  left:auto;
+  right:-21px;
+  border-width:9px 0 9px 21px;
+  border-color:transparent #fff;
+}
+

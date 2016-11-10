@@ -72,7 +72,7 @@ i.button-label-30 {
 
 i.vert-align:hover,
 i.button-label:hover,
-.toggle-button:hover i.button-label-30 {
+.step-switch:hover i.button-label-30 {
     color: #6699cc;
     cursor: pointer;
 }
@@ -201,18 +201,22 @@ i.button-label:hover,
     color: #6699cc;
 }
 
-.toggle-button {
+.step-switch {
     position: absolute;
     top:442px;
     left:170px;
     width:190px;
-    background: url(/img/toggle-track.png) no-repeat;
+    background: url(/img/switch-track.png) no-repeat;
     background-size: 100% 67px;
 }
 
-.toggle-knob {
+.step-switch-knob {
     position: relative;
     top:2px;
     left:2px;
     transition: left .3s ease-in-out;
+}
+
+.step-switch:hover {
+    cursor: pointer;
 }

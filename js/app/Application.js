@@ -17,19 +17,21 @@ define(function (require) {
         this.canvas = new DrawingCanvas();
         this.controlPanel = new ControlPanel(this);
 
-        var rewriter = new Rewriter("X");
-        rewriter.addProduction("X->F[+X][-X]FX");
-        rewriter.addProduction("F->FF");
+        //var rewriter = new Rewriter("X");
+        //rewriter.addProduction("X->F[+X][-X]FX");
+        //rewriter.addProduction("F->FF");
         //rewriter.derive(7);
     };
 
 
     Application.prototype.generate =  function() {
+        var panelData =  this.controlPanel.getData();
+        console.log(panelData);
+    };
 
-        var axiom =  this.controlPanel.axiom;
-        console.log(axiom);
 
-        //this.canvas.render();
+    Application.prototype.validateInput =  function() {
+
     };
 
 
