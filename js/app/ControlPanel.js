@@ -18,12 +18,11 @@ define(function (require) {
         this.toggleTab.addEventListener("click", this.toggleControlPanel.bind(this));
 
         this.generateBtn = new PushButton("btn-generate", "GENERATE");
-        this.prodInput = new ProductionInput("prod-input");
-
         this.generateBtn.addEventListener("click", function () {
             app.generate();
         });
 
+        this.pinput = new ProductionInput("prod-input");
         this.axiomField = document.getElementById("input-axiom");
         this.stepSwitch = new SlidingSwitch("step-switch");
     };
