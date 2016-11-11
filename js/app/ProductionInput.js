@@ -131,7 +131,7 @@ define(function () {
             var slotValue = slots[i].firstElementChild.value;
             if (i > 0 && slotValue === "") {
                 var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
-                cloneButton.firstElementChild.click();
+                cloneButton.firstElementChild.click(); // need to do all empty fields
                 continue;
             }
             values.push(slotValue);
