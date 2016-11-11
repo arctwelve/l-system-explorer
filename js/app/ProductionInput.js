@@ -13,6 +13,7 @@ define(function () {
 
         this.numSlots = 1;
         this.isClickLock = false;
+        this.btnClass = "prod-btn";
         this.className = elementClassName;
 
         this.element = document.getElementsByClassName(this.className)[0];
@@ -43,7 +44,7 @@ define(function () {
         var slotCloneY = parseInt(window.getComputedStyle(slotClone).top, 10);
         slotClone.style.top = slotCloneY + this.slotSpaceY + "px";
 
-        var cloneButton = slotClone.getElementsByClassName("prod-btn")[0];
+        var cloneButton = slotClone.getElementsByClassName(this.btnClass)[0];
         cloneButton.firstElementChild.innerHTML = "remove";
 
         slotClone.addEventListener('transitionend', (function () {
@@ -122,10 +123,18 @@ define(function () {
      * animated out.
      */
     ProductionInput.prototype.getValues = function () {
+
         var values = [];
-        var slotList = document.getElementsByClassName(this.className);
-        for (var i = 0; i < slotList.length; i++) {
-            values.push(slotList[i].firstElementChild.value);
+        var slots = document.getElementsByClassName(this.className);
+
+        for (var i = 0; i < slots.length; i++) {
+            var slotValue = slots[i].firstElementChild.value;
+            if (i > 0 && slotValue === "") {
+                var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
+                cloneButton.firstElementChild.click();
+                continue;
+            }
+            values.push(slotValue);
         }
         return values;
     };

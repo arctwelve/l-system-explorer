@@ -29,24 +29,17 @@ define(function (require) {
 
 
     /*
-     * Retrieves the data from the control panel. That includes the axiom,
-     * 1 to 4 production fields, the step switch state and any other data
-     * represented by the choices of the user in the control panel
+     * Data model for the App by way of the controllers on the panel. This is actual real MVC for a
+     * change. Model data Includes the axiom, 1 to 4, production fields, the step switch state and
+     * more TBD
      */
     ControlPanel.prototype.getData = function () {
         var dataObj = {};
-        dataObj.axiom = this.getAxiom();
+        dataObj.axiom = this.axiomField.value;
         dataObj.productions = this.getProductions();
+        dataObj.isShowingSteps = this.stepSwitch.showSteps;
 
         return dataObj;
-    };
-
-
-    /*
-     * Returns the value of the axiom field and error notification
-     */
-    ControlPanel.prototype.getAxiom = function () {
-        return this.axiomField.value;
     };
 
 
