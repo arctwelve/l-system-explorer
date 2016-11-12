@@ -124,15 +124,13 @@ define(function () {
 
         for (var i = 0; i < slots.length; i++) {
             var slotValue = slots[i].firstElementChild.value;
-            // is there a blank slot past the first add (+) one
-            if (i > 0 && slotValue === "") {
-                var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
-                cloneButton.firstElementChild.click();
-            }
-            values.push(slotValue);
+            if (slotValue !== "") values.push(slotValue);
         }
         return values;
     };
+
+    //var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
+      //          cloneButton.firstElementChild.click();
 
 
     return ProductionInput;
