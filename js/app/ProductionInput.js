@@ -57,7 +57,7 @@ define(function () {
 
 
     /*
-     * Handler for the new (+) button click. Removes the selected input slot and moves up any
+     * Handler for the remove (-) button click. Removes the selected input slot and moves up any
      * siblings below it.
      */
     ProductionInput.prototype.removeInputSlot = function (e) {
@@ -67,23 +67,12 @@ define(function () {
 
         var targetBtn = e.target.parentElement;
         var slots = document.getElementsByClassName(this.className);
+        var targetSlot = targetBtn.parentElement;
 
-        if (targetBtn.className.indexOf("prod-btn") === -1) {
+        if (targetBtn.className.indexOf(this.btnClass) === -1) {
             this.isClickLock = false;
             return;
         }
-
-        // move the target to the location of the first slot, before it's removed
-        var firstSlot = slots[0];
-        var targetSlot = targetBtn.parentElement;
-        var firstSlotY = parseInt(window.getComputedStyle(firstSlot).top, 10);
-        targetSlot.style.top = firstSlotY + "px";
-
-        // after the transition animation is complete, remove the target and unblock clicks
-        targetSlot.addEventListener('transitionend', function () {
-            if (this.parentElement) this.parentElement.removeChild(this);
-            this.isClickLock = false;
-        });
 
         // move up slots below the target
         var targetSlotIndex = this.getElementIndex(targetSlot);
@@ -92,6 +81,12 @@ define(function () {
             var slotY = parseInt(window.getComputedStyle(slot).top, 10);
             slot.style.top = (slotY - this.slotSpaceY) + "px";
         }
+
+         // remove the target and unblock clicks after the animation
+        targetSlot.addEventListener('transitionend', function () {
+            if (this.parentElement) this.parentElement.removeChild(this);
+            this.isClickLock = false;
+        });
 
         this.setZIndexPositions(slots);
         this.numSlots--;
@@ -119,7 +114,7 @@ define(function () {
 
 
     /*
-     * Method retrieves the production data as an array of strings. Any oprhaned field are
+     * Method retrieves the production data as an array of strings. Any oprhaned fields are
      * animated out.
      */
     ProductionInput.prototype.getValues = function () {
@@ -129,10 +124,10 @@ define(function () {
 
         for (var i = 0; i < slots.length; i++) {
             var slotValue = slots[i].firstElementChild.value;
+            // is there a blank slot past the first add (+) one
             if (i > 0 && slotValue === "") {
                 var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
-                cloneButton.firstElementChild.click(); // need to do all empty fields
-                continue;
+                cloneButton.firstElementChild.click();
             }
             values.push(slotValue);
         }

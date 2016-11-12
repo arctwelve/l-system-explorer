@@ -13,6 +13,8 @@ define(function (require) {
     var ControlPanel = function (app) {
 
         this.isOpen = true;
+        this.openPosX = "-400px";
+
         this.panel = document.getElementById("control-panel");
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControlPanel.bind(this));
@@ -57,7 +59,7 @@ define(function (require) {
     ControlPanel.prototype.toggleControlPanel = function () {
 
         if (this.isOpen) {
-            this.panel.style.left = "-400px";
+            this.panel.style.left = this.openPosX;
             this.isOpen = false;
         } else {
             this.panel.style.left = "0";
