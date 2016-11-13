@@ -38,18 +38,10 @@ define(function (require) {
     ControlPanel.prototype.getData = function () {
         var dataObj = {};
         dataObj.axiom = this.axiomField.value;
-        dataObj.productions = this.getProductions();
+        dataObj.productions = this.productionList.getValues();
         dataObj.isShowingSteps = this.stepSwitch.showSteps;
 
         return dataObj;
-    };
-
-
-    /*
-     * Returns the value of the production fields as an array, errors and collapsing unused fields
-     */
-    ControlPanel.prototype.getProductions = function () {
-        return this.productionList.getValues();
     };
 
 
@@ -65,6 +57,7 @@ define(function (require) {
             this.isOpen = true;
         }
     };
+
 
     return ControlPanel;
 });

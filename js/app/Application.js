@@ -34,8 +34,7 @@ define(function (require) {
 
 
     Application.prototype.generate =  function() {
-        var panelData =  this.controlPanel.getData();
-        console.log(panelData);
+        var panelData = this.controlPanel.getData();
     };
 
 

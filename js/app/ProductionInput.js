@@ -114,8 +114,7 @@ define(function () {
 
 
     /*
-     * Method retrieves the production data as an array of strings. Any oprhaned fields are
-     * animated out.
+     * Method retrieves the production data as an array of strings.
      */
     ProductionInput.prototype.getValues = function () {
 
@@ -126,11 +125,19 @@ define(function () {
             var slotValue = slots[i].firstElementChild.value;
             if (slotValue !== "") values.push(slotValue);
         }
+
+        this.hideOrphans();
         return values;
     };
 
-    //var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
-      //          cloneButton.firstElementChild.click();
+
+    /*
+     * Removes any empty slots when the productions are requested
+     */
+    ProductionInput.prototype.hideOrphans = function () {
+        //var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
+        // cloneButton.firstElementChild.click();
+    };
 
 
     return ProductionInput;
