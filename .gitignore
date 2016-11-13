@@ -5,5 +5,4 @@
 node_modules
 
 # minified css
-css/production/*.min.css
 /css/production/style.min.css
