@@ -13,21 +13,13 @@ define(function (require) {
 
 
     var Application = function () {
-
         this.intervalID = window.setInterval(this.testState.bind(this), 500);
-
-
-        //var rewriter = new Rewriter("X");
-        //rewriter.addProduction("X->F[+X][-X]FX");
-        //rewriter.addProduction("F->FF");
-        //rewriter.derive(7);
     };
 
 
     Application.prototype.init =  function() {
         this.canvas = new DrawingCanvas();
         this.controlPanel = new ControlPanel(this);
-
         this.controlPanel.toggleControlPanel();
         document.getElementById("drawing-canvas-container").style.visibility = "visible";
     };
@@ -35,11 +27,18 @@ define(function (require) {
 
     Application.prototype.generate =  function() {
         var panelData = this.controlPanel.getData();
+        this.validateInput(panelData);
+
+        //var rewriter = new Rewriter("X");
+        //rewriter.addProduction("X->F[+X][-X]FX");
+        //rewriter.addProduction("F->FF");
+        //rewriter.derive(7);
+
     };
 
 
-    Application.prototype.validateInput =  function() {
-        //
+    Application.prototype.validateInput =  function(input) {
+        // return true;
     };
 
 
