@@ -12,7 +12,7 @@ define(function (require) {
 
     var ControlPanel = function (app) {
 
-        this.isOpen = true;
+        this.isOpen = false;
         this.openPosX = "-400px";
 
         this.panel = document.getElementById("control-panel");
@@ -57,7 +57,6 @@ define(function (require) {
      * Handler for the toggle tab click. Slides the panel drawer in / out. Animation is CSS
      */
     ControlPanel.prototype.toggleControlPanel = function () {
-
         if (this.isOpen) {
             this.panel.style.left = this.openPosX;
             this.isOpen = false;
