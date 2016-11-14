@@ -130,7 +130,7 @@ define(function () {
                 }
             }
         }
-        this.intervalID = setInterval(this.clearEmptySlots.bind(this), 50);
+        this.intervalID = setInterval(this.clearEmptySlots.bind(this), 10);
     };
 
 
