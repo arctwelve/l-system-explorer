@@ -18,7 +18,7 @@ define(function () {
 
         this.element = document.getElementsByClassName(this.className)[0];
         this.elementBtn = this.element.getElementsByClassName("prod-btn")[0];
-        this.elementBtn.addEventListener("click", this.cloneInputSlot.bind(this));
+        this.elementBtn.addEventListener("click", this.addInputSlot.bind(this));
     };
 
 
@@ -27,7 +27,7 @@ define(function () {
      * The right-side button on the new clone slot is changed to a remove (-) button, visually and
      * functionally.
      */
-    ProductionInput.prototype.cloneInputSlot = function (e) {
+    ProductionInput.prototype.addInputSlot = function (e) {
 
         if (e.target.tagName !== 'I' || this.numSlots >= this.maxSlots || this.isClickLock) return;
 
@@ -94,6 +94,68 @@ define(function () {
 
 
     /*
+     * Method retrieves the production data as an array of strings.
+     */
+    ProductionInput.prototype.getValues = function () {
+
+        var values = [];
+        var slots = document.getElementsByClassName(this.className);
+
+        for (var i = 0; i < slots.length; i++) {
+            var slotValue = slots[i].firstElementChild.value;
+            if (slotValue !== "") values.push(slotValue);
+        }
+
+        if (values.length) this.hideOrphans();
+        return values;
+    };
+
+
+    /*
+     * Removes any empty slots when the productions are gathered as data. Replaces first slot
+     * with any data from a slot below, so the fields have the most economy visually
+     */
+    ProductionInput.prototype.hideOrphans = function () {
+
+        var slots = document.getElementsByClassName(this.className);
+
+        var firstSlot = slots[0].firstElementChild;
+        if (firstSlot.value === "") {
+            for (var i = 1; i < slots.length; i++) {
+                var currSlot = slots[i].firstElementChild;
+                if (currSlot.value !== "") {
+                    firstSlot.value = currSlot.value;
+                    currSlot.value = "";
+                    break;
+                }
+            }
+        }
+        this.intervalID = setInterval(this.clearEmpty.bind(this), 50);
+    };
+
+
+    /*
+     * Does the actual removal of empty slots by triggering the click event. setInterval is used
+     * for delay is between clicks for correct behavior
+     */
+    ProductionInput.prototype.clearEmpty = function () {
+
+        var slots = document.getElementsByClassName(this.className);
+
+        var isEmptySlots = false;
+        for (var n = 1; n < slots.length; n++) {
+            var slotValue = slots[n].firstElementChild.value;
+            if (slotValue === "") {
+                isEmptySlots = true;
+                var cloneButton = slots[n].getElementsByClassName(this.btnClass)[0];
+                cloneButton.firstElementChild.click();
+            }
+        }
+        if (! isEmptySlots) clearInterval(this.intervalID);
+    };
+
+
+    /*
      * Helper method to get the index of an element within a group of ordered siblings
      */
     ProductionInput.prototype.getElementIndex = function (el) {
@@ -110,33 +172,6 @@ define(function () {
         for (var i = 0; i < slotList.length; i++) {
             if (slotList[i]) slotList[i].style.zIndex = (slotList.length - i).toString();
         }
-    };
-
-
-    /*
-     * Method retrieves the production data as an array of strings.
-     */
-    ProductionInput.prototype.getValues = function () {
-
-        var values = [];
-        var slots = document.getElementsByClassName(this.className);
-
-        for (var i = 0; i < slots.length; i++) {
-            var slotValue = slots[i].firstElementChild.value;
-            if (slotValue !== "") values.push(slotValue);
-        }
-
-        this.hideOrphans();
-        return values;
-    };
-
-
-    /*
-     * Removes any empty slots when the productions are requested
-     */
-    ProductionInput.prototype.hideOrphans = function () {
-        //var cloneButton = slots[i].getElementsByClassName(this.btnClass)[0];
-        // cloneButton.firstElementChild.click();
     };
 
 
