@@ -130,7 +130,7 @@ define(function () {
                 }
             }
         }
-        this.intervalID = setInterval(this.clearEmpty.bind(this), 50);
+        this.intervalID = setInterval(this.clearEmptySlots.bind(this), 50);
     };
 
 
@@ -138,7 +138,7 @@ define(function () {
      * Does the actual removal of empty slots by triggering the click event. setInterval is used
      * for delay is between clicks for correct behavior
      */
-    ProductionInput.prototype.clearEmpty = function () {
+    ProductionInput.prototype.clearEmptySlots = function () {
 
         var slots = document.getElementsByClassName(this.className);
 
