@@ -17,6 +17,9 @@ define(function (require) {
     };
 
 
+    /*
+     * Init method is called once the document readystate is complete.
+     */
     Application.prototype.init =  function() {
         this.canvas = new DrawingCanvas();
         this.controlPanel = new ControlPanel(this);
@@ -33,7 +36,6 @@ define(function (require) {
         //rewriter.addProduction("X->F[+X][-X]FX");
         //rewriter.addProduction("F->FF");
         //rewriter.derive(7);
-
     };
 
 
