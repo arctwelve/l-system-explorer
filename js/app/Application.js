@@ -10,6 +10,7 @@ define(function (require) {
     var ControlPanel =  require('app/ControlPanel');
     var DrawingCanvas = require('app/DrawingCanvas');
     var Rewriter =      require('app/Rewriter');
+    var MessageBubble = require('app/MessageBubble');
 
 
     var Application = function () {
@@ -25,12 +26,16 @@ define(function (require) {
         this.controlPanel = new ControlPanel(this);
         this.controlPanel.toggleControlPanel();
         document.getElementById("drawing-canvas-container").style.visibility = "visible";
+
+        this.msgBubble = new MessageBubble();
+        this.msgBubble.setMessage(500, 600, "YOU MUST INSERT A NUDE TAIN", "left");
     };
 
 
     Application.prototype.generate =  function() {
         var panelData = this.controlPanel.getData();
         this.validateInput(panelData);
+
 
         //var rewriter = new Rewriter("X");
         //rewriter.addProduction("X->F[+X][-X]FX");
