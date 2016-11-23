@@ -5,8 +5,8 @@ define(function (require) {
 
     "use strict";
 
+    var Switch = require('app/Switch');
     var PushButton = require('app/PushButton');
-    var SlidingSwitch = require('app/SlidingSwitch');
     var ProductionInput = require('app/ProductionInput');
 
 
@@ -24,16 +24,15 @@ define(function (require) {
             app.generate();
         });
 
-        this.stepSwitch = new SlidingSwitch("step-switch");
+        this.stepSwitch = new Switch("step-switch");
         this.axiomField = document.getElementById("input-axiom");
         this.productionList = new ProductionInput("prod-input");
     };
 
 
     /*
-     * Data model for the App by way of the controllers on the panel. This is actual real MVC for a
-     * change. Model data Includes the axiom, 1 to 4, production fields, the step switch state and
-     * more TBD
+     * Data model for the App by way of the controls on the panel. Model data Includes the
+     * axiom, 1 to 4, production fields, the step switch state and more TBD
      */
     ControlPanel.prototype.getData = function () {
         var dataObj = {};

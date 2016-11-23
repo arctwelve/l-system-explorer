@@ -27,8 +27,7 @@ define(function (require) {
         this.controlPanel.toggleControlPanel();
         document.getElementById("drawing-canvas-container").style.visibility = "visible";
 
-        this.msgBubble = new MessageBubble();
-        this.msgBubble.setMessage(500, 600, "YOU MUST INSERT A NUDE TAIN", "left");
+
     };
 
 
@@ -36,6 +35,9 @@ define(function (require) {
         var panelData = this.controlPanel.getData();
         this.validateInput(panelData);
 
+
+        //this.msgBubble = new MessageBubble();
+        //this.msgBubble.setMessage(500, 600, "YOU MUST INSERT A NUDE TAIN", "left");
 
         //var rewriter = new Rewriter("X");
         //rewriter.addProduction("X->F[+X][-X]FX");
