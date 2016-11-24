@@ -1,0 +1,21 @@
+
+.step-switch {
+    position: absolute;
+    top:442px;
+    left:170px;
+    width:190px;
+    background: url(/img/switch-track.png) no-repeat;
+    background-size: 100% 67px;
+
+}
+
+.step-switch-knob {
+    position: relative;
+    top:2px;
+    left:2px;
+    transition: left .3s ease-in-out;
+}
+
+.step-switch:hover {
+    cursor: pointer;
+}
