@@ -210,15 +210,26 @@ i.button-label:hover,
 }
 
 .small-slider-knob {
-    position: relative;
-    top:-3px;
+    position: absolute;
+    top:-4px;
     left:20px;
 }
 
-.small-slider-field {
-    position: relative;
-    top:-3px;
-    left:220px;
+.small-slider-input-text {
+    position:relative;
+    left:277px;
+    top:-16px;
+    width: 42px;
+    height: 26px;
+    border: 0;
+    outline: none;
+    background: url(/img/slider-field.png) no-repeat 100% 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .75em;
+    color: #ffffff;
+    font-weight: 400;
+    box-sizing: border-box;
+    text-align:center;
 }
 
 .step-switch {
