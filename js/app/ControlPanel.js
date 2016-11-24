@@ -1,5 +1,6 @@
 /*
- * Control panel object. Persists on the left side in open or closed drawer state.
+ * Control panel object. Persists on the left side in open or closed drawer state. Acts as parent
+ * object to GUI components in the panel.
  */
 define(function (require) {
 
