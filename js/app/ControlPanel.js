@@ -6,6 +6,7 @@ define(function (require) {
 
     "use strict";
 
+    var Slider = require('app/Slider');
     var Switch = require('app/Switch');
     var PushButton = require('app/PushButton');
     var ProductionInput = require('app/ProductionInput');
@@ -19,6 +20,10 @@ define(function (require) {
         this.panel = document.getElementById("control-panel");
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControlPanel.bind(this));
+
+
+        this.sliderA = new Slider("iteration-slider");
+
 
         this.generateBtn = new PushButton("btn-generate", "GENERATE");
         this.generateBtn.addEventListener("click", function () {
