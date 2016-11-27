@@ -1,5 +1,6 @@
 /*
- * A horizontal slider with output value field and label
+ * A horizontal slider with output value field and label. Element could be an input range, but
+ * this allows more flexibility for custom GUI items
  */
 define(function () {
 
