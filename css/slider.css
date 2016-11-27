@@ -20,6 +20,7 @@
     position: absolute;
     top:-4px;
     left:20px;
+    cursor: pointer;
 }
 
 .small-slider-input-text {
