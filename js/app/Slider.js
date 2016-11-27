@@ -7,34 +7,17 @@ define(function () {
 
     var Slider = function (elementID) {
 
+        this.sliderOffsetX = 46;
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
-        /*
-        this.elementBtn.onmousedown = function() {
-
-            var self = this;
-
-            document.onmousemove = function(e) {
-                self.style.left = e.clientX - 46 + 'px';
-            };
-
-            this.onmouseup = function() {
-                document.onmousemove = null;
-            };
-
-            document.onmouseup = function() {
-                document.onmousemove = null;
-            };
-        };
-
-        this.elementBtn.ondragstart = function() {
-            return false;
-        };
-        */
     };
 
 
+    /*
+     * Handler for mousedown on the slider knob (thumb). Document level event are nested inside
+     * to keep their scope limited
+     */
     Slider.prototype.knobMouseDown = function(e) {
 
         document.onmouseup = this.knobMouseUp.bind(this);
@@ -48,7 +31,7 @@ define(function () {
 
 
     Slider.prototype.knobMouseMove = function(e) {
-        this.elementBtn.style.left = e.clientX - 46 + 'px';
+        this.elementBtn.style.left = e.clientX - this.sliderOffsetX + 'px';
     };
 
 
