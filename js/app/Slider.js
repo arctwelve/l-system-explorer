@@ -6,12 +6,18 @@ define(function () {
 
     "use strict";
 
-    var Slider = function (elementID) {
+    var Slider = function (elementID, labelText) {
+
+        this.minX = 2;
+        this.maxX = 251;
 
         this.sliderOffsetX = 46;
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
+
+        this.labelElement = this.element.firstElementChild;
+        this.labelElement.textContent = labelText;
     };
 
 
@@ -33,7 +39,15 @@ define(function () {
 
 
     Slider.prototype.knobMouseMove = function(e) {
+
         this.elementBtn.style.left = e.clientX - this.sliderOffsetX + 'px';
+        var posX = parseInt(this.elementBtn.style.left, 10);
+
+        if (posX > this.maxX) {
+            this.elementBtn.style.left = this.maxX + "px";
+        } else if (posX < this.minX) {
+            this.elementBtn.style.left = this.minX + "px";
+        }
     };
 
 

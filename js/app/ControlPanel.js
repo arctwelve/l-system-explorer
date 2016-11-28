@@ -22,7 +22,7 @@ define(function (require) {
         this.toggleTab.addEventListener("click", this.toggleControlPanel.bind(this));
 
 
-        this.sliderA = new Slider("iteration-slider");
+        this.sliderA = new Slider("iteration-slider", "ITERATIONS");
 
 
         this.generateBtn = new PushButton("btn-generate", "GENERATE");
