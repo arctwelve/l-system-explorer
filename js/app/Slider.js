@@ -16,15 +16,16 @@ define(function () {
 
 
     /*
-     * Handler for mousedown on the slider knob (thumb). Document level event are nested inside
-     * to keep their scope limited
+     * Handler for mousedown on the slider knob (thumb). Document level events are nested inside
+     * to keep their scope limited. Single function assignment to event is preferable for
+     * nullability in the knobMouseUp handler.
      */
     Slider.prototype.knobMouseDown = function(e) {
 
         document.onmouseup = this.knobMouseUp.bind(this);
         document.onmousemove = this.knobMouseMove.bind(this);
-        this.elementBtn.onmouseup = this.knobMouseUp.bind(this);
 
+        this.elementBtn.onmouseup = this.knobMouseUp.bind(this);
         this.elementBtn.ondragstart = function() {
             return false;
         };
