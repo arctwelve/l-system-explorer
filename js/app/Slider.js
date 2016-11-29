@@ -11,13 +11,25 @@ define(function () {
         this.minX = 2;
         this.maxX = 251;
 
+        this.sliderVal = 0;
         this.sliderOffsetX = 46;
+
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
         this.labelElement = this.element.firstElementChild;
         this.labelElement.textContent = labelText;
+        this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
+
+        Object.defineProperty(Slider.prototype, 'value', {
+            get: function () {
+                return this.sliderVal;
+            },
+            set: function (v) {
+                this.sliderVal = v;
+            }
+        });
     };
 
 
@@ -41,11 +53,12 @@ define(function () {
     Slider.prototype.knobMouseMove = function(e) {
 
         this.elementBtn.style.left = e.clientX - this.sliderOffsetX + 'px';
-        var posX = parseInt(this.elementBtn.style.left, 10);
+        this.value = parseInt(this.elementBtn.style.left, 10);
+        this.valueField.value = this.value;
 
-        if (posX > this.maxX) {
+        if (this.value > this.maxX) {
             this.elementBtn.style.left = this.maxX + "px";
-        } else if (posX < this.minX) {
+        } else if (this.value < this.minX) {
             this.elementBtn.style.left = this.minX + "px";
         }
     };
