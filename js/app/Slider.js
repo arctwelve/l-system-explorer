@@ -6,7 +6,7 @@ define(function () {
 
     "use strict";
 
-    var Slider = function (elementID, labelText) {
+    var Slider = function (elementID, labelText, startVal, endVal, increment) {
 
         this.minX = 2;
         this.maxX = 251;
