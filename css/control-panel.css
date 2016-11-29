@@ -166,18 +166,6 @@ i.button-label:hover,
     width: 36px;
 }
 
-.separator {
-    position: absolute;
-    top: 400px;
-    left: 14px;
-    width: calc(100% - 28px);
-}
-
-.separator img {
-    width: 100%;
-    height: 32px;
-}
-
 .btn-rect {
     position: absolute;
     top:425px;

@@ -23,6 +23,8 @@ define(function () {
         this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
 
         Object.defineProperty(Slider.prototype, 'value', {
+            configurable: true,
+
             get: function () {
                 return this.sliderVal;
             },

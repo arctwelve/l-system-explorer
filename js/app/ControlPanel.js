@@ -21,18 +21,19 @@ define(function (require) {
         this.toggleTab = document.getElementById("control-panel-toggle-tab");
         this.toggleTab.addEventListener("click", this.toggleControlPanel.bind(this));
 
+        this.axiomField = document.getElementById("input-axiom");
+        this.productionList = new ProductionInput("prod-input");
 
         this.sliderA = new Slider("iteration-slider", "ITERATIONS");
+        this.sliderB = new Slider("startx-slider", "START X");
 
-
+        /*
         this.generateBtn = new PushButton("btn-generate", "GENERATE");
         this.generateBtn.addEventListener("click", function () {
             app.generate();
         });
-
-        this.stepSwitch = new Switch("step-switch");
-        this.axiomField = document.getElementById("input-axiom");
-        this.productionList = new ProductionInput("prod-input");
+*/
+        //this.stepSwitch = new Switch("step-switch");
     };
 
 

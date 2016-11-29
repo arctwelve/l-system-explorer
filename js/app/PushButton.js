@@ -1,5 +1,5 @@
 /*
- * Object represents a rectangular push button
+ * Object represents a rectangular push button with label set in the constructor
  */
 define(function () {
 

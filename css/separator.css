@@ -1,0 +1,14 @@
+.separator {
+    position: absolute;
+    left: 14px;
+    width: calc(100% - 28px);
+}
+
+.separator img {
+    width: 100%;
+    height: 32px;
+}
+
+.separator.first {
+    top: 330px;
+}
