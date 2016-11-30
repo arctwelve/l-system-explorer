@@ -1,18 +1,23 @@
 /*
  * A horizontal slider with output value field and label. Element could be an input range, but
- * this allows more flexibility for custom GUI items
+ * this allows more flexibility for custom GUI items. min and max parameters specify the lowest
+ * and highest values of the slider. The step parament defines the increment value between
+ * min and max -- range permitting
  */
 define(function () {
 
     "use strict";
 
-    var Slider = function (elementID, labelText) {
+    var Slider = function (elementID, labelText, min, max, step) {
 
-        this.minX = 2;
-        this.maxX = 251;
+        // consts for the range and offset of the slider knob
+        this.LO_BOUND_X = 1;
+        this.HI_BOUND_X = 251;
+        this.OFFSET_X = 46;
 
-        this.sliderVal = 0;
-        this.sliderOffsetX = 46;
+        this.min = min;
+        this.max = max;
+        this.step = step;
 
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
@@ -22,6 +27,7 @@ define(function () {
         this.labelElement.textContent = labelText;
         this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
 
+        this.sliderVal = 0;
         Object.defineProperty(Slider.prototype, 'value', {
             configurable: true,
 
@@ -52,22 +58,27 @@ define(function () {
     };
 
 
+    /*
+     * Event handler for both the movement of the slider knob as well as deriving its value from
+     * the min, max and step parameters. Method first clamps the slider knob to its track, then
+     * derives the specific value.
+     */
     Slider.prototype.knobMouseMove = function(e) {
 
-        var mouseX = e.clientX - this.sliderOffsetX;
-
-        if (mouseX > this.maxX) {
-            mouseX = this.maxX;
-        } else if (mouseX < this.minX) {
-            mouseX = this.minX;
-        }
-
+        var mouseX = e.clientX - this.OFFSET_X;
+        if (mouseX > this.HI_BOUND_X) mouseX = this.HI_BOUND_X;
+        if (mouseX < this.LO_BOUND_X) mouseX = this.LO_BOUND_X;
         this.elementBtn.style.left = mouseX + 'px';
 
         this.adjustSliderValue(mouseX);
         this.valueField.value = this.value;
+    };
 
-        this.value = mouseX;
+
+    Slider.prototype.adjustSliderValue = function(mouseX) {
+        var coef = this.max / this.HI_BOUND_X;
+        var single = Math.ceil(mouseX * coef);
+        this.value = single;
     };
 
 
