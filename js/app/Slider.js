@@ -6,7 +6,7 @@ define(function () {
 
     "use strict";
 
-    var Slider = function (elementID, labelText, startVal, endVal, increment) {
+    var Slider = function (elementID, labelText) {
 
         this.minX = 2;
         this.maxX = 251;
@@ -54,15 +54,20 @@ define(function () {
 
     Slider.prototype.knobMouseMove = function(e) {
 
-        this.elementBtn.style.left = e.clientX - this.sliderOffsetX + 'px';
-        this.value = parseInt(this.elementBtn.style.left, 10);
+        var mouseX = e.clientX - this.sliderOffsetX;
+
+        if (mouseX > this.maxX) {
+            mouseX = this.maxX;
+        } else if (mouseX < this.minX) {
+            mouseX = this.minX;
+        }
+
+        this.elementBtn.style.left = mouseX + 'px';
+
+        this.adjustSliderValue(mouseX);
         this.valueField.value = this.value;
 
-        if (this.value > this.maxX) {
-            this.elementBtn.style.left = this.maxX + "px";
-        } else if (this.value < this.minX) {
-            this.elementBtn.style.left = this.minX + "px";
-        }
+        this.value = mouseX;
     };
 
 
