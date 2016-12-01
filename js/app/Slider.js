@@ -8,7 +8,7 @@ define(function () {
 
     "use strict";
 
-    var Slider = function (elementID, labelText, min, max, step) {
+    var Slider = function (elementID, labelText, min, max) {
 
         // consts for the range and offset of the slider knob
         this.LO_BOUND_X = 1;
@@ -17,7 +17,6 @@ define(function () {
 
         this.min = min;
         this.max = max;
-        this.step = step;
 
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
@@ -76,9 +75,9 @@ define(function () {
 
 
     Slider.prototype.adjustSliderValue = function(mouseX) {
-        var coef = this.max / this.HI_BOUND_X;
-        var single = Math.ceil(mouseX * coef);
-        this.value = single;
+        var coef = (this.max - this.min) / this.HI_BOUND_X;
+        var adjValue = Math.floor(mouseX * coef) + this.min;
+        this.value = adjValue;
     };
 
 
