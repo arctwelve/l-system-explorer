@@ -11,9 +11,8 @@ define(function () {
     var Slider = function (elementID, labelText, min, max) {
 
         // consts for the range and offset of the slider knob
-        this.LO_BOUND_X = 1;
-        this.HI_BOUND_X = 251;
         this.OFFSET_X = 46;
+        this.HI_BOUND_X = 251;
 
         this.min = min;
         this.max = max;
@@ -67,8 +66,7 @@ define(function () {
     Slider.prototype.knobMouseMove = function(e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
-        if (mouseX > this.HI_BOUND_X) mouseX = this.HI_BOUND_X;
-        if (mouseX < this.LO_BOUND_X) mouseX = this.LO_BOUND_X;
+        mouseX = this.range(mouseX, 0, this.HI_BOUND_X)
         this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
