@@ -34,7 +34,9 @@ define(function () {
                 return this.sliderVal;
             },
             set: function (v) {
+                v = this.range(v, min, max);
                 this.sliderVal = v;
+                this.setSliderToValue(v);
             }
         });
     };
@@ -60,7 +62,7 @@ define(function () {
     /*
      * Event handler for both the movement of the slider knob as well as deriving its value from
      * the min, max and step parameters. Method first clamps the slider knob to its track, then
-     * derives the specific value.
+     * derives the specific min and max adjusted value.
      */
     Slider.prototype.knobMouseMove = function(e) {
 
@@ -69,21 +71,45 @@ define(function () {
         if (mouseX < this.LO_BOUND_X) mouseX = this.LO_BOUND_X;
         this.elementBtn.style.left = mouseX + 'px';
 
-        this.adjustSliderValue(mouseX);
-        this.valueField.value = this.value;
-    };
-
-
-    Slider.prototype.adjustSliderValue = function(mouseX) {
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = Math.floor(mouseX * coef) + this.min;
-        this.value = adjValue;
+
+        this.valueField.value = adjValue;
+        this.sliderVal = adjValue;
     };
 
 
+    /*
+     * Clears mouse events on the slider knob and document.
+     */
     Slider.prototype.knobMouseUp = function(e) {
         document.onmousemove = null;
         this.elementBtn.onmouseup = null;
+    };
+
+
+    /*
+     * Used by the 'value' setter instead of directly. Sets both the slider knob and the value
+     * field. For initializing the slider to a value from a saved configuration or other external
+     * changes.
+     */
+    Slider.prototype.setSliderToValue = function(v) {
+
+        var coef = this.HI_BOUND_X / (this.max - this.min);
+        var mouseX = (v - this.min) * coef;
+
+        this.elementBtn.style.left = mouseX + 'px';
+        this.valueField.value = v;
+    };
+
+
+    /*
+     * Utility method to keep values in a range
+     */
+    Slider.prototype.range = function(v, min, max) {
+        if (v > max) return max;
+        if (v < min) return min;
+        return v;
     };
 
 
