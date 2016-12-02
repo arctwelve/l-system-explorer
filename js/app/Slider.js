@@ -8,7 +8,7 @@ define(function () {
 
     "use strict";
 
-    var Slider = function (elementID, labelText, min, max) {
+    var Slider = function (elementID, label, min, max) {
 
         // consts for the range and offset of the slider knob
         this.OFFSET_X = 46;
@@ -22,7 +22,7 @@ define(function () {
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
         this.labelElement = this.element.firstElementChild;
-        this.labelElement.textContent = labelText;
+        this.labelElement.textContent = label;
         this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
 
         this.sliderVal = 0;
@@ -66,14 +66,24 @@ define(function () {
     Slider.prototype.knobMouseMove = function(e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
-        mouseX = this.range(mouseX, 0, this.HI_BOUND_X)
+        mouseX = this.range(mouseX, 0, this.HI_BOUND_X);
         this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
-        var adjValue = Math.floor(mouseX * coef) + this.min;
+        //var adjValue = Math.floor(mouseX * coef) + this.min;
+        var adjValue = (mouseX * coef) + this.min;
+        adjValue = adjValue.toFixed(1);
 
         this.valueField.value = adjValue;
         this.sliderVal = adjValue;
+    };
+
+
+    /*
+     * Sets the value of the slider to a fixed number of decimal place, same as actual method
+     */
+    Slider.prototype.toFloat = function() {
+        //this.valueField.toFixed(1);
     };
 
 
@@ -87,9 +97,9 @@ define(function () {
 
 
     /*
-     * Used by the 'value' setter instead of directly. Sets both the slider knob and the value
-     * field. For initializing the slider to a value from a saved configuration or other external
-     * changes.
+     * private method used by the 'value' setter instead of directly. Sets both the slider knob and
+     * the value field. For initializing the slider to a value from a saved configuration or other
+     * external changes.
      */
     Slider.prototype.setSliderToValue = function(v) {
 

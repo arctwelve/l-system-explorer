@@ -25,6 +25,7 @@ define(function (require) {
         this.productionList = new ProductionInput("prod-input");
 
         this.sliderA = new Slider("iteration-slider", "ITERATIONS", 10, 25);
+        this.sliderA.toFloat();
         this.sliderB = new Slider("start-x-slider", "START X", 0, 500);
 
 
