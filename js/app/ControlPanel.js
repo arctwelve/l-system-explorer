@@ -24,12 +24,12 @@ define(function (require) {
         this.axiomField = document.getElementById("input-axiom");
         this.productionList = new ProductionInput("prod-input");
 
-        this.sliderA = new Slider("iteration-slider", "ITERATIONS", 10, 25);
-        this.sliderA.toFloat();
+        this.sliderA = new Slider("iteration-slider", "ITERATIONS", 10, 25, true);
         this.sliderB = new Slider("start-x-slider", "START X", 0, 500);
 
+        this.sliderA.value = 11;
+        this.sliderB.value = 130;
 
-        //this.sliderB = new Slider("startx-slider", "START X");
 
         /*
         this.generateBtn = new PushButton("btn-generate", "GENERATE");

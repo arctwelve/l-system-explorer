@@ -8,7 +8,7 @@ define(function () {
 
     "use strict";
 
-    var Slider = function (elementID, label, min, max) {
+    var Slider = function (elementID, label, min, max, float) {
 
         // consts for the range and offset of the slider knob
         this.OFFSET_X = 46;
@@ -16,6 +16,7 @@ define(function () {
 
         this.min = min;
         this.max = max;
+        this.float = float || false;
 
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
@@ -70,20 +71,11 @@ define(function () {
         this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
-        //var adjValue = Math.floor(mouseX * coef) + this.min;
         var adjValue = (mouseX * coef) + this.min;
-        adjValue = adjValue.toFixed(1);
+        adjValue = this.float ? adjValue.toFixed(1) : Math.floor(adjValue);
 
         this.valueField.value = adjValue;
         this.sliderVal = adjValue;
-    };
-
-
-    /*
-     * Sets the value of the slider to a fixed number of decimal place, same as actual method
-     */
-    Slider.prototype.toFloat = function() {
-        //this.valueField.toFixed(1);
     };
 
 
@@ -97,7 +89,7 @@ define(function () {
 
 
     /*
-     * private method used by the 'value' setter instead of directly. Sets both the slider knob and
+     * Private method used by the 'value' setter instead of directly. Sets both the slider knob and
      * the value field. For initializing the slider to a value from a saved configuration or other
      * external changes.
      */
