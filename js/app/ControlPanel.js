@@ -24,7 +24,7 @@ define(function (require) {
         this.axiomField = document.getElementById("input-axiom");
         this.productionList = new ProductionInput("prod-input");
 
-        this.sliderA = new Slider("iteration-slider", "ITERATIONS", 10, 25, true);
+        this.sliderA = new Slider("iteration-slider", "ITERATIONS", 1, 20);
         this.sliderB = new Slider("start-x-slider", "START X", 0, 500);
 
         this.sliderA.value = 11;

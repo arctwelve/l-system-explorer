@@ -60,8 +60,8 @@ i.vert-align {
 
 i.button-label {
     position: absolute;
-    top: 6px;
-    left: 6px;
+    top: 4px;
+    left: 4px;
 }
 
 i.button-label-30 {
@@ -124,8 +124,8 @@ i.button-label:hover,
 
 .input-text {
     border: 0;
-    height: 35px;
-    width: 65px;
+    height: 30px;
+    width: 100px;
     outline: none;
     text-indent: 10px;
     background: url(/img/input-bg.png) no-repeat 100% 100%;
@@ -142,7 +142,7 @@ i.button-label:hover,
 
 .prod-input-area {
     position: absolute;
-    top: 175px;
+    top: 150px;
     left: 40px;
     width: calc(100% - 50px);
 }
@@ -163,7 +163,7 @@ i.button-label:hover,
 }
 
 .prod-btn img {
-    width: 36px;
+    width: 32px;
 }
 
 .btn-rect {
