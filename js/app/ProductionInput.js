@@ -8,7 +8,7 @@ define(function () {
 
     var ProductionInput = function (elementClassName) {
 
-        this.maxSlots = 4;
+        this.maxSlots = 3;
         this.slotSpaceY = 46;
 
         this.numSlots = 1;

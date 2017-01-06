@@ -1,14 +1,13 @@
 /*
  * A horizontal slider with output value field and label. Element could be an input range, but
  * this allows more flexibility for custom GUI items. min and max parameters specify the lowest
- * and highest values of the slider. The step parament defines the increment value between
- * min and max -- range permitting
+ * and highest values of the slider.
  */
 define(function () {
 
     "use strict";
 
-    var Slider = function (elementID, label, min, max, float) {
+    var Slider = function (elementID, label, min, max) {
 
         // consts for the range and offset of the slider knob
         this.OFFSET_X = 46;
@@ -16,7 +15,6 @@ define(function () {
 
         this.min = min;
         this.max = max;
-        this.float = float || false;
 
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
@@ -72,9 +70,8 @@ define(function () {
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
-        adjValue = this.float ? adjValue.toFixed(1) : Math.floor(adjValue);
 
-        this.valueField.value = adjValue;
+        this.valueField.value =  Math.floor(adjValue);
         this.sliderVal = adjValue;
     };
 
