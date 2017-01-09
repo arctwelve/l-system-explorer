@@ -1,3 +1,4 @@
+/* styles for the regular Slider */
 .small-slider {
     position: relative;
     top:340px;
@@ -40,3 +41,6 @@
     box-sizing: border-box;
     text-align:center;
 }
+
+/* Slider Decimal Decorator */
+

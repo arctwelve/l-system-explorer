@@ -1,6 +1,7 @@
 /*
  * An input field with an add or remove button at the end. Allows user to enter an l-system
- * production value. Handles it's own siblings, adding or removing them.
+ * production value. Functions as its own collection: handling its own siblings, adding or
+ * removing them.
  */
 define(function () {
 
@@ -25,7 +26,8 @@ define(function () {
     /*
      * Event handler for "add" button clicks. Creates a clone input slot and appends it to the DOM.
      * The right-side button on the new clone slot is changed to a remove (-) button, visually and
-     * functionally.
+     * functionally. isClickLock prevents creation of slot on click, during the creation and
+     * animation of another ProductionInput field.
      */
     ProductionInput.prototype.addInputSlot = function (e) {
 
