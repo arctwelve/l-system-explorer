@@ -1,4 +1,4 @@
-/* styles for the regular Slider */
+/* Styles for the regular Slider */
 .small-slider {
     position: relative;
     top:340px;
@@ -23,6 +23,7 @@
     top:-4px;
     left:20px;
     cursor: pointer;
+    z-index: 20;
 }
 
 .small-slider-input-text {
@@ -42,5 +43,12 @@
     text-align:center;
 }
 
-/* Slider Decimal Decorator */
 
+/* Slider Decimal Decorator */
+.slider-decimal-knob {
+    position: absolute;
+    top:5px;
+    left:50px;
+    cursor: pointer;
+    z-index: 10;
+}

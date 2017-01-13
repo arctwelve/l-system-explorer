@@ -19,6 +19,7 @@ define(function () {
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
+        //this.elBtnCache = this.elementBtn;
 
         this.labelElement = this.element.firstElementChild;
         this.labelElement.textContent = label;
@@ -45,13 +46,16 @@ define(function () {
      * to keep their scope limited. Single function assignment to event is preferable for
      * nullability in the knobMouseUp handler.
      */
-    Slider.prototype.knobMouseDown = function(e) {
+    Slider.prototype.knobMouseDown = function(e, elBtn) {
+
+        var currElementBtn = (elBtn) ? elBtn : this.elementBtn;
+        console.log(currElementBtn);
 
         document.onmouseup = this.knobMouseUp.bind(this);
         document.onmousemove = this.knobMouseMove.bind(this);
 
-        this.elementBtn.onmouseup = this.knobMouseUp.bind(this);
-        this.elementBtn.ondragstart = function() {
+        currElementBtn.onmouseup = this.knobMouseUp.bind(this);
+        currElementBtn.ondragstart = function() {
             return false;
         };
     };
@@ -62,11 +66,14 @@ define(function () {
      * the min, max and step parameters. Method first clamps the slider knob to its track, then
      * derives the specific min and max adjusted value.
      */
-    Slider.prototype.knobMouseMove = function(e) {
+    Slider.prototype.knobMouseMove = function(e, elBtn) {
+
+        var currElementBtn = (elBtn) ? elBtn : this.elementBtn;
+        console.log(elBtn);
 
         var mouseX = e.clientX - this.OFFSET_X;
         mouseX = this.range(mouseX, 0, this.HI_BOUND_X);
-        this.elementBtn.style.left = mouseX + 'px';
+        currElementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
@@ -86,9 +93,9 @@ define(function () {
 
 
     /*
-     * Private method used by the 'value' setter instead of directly. Sets both the slider knob and
-     * the value field. For initializing the slider to a value from a saved configuration or other
-     * external changes.
+     * Private method used by the 'value' setter instead of directly. Sets both the slider knob
+     * and the value field. Also used for initializing the slider to a value from a saved
+     * configuration or other external changes.
      */
     Slider.prototype.setSliderToValue = function(v) {
 
