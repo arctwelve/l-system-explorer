@@ -7,8 +7,6 @@ define(function (require) {
     "use strict";
 
     var Slider = require('app/Slider');
-    var SliderDecimalDecorator = require('app/SliderDecimalDecorator');
-
     var Switch = require('app/Switch');
     var PushButton = require('app/PushButton');
     var ProductionInput = require('app/ProductionInput');
@@ -29,10 +27,6 @@ define(function (require) {
         this.sliderA = new Slider("iteration-slider", "ITERATIONS", 1, 20);
         this.sliderB = new Slider("start-x-slider", "START X", 0, 500);
         this.sliderC = new Slider("angle-slider", "ANGLE", 0, 180);
-
-        this.sliderC = new SliderDecimalDecorator(this.sliderC);
-
-
 
         this.sliderA.value = 11;
         this.sliderB.value = 130;

@@ -19,7 +19,6 @@ define(function () {
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
-        //this.elBtnCache = this.elementBtn;
 
         this.labelElement = this.element.firstElementChild;
         this.labelElement.textContent = label;
@@ -46,16 +45,13 @@ define(function () {
      * to keep their scope limited. Single function assignment to event is preferable for
      * nullability in the knobMouseUp handler.
      */
-    Slider.prototype.knobMouseDown = function(e, elBtn) {
-
-        var currElementBtn = (elBtn) ? elBtn : this.elementBtn;
-        console.log(currElementBtn);
+    Slider.prototype.knobMouseDown = function(e) {
 
         document.onmouseup = this.knobMouseUp.bind(this);
         document.onmousemove = this.knobMouseMove.bind(this);
 
-        currElementBtn.onmouseup = this.knobMouseUp.bind(this);
-        currElementBtn.ondragstart = function() {
+        this.elementBtn.onmouseup = this.knobMouseUp.bind(this);
+        this.elementBtn.ondragstart = function() {
             return false;
         };
     };
@@ -66,14 +62,11 @@ define(function () {
      * the min, max and step parameters. Method first clamps the slider knob to its track, then
      * derives the specific min and max adjusted value.
      */
-    Slider.prototype.knobMouseMove = function(e, elBtn) {
-
-        var currElementBtn = (elBtn) ? elBtn : this.elementBtn;
-        console.log(elBtn);
+    Slider.prototype.knobMouseMove = function(e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
         mouseX = this.range(mouseX, 0, this.HI_BOUND_X);
-        currElementBtn.style.left = mouseX + 'px';
+        this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
