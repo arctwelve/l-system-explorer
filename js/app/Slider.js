@@ -7,6 +7,7 @@ define(function () {
 
     "use strict";
 
+
     var Slider = function (elementID, label, min, max) {
 
         // consts for the range and offset of the slider knob

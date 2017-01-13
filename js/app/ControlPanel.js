@@ -7,6 +7,7 @@ define(function (require) {
     "use strict";
 
     var Slider = require('app/Slider');
+    var DecimalSlider = require('app/DecimalSlider');
     var Switch = require('app/Switch');
     var PushButton = require('app/PushButton');
     var ProductionInput = require('app/ProductionInput');
