@@ -3,9 +3,9 @@
  */
 define(function () {
 
+
     "use strict";
 
-    //var Slider = require('app/Slider');
 
     var DecimalSlider = function (parentSliderObj) {
 
@@ -23,6 +23,8 @@ define(function () {
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
         this.initGetSetValue();
+
+        this.parentObj = parentSliderObj;
     };
 
 
