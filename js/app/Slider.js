@@ -7,7 +7,6 @@ define(function () {
 
     "use strict";
 
-
     var Slider = function (elementID, label, min, max) {
 
         // consts for the range and offset of the slider knob
@@ -25,19 +24,7 @@ define(function () {
         this.labelElement.textContent = label;
         this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
 
-        this.sliderVal = 0;
-        Object.defineProperty(Slider.prototype, 'value', {
-            configurable: true,
-
-            get: function () {
-                return this.sliderVal;
-            },
-            set: function (v) {
-                v = this.range(v, min, max);
-                this.sliderVal = v;
-                this.setSliderToValue(v);
-            }
-        });
+        this.initGetSetValue();
     };
 
 
@@ -46,13 +33,13 @@ define(function () {
      * to keep their scope limited. Single function assignment to event is preferable for
      * nullability in the knobMouseUp handler.
      */
-    Slider.prototype.knobMouseDown = function(e) {
+    Slider.prototype.knobMouseDown = function (e) {
 
         document.onmouseup = this.knobMouseUp.bind(this);
         document.onmousemove = this.knobMouseMove.bind(this);
 
         this.elementBtn.onmouseup = this.knobMouseUp.bind(this);
-        this.elementBtn.ondragstart = function() {
+        this.elementBtn.ondragstart = function () {
             return false;
         };
     };
@@ -63,7 +50,7 @@ define(function () {
      * the min, max and step parameters. Method first clamps the slider knob to its track, then
      * derives the specific min and max adjusted value.
      */
-    Slider.prototype.knobMouseMove = function(e) {
+    Slider.prototype.knobMouseMove = function (e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
         mouseX = this.range(mouseX, 0, this.HI_BOUND_X);
@@ -72,7 +59,7 @@ define(function () {
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
 
-        this.valueField.value =  Math.floor(adjValue);
+        this.valueField.value = Math.floor(adjValue);
         this.sliderVal = adjValue;
     };
 
@@ -80,18 +67,18 @@ define(function () {
     /*
      * Clears mouse events on the slider knob and document.
      */
-    Slider.prototype.knobMouseUp = function(e) {
+    Slider.prototype.knobMouseUp = function (e) {
         document.onmousemove = null;
         this.elementBtn.onmouseup = null;
     };
 
 
     /*
-     * Private method used by the 'value' setter instead of directly. Sets both the slider knob
+     * 'Method used by the 'value' setter instead of directly. Sets both the slider knob
      * and the value field. Also used for initializing the slider to a value from a saved
      * configuration or other external changes.
      */
-    Slider.prototype.setSliderToValue = function(v) {
+    Slider.prototype.setSliderToValue = function (v) {
 
         var coef = this.HI_BOUND_X / (this.max - this.min);
         var mouseX = (v - this.min) * coef;
@@ -104,10 +91,30 @@ define(function () {
     /*
      * Utility method to keep values in a range
      */
-    Slider.prototype.range = function(v, min, max) {
+    Slider.prototype.range = function (v, min, max) {
         if (v > max) return max;
         if (v < min) return min;
         return v;
+    };
+
+
+    /*
+     * Utility to initialize slider.value property and its getter and setter
+     */
+    Slider.prototype.initGetSetValue = function () {
+        this.sliderVal = 0;
+        Object.defineProperty(Slider.prototype, 'value', {
+            configurable: true,
+
+            get: function () {
+                return this.sliderVal;
+            },
+            set: function (v) {
+                v = this.range(v, this.min, this.max);
+                this.sliderVal = v;
+                this.setSliderToValue(v);
+            }
+        });
     };
 
 

@@ -8,6 +8,7 @@ define(function (require) {
 
     var Slider = require('app/Slider');
     var DecimalSlider = require('app/DecimalSlider');
+
     var Switch = require('app/Switch');
     var PushButton = require('app/PushButton');
     var ProductionInput = require('app/ProductionInput');
@@ -33,6 +34,7 @@ define(function (require) {
         this.sliderB.value = 130;
         this.sliderC.value = 20;
 
+        this.decimalSliderC = new DecimalSlider(this.sliderC);
 
         /*
         this.generateBtn = new PushButton("btn-generate", "GENERATE");
