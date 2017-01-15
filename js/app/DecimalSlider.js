@@ -13,12 +13,11 @@ define(function () {
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
-        this.min = 1;
-        this.max = 10;
+        this.min = 0.0;
+        this.max = 0.9;
 
         this.element = parentSliderObj.element;
         this.elementBtn = this.element.getElementsByClassName("slider-decimal-knob")[0];
-        console.log(this.elementBtn);
 
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
@@ -46,9 +45,8 @@ define(function () {
 
 
     /*
-     * Event handler for both the movement of the slider knob as well as deriving its value from
-     * the min, max and step parameters. Method first clamps the slider knob to its track, then
-     * derives the specific min and max adjusted value.
+     * Event handler for both the movement of the decimal slider knob. The values are always from
+     * 0.0 to 0.9
      */
     DecimalSlider.prototype.knobMouseMove = function (e) {
 
@@ -56,11 +54,12 @@ define(function () {
         mouseX = this.range(mouseX, 0, this.HI_BOUND_X);
         this.elementBtn.style.left = mouseX + 'px';
 
-        //var coef = (this.max - this.min) / this.HI_BOUND_X;
-        //var adjValue = (mouseX * coef) + this.min;
+        var coef = (this.max - this.min) / this.HI_BOUND_X;
+        var adjValue = (mouseX * coef) + this.min;
 
-        //this.valueField.value = Math.floor(adjValue);
-        //this.sliderVal = adjValue;
+        adjValue = this.round(adjValue, 1);
+        console.log(adjValue);
+        this.parentObj.valueField.value = adjValue;
     };
 
 
@@ -116,6 +115,15 @@ define(function () {
             }
         });
     };
+
+
+    /*
+     * Curious artifact found here:
+     * http://www.jacklmoore.com/notes/rounding-in-javascript/
+     */
+    DecimalSlider.prototype.round = function(value, decimals) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+     }
 
 
     return DecimalSlider;
