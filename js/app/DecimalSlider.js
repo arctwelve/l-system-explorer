@@ -13,15 +13,17 @@ define(function () {
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
-        this.min = 0.0;
-        this.max = 0.9;
+        this.min = 1;
+        this.max = 9;
 
+        this.parentSlider = parentSliderObj;
         this.element = parentSliderObj.element;
         this.elementBtn = this.element.getElementsByClassName("slider-decimal-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
         this.decimalValue = 0.0;
-        parentSliderObj.setDecimcalSlider(this);
+        this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
+        this.parentSlider.setDecimcalSlider(this);
     };
 
 
@@ -54,8 +56,18 @@ define(function () {
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var decValue = (mouseX * coef) + this.min;
+        decValue = Math.floor(decValue);
+        //console.log(decValue);
 
-        this.decimalValue = this.round(decValue, 1);
+        //this.decimalValue = this.round(decValue, 1);
+        //this.decimalValue = this.round(decValue, 1);
+        //this.valueField.value = this.parentSlider.sliderVal + this.decimalValue;
+
+        var psv =  Math.round(this.parentSlider.sliderVal)
+        console.log(psv + "." + decValue);
+        var result = Number(psv + "." + decValue);
+
+        this.valueField.value = result;
     };
 
 

@@ -60,7 +60,7 @@ define(function () {
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
 
-        this.valueField.value = Math.floor(adjValue) + this.decimalSlider.decimalValue;
+        this.valueField.value = Number(Math.floor(adjValue) + "." + this.decimalSlider.decimalValue);
         this.sliderVal = adjValue;
     };
 
