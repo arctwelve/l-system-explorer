@@ -15,6 +15,7 @@ define(function () {
 
         this.min = min;
         this.max = max;
+        this.decimalSlider = null;
 
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
@@ -59,7 +60,7 @@ define(function () {
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
 
-        this.valueField.value = Math.floor(adjValue);
+        this.valueField.value = Math.floor(adjValue) + this.decimalSlider.decimalValue;
         this.sliderVal = adjValue;
     };
 
@@ -115,6 +116,14 @@ define(function () {
                 this.setSliderToValue(v);
             }
         });
+    };
+
+
+    /*
+     * Optionally sets the associated DecimalSlider
+     */
+    Slider.prototype.setDecimcalSlider = function (d) {
+        this.decimalSlider = d;
     };
 
 
