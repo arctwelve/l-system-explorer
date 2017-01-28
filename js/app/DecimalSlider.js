@@ -15,7 +15,7 @@ define(function () {
 
         // could be params instead of hard coded but I'm not writing a component library (yet)
         this.min = 0;
-        this.max = 1;
+        this.max = 0.9;
 
         this.elementBtn = document.getElementById(elementID);
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
@@ -55,7 +55,7 @@ define(function () {
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
 
-        this.sliderVal = adjValue;
+        this.sliderVal = this.round(adjValue, 1);
         console.log(this.sliderVal);
         //this.valueField.value = Number(adjValue + "." + this.decimalSlider.decimalValue);
     };
