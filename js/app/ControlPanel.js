@@ -26,15 +26,15 @@ define(function (require) {
         this.axiomField = document.getElementById("input-axiom");
         this.productionList = new ProductionInput("prod-input");
 
-        this.sliderA = new Slider("iteration-slider", "ITERATIONS", 1, 20);
-        this.sliderB = new Slider("start-x-slider", "START X", 0, 500);
-        this.sliderC = new Slider("angle-slider", "ANGLE", 0, 180);
+        this.sliderIteration = new Slider("iteration-slider", "ITERATIONS", 1, 20);
+        this.sliderStartX = new Slider("start-x-slider", "START X", 0, 500);
+        this.sliderAngle = new Slider("angle-slider", "ANGLE", 0, 180);
 
-        this.sliderA.value = 11;
-        this.sliderB.value = 130;
-        this.sliderC.value = 20;
+        this.sliderIteration.value = 11;
+        this.sliderStartX.value = 130;
+        this.sliderAngle.value = 20;
 
-        this.decimalSliderC = new DecimalSlider(this.sliderC);
+        this.decimalSliderC = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
         /*
         this.generateBtn = new PushButton("btn-generate", "GENERATE");

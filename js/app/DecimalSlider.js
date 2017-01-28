@@ -1,34 +1,31 @@
 /*
- * An add-on slider that controls single precision decimal values to the whole number value
+ * An optional decimal slider, to add single decimal precision to a parent whole number slider.
+ * This is necessary because some slider ranges are too large to accomodate a pixel to decimal
+ * relationship.
  */
 define(function () {
 
-
     "use strict";
 
-
-    var DecimalSlider = function (parentSliderObj) {
+    var DecimalSlider = function (elementID, parentSlider) {
 
         // consts for the range and offset of the slider knob
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
-        this.min = 1;
-        this.max = 9;
+        // could be params instead of hard coded but I'm not writing a component library (yet)
+        this.min = 0;
+        this.max = 1;
 
-        this.parentSlider = parentSliderObj;
-        this.element = parentSliderObj.element;
-        this.elementBtn = this.element.getElementsByClassName("slider-decimal-knob")[0];
+        this.elementBtn = document.getElementById(elementID);
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
-        this.decimalValue = 0.0;
-        this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
-        this.parentSlider.setDecimcalSlider(this);
+        this.initGetSetValue();
     };
 
 
     /*
-     * Handler for mousedown on the slider knob (thumb). Document level events are nested inside
+     * Handler for mousedown on the slider knob. Document level events are nested inside
      * to keep their scope limited. Single function assignment to event is preferable for
      * nullability in the knobMouseUp handler.
      */
@@ -45,8 +42,9 @@ define(function () {
 
 
     /*
-     * Event handler for both the movement of the decimal slider knob. The values are always from
-     * 0.0 to 0.9
+     * Event handler for both the movement of the slider knob as well as deriving its value from
+     * the min, max and step parameters. Method first clamps the slider knob to its track, then
+     * derives the specific min and max adjusted value.
      */
     DecimalSlider.prototype.knobMouseMove = function (e) {
 
@@ -55,19 +53,11 @@ define(function () {
         this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
-        var decValue = (mouseX * coef) + this.min;
-        decValue = Math.floor(decValue);
-        //console.log(decValue);
+        var adjValue = (mouseX * coef) + this.min;
 
-        //this.decimalValue = this.round(decValue, 1);
-        //this.decimalValue = this.round(decValue, 1);
-        //this.valueField.value = this.parentSlider.sliderVal + this.decimalValue;
-
-        var psv =  Math.round(this.parentSlider.sliderVal)
-        console.log(psv + "." + decValue);
-        var result = Number(psv + "." + decValue);
-
-        this.valueField.value = result;
+        this.sliderVal = adjValue;
+        console.log(this.sliderVal);
+        //this.valueField.value = Number(adjValue + "." + this.decimalSlider.decimalValue);
     };
 
 
@@ -77,6 +67,21 @@ define(function () {
     DecimalSlider.prototype.knobMouseUp = function (e) {
         document.onmousemove = null;
         this.elementBtn.onmouseup = null;
+    };
+
+
+    /*
+     * 'Method used by the 'value' setter instead of directly. Sets both the slider knob
+     * and the value field. Also used for initializing the slider to a value from a saved
+     * configuration or other external changes.
+     */
+    DecimalSlider.prototype.setSliderToValue = function (v) {
+
+        var coef = this.HI_BOUND_X / (this.max - this.min);
+        var mouseX = (v - this.min) * coef;
+
+        this.elementBtn.style.left = mouseX + 'px';
+        this.valueField.value = v;
     };
 
 
@@ -91,58 +96,34 @@ define(function () {
 
 
     /*
-     * Replaces toFixed(...) found here: http://www.jacklmoore.com/notes/rounding-in-javascript/
+     * Utility to initialize slider.value property and its getter and setter
      */
-    DecimalSlider.prototype.round = function (value, decimals) {
-        return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+    DecimalSlider.prototype.initGetSetValue = function () {
+
+        this.sliderVal = 0;
+        Object.defineProperty(DecimalSlider.prototype, 'value', {
+            configurable: true,
+
+            get: function () {
+                return this.sliderVal;
+            },
+            set: function (v) {
+                v = this.range(v, this.min, this.max);
+                this.sliderVal = v;
+                this.setSliderToValue(v);
+            }
+        });
     };
+
+
+    /*
+     * Sets the passed numeric value to a given level of precision
+     */
+    DecimalSlider.prototype.round = function (value, precision) {
+        var multiplier = Math.pow(10, precision || 0);
+        return Math.round(value * multiplier) / multiplier;
+    }
+
 
     return DecimalSlider;
 });
-
-
-
-
-
-
-
-
-
-/*
- * 'Method used by the 'value' setter instead of directly. Sets both the slider knob
- * and the value field. Also used for initializing the slider to a value from a saved
- * configuration or other external changes.
- */
-/*
-DecimalSlider.prototype.setSliderToValue = function (v) {
-
-    var coef = this.HI_BOUND_X / (this.max - this.min);
-    var mouseX = (v - this.min) * coef;
-
-    this.elementBtn.style.left = mouseX + 'px';
-    this.valueField.value = v;
-};
-*/
-
-
-
-/*
- * Utility to initialize decimalSlider.value property and its getter and setter
- */
-/*
-DecimalSlider.prototype.initGetSetValue = function () {
-    this.sliderVal = 0;
-    Object.defineProperty(DecimalSlider.prototype, 'value', {
-        configurable: true,
-
-        get: function () {
-            return this.sliderVal;
-        },
-        set: function (v) {
-            v = this.range(v, this.min, this.max);
-            this.sliderVal = v;
-            this.setSliderToValue(v);
-        }
-    });
-};
-*/

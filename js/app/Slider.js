@@ -15,7 +15,6 @@ define(function () {
 
         this.min = min;
         this.max = max;
-        this.decimalSlider = null;
 
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
@@ -23,8 +22,8 @@ define(function () {
 
         this.labelElement = this.element.firstElementChild;
         this.labelElement.textContent = label;
-        this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
 
+        this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
         this.initGetSetValue();
     };
 
@@ -60,8 +59,8 @@ define(function () {
         var coef = (this.max - this.min) / this.HI_BOUND_X;
         var adjValue = (mouseX * coef) + this.min;
 
-        this.valueField.value = Number(Math.floor(adjValue) + "." + this.decimalSlider.decimalValue);
-        this.sliderVal = adjValue;
+        this.sliderVal = Math.floor(adjValue);
+        this.valueField.value = this.sliderVal;
     };
 
 
@@ -114,16 +113,8 @@ define(function () {
                 v = this.range(v, this.min, this.max);
                 this.sliderVal = v;
                 this.setSliderToValue(v);
-            }
+            },
         });
-    };
-
-
-    /*
-     * Optionally sets the associated DecimalSlider
-     */
-    Slider.prototype.setDecimcalSlider = function (d) {
-        this.decimalSlider = d;
     };
 
 
