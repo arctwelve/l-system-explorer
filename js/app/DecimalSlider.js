@@ -13,13 +13,15 @@ define(function () {
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
-        // could be params instead of hard coded but I'm not writing a component library (yet)
+        // could be params instead of hard-coded but I'm not writing a component library (yet)
         this.min = 0;
         this.max = 0.9;
 
         this.elementBtn = document.getElementById(elementID);
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
+        this.parentSlider = parentSlider;
+        this.fixedParentVal = null;
         this.initGetSetValue();
     };
 
@@ -30,6 +32,8 @@ define(function () {
      * nullability in the knobMouseUp handler.
      */
     DecimalSlider.prototype.knobMouseDown = function (e) {
+
+        this.fixedParentVal = this.parentSlider.value;
 
         document.onmouseup = this.knobMouseUp.bind(this);
         document.onmousemove = this.knobMouseMove.bind(this);
@@ -56,15 +60,15 @@ define(function () {
         var adjValue = (mouseX * coef) + this.min;
 
         this.sliderVal = this.round(adjValue, 1);
-        console.log(this.sliderVal);
-        //this.valueField.value = Number(adjValue + "." + this.decimalSlider.decimalValue);
+        this.parentSlider.value = this.fixedParentVal + this.sliderVal;
     };
 
 
     /*
-     * Clears mouse events on the slider knob and document.
+     * Clears mouse events on the slider knob and document, and the stored parent slider value
      */
     DecimalSlider.prototype.knobMouseUp = function (e) {
+        this.fixedParentVal = null;
         document.onmousemove = null;
         this.elementBtn.onmouseup = null;
     };
