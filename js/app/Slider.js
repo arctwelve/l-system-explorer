@@ -16,6 +16,9 @@ define(function () {
         this.min = min;
         this.max = max;
 
+        this.decimal = 0;
+        this.isFloat = false;
+
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
@@ -57,10 +60,10 @@ define(function () {
         this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
-        var adjValue = (mouseX * coef) + this.min;
+        var adjValue = Math.floor((mouseX * coef) + this.min);
 
-        this.sliderVal = Math.floor(adjValue);
-        this.valueField.value = this.sliderVal;
+        this.sliderVal = (this.isFloat) ? adjValue + "." + this.decimal : adjValue;
+        this.setGUIToValue(this.sliderVal);
     };
 
 
@@ -83,8 +86,8 @@ define(function () {
         var coef = this.HI_BOUND_X / (this.max - this.min);
         var mouseX = (v - this.min) * coef;
 
-        this.elementBtn.style.left = mouseX + 'px';
-        this.valueField.value = v;
+        if (! this.isFloat) this.elementBtn.style.left = mouseX + 'px';
+        this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
     };
 
 
@@ -110,11 +113,33 @@ define(function () {
                 return this.sliderVal;
             },
             set: function (v) {
-                v = this.clamp(v, this.min, this.max);
                 this.sliderVal = v;
                 this.setGUIToValue(v);
-            },
+            }
         });
+    };
+
+
+    /*
+     * Sets an optional single precision decimal value. Used by setter on first initialization
+     * and DecimalSlider as the single connection point between the parent and child decimal.
+     */
+    Slider.prototype.setDecimal = function (d) {
+
+        this.isFloat = true;
+
+        this.decimal = d;
+        this.value = Math.floor(this.value);
+        this.value = this.value + "." + this.decimal;
+    };
+
+
+    /*
+     * Sets the passed numeric value to a given level of precision.
+     */
+    Slider.prototype.setPrecision = function (value, precision) {
+        var multiplier = Math.pow(10, precision || 0);
+        return Math.round(value * multiplier) / multiplier;
     };
 
 
