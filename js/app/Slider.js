@@ -53,7 +53,7 @@ define(function () {
     Slider.prototype.knobMouseMove = function (e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
-        mouseX = this.range(mouseX, 0, this.HI_BOUND_X);
+        mouseX = this.clamp(mouseX, 0, this.HI_BOUND_X);
         this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
@@ -78,7 +78,7 @@ define(function () {
      * and the value field. Also used for initializing the slider to a value from a saved
      * configuration or other external changes.
      */
-    Slider.prototype.setSliderToValue = function (v) {
+    Slider.prototype.setGUIToValue = function (v) {
 
         var coef = this.HI_BOUND_X / (this.max - this.min);
         var mouseX = (v - this.min) * coef;
@@ -89,9 +89,9 @@ define(function () {
 
 
     /*
-     * Utility method to keep values in a range
+     * Keeps given value between a range of min and max
      */
-    Slider.prototype.range = function (v, min, max) {
+    Slider.prototype.clamp = function (v, min, max) {
         if (v > max) return max;
         if (v < min) return min;
         return v;
@@ -110,9 +110,9 @@ define(function () {
                 return this.sliderVal;
             },
             set: function (v) {
-                v = this.range(v, this.min, this.max);
+                v = this.clamp(v, this.min, this.max);
                 this.sliderVal = v;
-                this.setSliderToValue(v);
+                this.setGUIToValue(v);
             },
         });
     };

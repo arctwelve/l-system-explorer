@@ -29,12 +29,12 @@ define(function (require) {
         this.sliderIteration = new Slider("iteration-slider", "ITERATIONS", 1, 20);
         this.sliderStartX = new Slider("start-x-slider", "START X", 0, 500);
         this.sliderAngle = new Slider("angle-slider", "ANGLE", 0, 180);
+        this.sliderAngleDecimal = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
         this.sliderIteration.value = 11;
         this.sliderStartX.value = 130;
         this.sliderAngle.value = 20;
 
-        this.decimalSliderC = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
         /*
         this.generateBtn = new PushButton("btn-generate", "GENERATE");

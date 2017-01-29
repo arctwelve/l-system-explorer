@@ -22,7 +22,6 @@ define(function () {
 
         this.parentSlider = parentSlider;
         this.fixedParentVal = null;
-        this.initGetSetValue();
     };
 
 
@@ -53,7 +52,7 @@ define(function () {
     DecimalSlider.prototype.knobMouseMove = function (e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
-        mouseX = this.range(mouseX, 0, this.HI_BOUND_X);
+        mouseX = this.clamp(mouseX, 0, this.HI_BOUND_X);
         this.elementBtn.style.left = mouseX + 'px';
 
         var coef = (this.max - this.min) / this.HI_BOUND_X;
@@ -75,48 +74,12 @@ define(function () {
 
 
     /*
-     * 'Method used by the 'value' setter instead of directly. Sets both the slider knob
-     * and the value field. Also used for initializing the slider to a value from a saved
-     * configuration or other external changes.
+     * Keeps given value between a range of min and max
      */
-    DecimalSlider.prototype.setSliderToValue = function (v) {
-
-        var coef = this.HI_BOUND_X / (this.max - this.min);
-        var mouseX = (v - this.min) * coef;
-
-        this.elementBtn.style.left = mouseX + 'px';
-        this.valueField.value = v;
-    };
-
-
-    /*
-     * Utility method to keep values in a range
-     */
-    DecimalSlider.prototype.range = function (v, min, max) {
+    DecimalSlider.prototype.clamp = function (v, min, max) {
         if (v > max) return max;
         if (v < min) return min;
         return v;
-    };
-
-
-    /*
-     * Utility to initialize slider.value property and its getter and setter
-     */
-    DecimalSlider.prototype.initGetSetValue = function () {
-
-        this.sliderVal = 0;
-        Object.defineProperty(DecimalSlider.prototype, 'value', {
-            configurable: true,
-
-            get: function () {
-                return this.sliderVal;
-            },
-            set: function (v) {
-                v = this.range(v, this.min, this.max);
-                this.sliderVal = v;
-                this.setSliderToValue(v);
-            }
-        });
     };
 
 
