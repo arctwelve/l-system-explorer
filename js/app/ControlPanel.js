@@ -33,7 +33,10 @@ define(function (require) {
 
         this.sliderIteration.value = 11;
         this.sliderStartX.value = 130;
+
         this.sliderAngle.value = 20;
+        this.sliderAngleDecimal.value = 2;
+
 
 
         /*

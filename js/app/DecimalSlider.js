@@ -18,10 +18,17 @@ define(function () {
         this.min = 0;
         this.max = 9;
 
+        this.parentSlider = parentSlider;
         this.elementBtn = document.getElementById(elementID);
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
-        this.parentSlider = parentSlider;
+        Object.defineProperty(DecimalSlider.prototype, 'value', {
+            configurable: true,
+
+            set: function (v) {
+                this.setGUIToValue(v);
+            }
+        });
     };
 
 
@@ -74,6 +81,9 @@ define(function () {
      * Used directly to initialize the location of the slider knob
      */
     DecimalSlider.prototype.setGUIToValue = function (v) {
+
+        v = this.clamp(v, this.min, this.max);
+        this.parentSlider.setDecimal(v);
 
         var coef = this.HI_BOUND_X / (this.max - this.min);
         var mouseX = (v - this.min) * coef;

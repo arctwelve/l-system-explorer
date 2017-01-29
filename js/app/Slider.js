@@ -121,8 +121,7 @@ define(function () {
 
 
     /*
-     * Sets an optional single precision decimal value. Used by setter on first initialization
-     * and DecimalSlider as the single connection point between the parent and child decimal.
+     * Sets an optional single precision decimal value.
      */
     Slider.prototype.setDecimal = function (d) {
 
@@ -137,10 +136,10 @@ define(function () {
     /*
      * Sets the passed numeric value to a given level of precision.
      */
-    Slider.prototype.setPrecision = function (value, precision) {
+  /*  Slider.prototype.setPrecision = function (value, precision) {
         var multiplier = Math.pow(10, precision || 0);
         return Math.round(value * multiplier) / multiplier;
-    };
+    };*/
 
 
     return Slider;
