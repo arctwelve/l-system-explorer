@@ -28,12 +28,18 @@ define(function (require) {
 
         this.sliderIteration = new Slider("iteration-slider", "ITERATIONS", 1, 20);
         this.sliderStartX = new Slider("start-x-slider", "START X", 0, 500);
-        this.sliderAngle = new Slider("angle-slider", "ANGLE", 0, 180);
+        this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 500);
+        this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
+        this.lengthSlider = new Slider("length-slider", "SEGMENT LENGTH", 1, 100);
+
+        this.sliderAngle = new Slider("angle-slider", "SEGMENT ANGLE", 0, 180);
         this.sliderAngleDecimal = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
         this.sliderIteration.value = 11;
         this.sliderStartX.value = 130;
-
+        this.sliderStartY.value = 250;
+        this.sliderStartAngle.value = 45;
+        this.lengthSlider.value = 5;
         this.sliderAngle.value = 20;
         this.sliderAngleDecimal.value = 2;
 
