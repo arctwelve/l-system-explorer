@@ -87,7 +87,16 @@ define(function () {
         var mouseX = (v - this.min) * coef;
 
         if (! this.isFloat) this.elementBtn.style.left = mouseX + 'px';
-        this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
+        //this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
+
+        this.valueField.style.color= "#" + v.toString();
+        this.valueField.style.fontSize = "35px";
+        this.valueField.style.paddingBottom = "8px";
+
+        //this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
+        //this.valueField.value = '\u25A0';
+        //this.valueField.value = '\u25AC';
+        this.valueField.value = '\u25CF';
     };
 
 
