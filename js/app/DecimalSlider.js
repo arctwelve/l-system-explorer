@@ -17,6 +17,9 @@ define(function () {
         // use integers instead of floats for accuracy
         this.min = 0;
         this.max = 9;
+        this.coefX = (this.max - this.min) / this.HI_BOUND_X;
+        this.invCoefX = this.HI_BOUND_X / (this.max - this.min);
+
 
         this.parentSlider = parentSlider;
         this.elementBtn = document.getElementById(elementID);
@@ -26,7 +29,7 @@ define(function () {
             configurable: true,
 
             set: function (v) {
-                this.setGUIToValue(v);
+                this.setKnobToValue(v);
             }
         });
     };
@@ -50,9 +53,7 @@ define(function () {
 
 
     /*
-     * Event handler for both the movement of the slider knob as well as deriving its value from
-     * the min, max and step parameters. Method first clamps the slider knob to its track, then
-     * derives the specific min and max adjusted value.
+     * Event handler for the movement of the slider knob and setting the parent slider value field
      */
     DecimalSlider.prototype.knobMouseMove = function (e) {
 
@@ -60,8 +61,7 @@ define(function () {
         mouseX = this.clamp(mouseX, 0, this.HI_BOUND_X);
         this.elementBtn.style.left = mouseX + 'px';
 
-        var coef = (this.max - this.min) / this.HI_BOUND_X;
-        var adjValue = (mouseX * coef) + this.min;
+        var adjValue = (mouseX * this.coefX) + this.min;
         adjValue = Math.floor(adjValue);
 
         this.parentSlider.setDecimal(adjValue);
@@ -80,13 +80,12 @@ define(function () {
     /*
      * Used directly to initialize the location of the slider knob
      */
-    DecimalSlider.prototype.setGUIToValue = function (v) {
+    DecimalSlider.prototype.setKnobToValue = function (v) {
 
         v = this.clamp(v, this.min, this.max);
         this.parentSlider.setDecimal(v);
 
-        var coef = this.HI_BOUND_X / (this.max - this.min);
-        var mouseX = (v - this.min) * coef;
+        var mouseX = (v - this.min) * this.invCoefX;
         this.elementBtn.style.left = mouseX + 'px';
     };
 

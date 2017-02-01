@@ -13,11 +13,12 @@ define(function () {
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
-        this.min = min;
-        this.max = max;
-
         this.decimal = 0;
-        this.isFloat = false;
+        this.hasDecimal = false;
+
+        this.min = min;
+        this.coefX = (max - min) / this.HI_BOUND_X;
+        this.invCoefX = this.HI_BOUND_X / (max - min);
 
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
@@ -57,12 +58,9 @@ define(function () {
 
         var mouseX = e.clientX - this.OFFSET_X;
         mouseX = this.clamp(mouseX, 0, this.HI_BOUND_X);
-        this.elementBtn.style.left = mouseX + 'px';
 
-        var coef = (this.max - this.min) / this.HI_BOUND_X;
-        var adjValue = Math.floor((mouseX * coef) + this.min);
-
-        this.sliderVal = (this.isFloat) ? adjValue + "." + this.decimal : adjValue;
+        var adjValue = Math.floor((mouseX * this.coefX) + this.min);
+        this.sliderVal = (this.hasDecimal) ? adjValue + "." + this.decimal : adjValue;
         this.setGUIToValue(this.sliderVal);
     };
 
@@ -83,20 +81,9 @@ define(function () {
      */
     Slider.prototype.setGUIToValue = function (v) {
 
-        var coef = this.HI_BOUND_X / (this.max - this.min);
-        var mouseX = (v - this.min) * coef;
-
-        if (! this.isFloat) this.elementBtn.style.left = mouseX + 'px';
-        //this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
-
-        this.valueField.style.color= "#" + v.toString();
-        this.valueField.style.fontSize = "35px";
-        this.valueField.style.paddingBottom = "8px";
-
-        //this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
-        //this.valueField.value = '\u25A0';
-        //this.valueField.value = '\u25AC';
-        this.valueField.value = '\u25CF';
+        var mouseX = (v - this.min) * this.invCoefX;
+        this.elementBtn.style.left = mouseX + 'px';
+        this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
     };
 
 
@@ -130,25 +117,16 @@ define(function () {
 
 
     /*
-     * Sets an optional single precision decimal value.
+     * Sets an optional single precision decimal value and updates gui field for decimal value
      */
     Slider.prototype.setDecimal = function (d) {
 
-        this.isFloat = true;
-
         this.decimal = d;
-        this.value = Math.floor(this.value);
-        this.value = this.value + "." + this.decimal;
+        this.hasDecimal = true;
+
+        this.sliderVal = Math.floor(this.value) + "." + this.decimal;
+        this.valueField.value = (this.decimal === 0) ? Math.floor(this.sliderVal) : this.sliderVal;
     };
-
-
-    /*
-     * Sets the passed numeric value to a given level of precision.
-     */
-  /*  Slider.prototype.setPrecision = function (value, precision) {
-        var multiplier = Math.pow(10, precision || 0);
-        return Math.round(value * multiplier) / multiplier;
-    };*/
 
 
     return Slider;
