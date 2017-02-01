@@ -13,6 +13,7 @@ define(function () {
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
+        this.sliderVal = 0;
         this.decimal = 0;
         this.hasDecimal = false;
 
@@ -23,12 +24,22 @@ define(function () {
         this.element = document.getElementById(elementID);
         this.elementBtn = this.element.getElementsByClassName("small-slider-knob")[0];
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
+        this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
 
         this.labelElement = this.element.firstElementChild;
         this.labelElement.textContent = label;
 
-        this.valueField = this.element.getElementsByClassName("small-slider-input-text")[0];
-        this.initGetSetValue();
+        Object.defineProperty(Slider.prototype, 'value', {
+            configurable: true,
+
+            get: function () {
+                return this.sliderVal;
+            },
+            set: function (v) {
+                this.sliderVal = v;
+                this.setGUIToValue(v);
+            }
+        });
     };
 
 
@@ -50,9 +61,8 @@ define(function () {
 
 
     /*
-     * Event handler for both the movement of the slider knob as well as deriving its value from
-     * the min, max and step parameters. Method first clamps the slider knob to its track, then
-     * derives the specific min and max adjusted value.
+     * Event handler the slider knob, deriving its value from [min, max] properties relative to
+     * it's track and mouse location.
      */
     Slider.prototype.knobMouseMove = function (e) {
 
@@ -98,32 +108,12 @@ define(function () {
 
 
     /*
-     * Utility to initialize slider.value property and its getter and setter
-     */
-    Slider.prototype.initGetSetValue = function () {
-        this.sliderVal = 0;
-        Object.defineProperty(Slider.prototype, 'value', {
-            configurable: true,
-
-            get: function () {
-                return this.sliderVal;
-            },
-            set: function (v) {
-                this.sliderVal = v;
-                this.setGUIToValue(v);
-            }
-        });
-    };
-
-
-    /*
      * Sets an optional single precision decimal value and updates gui field for decimal value
      */
     Slider.prototype.setDecimal = function (d) {
 
         this.decimal = d;
         this.hasDecimal = true;
-
         this.sliderVal = Math.floor(this.value) + "." + this.decimal;
         this.valueField.value = (this.decimal === 0) ? Math.floor(this.sliderVal) : this.sliderVal;
     };

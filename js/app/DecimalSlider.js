@@ -26,7 +26,6 @@ define(function () {
 
         Object.defineProperty(DecimalSlider.prototype, 'value', {
             configurable: true,
-
             set: function (v) {
                 this.setKnobToValue(v);
             }
@@ -60,9 +59,7 @@ define(function () {
         mouseX = this.clamp(mouseX, 0, this.HI_BOUND_X);
         this.elementBtn.style.left = mouseX + 'px';
 
-        var adjValue = (mouseX * this.coefX) + this.min;
-        adjValue = Math.floor(adjValue);
-
+        var adjValue = Math.floor((mouseX * this.coefX) + this.min);
         this.parentSlider.setDecimal(adjValue);
     };
 
