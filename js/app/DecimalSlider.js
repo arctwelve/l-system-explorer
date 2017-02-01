@@ -20,7 +20,6 @@ define(function () {
         this.coefX = (this.max - this.min) / this.HI_BOUND_X;
         this.invCoefX = this.HI_BOUND_X / (this.max - this.min);
 
-
         this.parentSlider = parentSlider;
         this.elementBtn = document.getElementById(elementID);
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
