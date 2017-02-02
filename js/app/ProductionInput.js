@@ -10,7 +10,7 @@ define(function () {
     var ProductionInput = function (elementClassName) {
 
         this.maxSlots = 3;
-        this.slotSpaceY = 46;
+        this.slotSpaceY = 39;
 
         this.numSlots = 1;
         this.isClickLock = false;

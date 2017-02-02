@@ -35,13 +35,13 @@ define(function (require) {
         this.sliderAngle = new Slider("angle-slider", "SEGMENT ANGLE", 0, 180);
         this.sliderAngleDecimal = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
-        this.sliderIteration.value = 11;
-        this.sliderStartX.value = 130;
-        this.sliderStartY.value = 250;
-        this.sliderStartAngle.value = 45;
-        this.lengthSlider.value = 5;
-        this.sliderAngle.value = 20;
-        this.sliderAngleDecimal.value = 2;
+        this.sliderIteration.val = 11;
+        this.sliderStartX.val = 130;
+        this.sliderStartY.val = 250;
+        this.sliderStartAngle.val = 45;
+        this.lengthSlider.val = 5;
+        this.sliderAngle.val = 20;
+        this.sliderAngleDecimal.val = 2;
 
 
 

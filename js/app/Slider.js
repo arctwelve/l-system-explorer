@@ -11,7 +11,7 @@ define(function (require) {
 
     var Slider = function (elementID, label, min, max) {
 
-        // consts for the range and offset of the slider knob
+        // consts for the pixel range and offset of the slider knob
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
@@ -31,8 +31,8 @@ define(function (require) {
         this.labelElement = this.element.firstElementChild;
         this.labelElement.textContent = label;
 
-        Object.defineProperty(Slider.prototype, 'value', {
-            configurable: true,
+        Object.defineProperty(Slider.prototype, 'val', {
+            configurable:true,
 
             get: function () {
                 return this.sliderVal;
@@ -105,7 +105,7 @@ define(function (require) {
 
         this.decimal = d;
         this.hasDecimal = true;
-        this.sliderVal = Math.floor(this.value) + "." + this.decimal;
+        this.sliderVal = Math.floor(this.val) + "." + this.decimal;
         this.valueField.value = (this.decimal === 0) ? Math.floor(this.sliderVal) : this.sliderVal;
     };
 

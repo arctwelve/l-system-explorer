@@ -1,8 +1,8 @@
 /*
  * An optional decimal slider, to add single decimal precision to a parent whole number slider.
  * This is necessary because some slider ranges are too large to accomodate a pixel to decimal
- * relationship. DecimalSlider never touches the parent GUI elements directly - it only sets
- * the decimal property of its parent slider.
+ * relationship. DecimalSlider never touches the parent GUI elements directly - it only calls
+ * the setDecimal method of its parent slider.
  */
 define(function (require) {
 
@@ -12,7 +12,7 @@ define(function (require) {
 
     var DecimalSlider = function (elementID, parentSlider) {
 
-        // consts for the range and offset of the slider knob
+        // consts for the pixel range and offset of the decimalslider knob
         this.OFFSET_X = 46;
         this.HI_BOUND_X = 251;
 
@@ -26,7 +26,7 @@ define(function (require) {
         this.elementBtn = document.getElementById(elementID);
         this.elementBtn.addEventListener("mousedown", this.knobMouseDown.bind(this));
 
-        Object.defineProperty(DecimalSlider.prototype, 'value', {
+        Object.defineProperty(DecimalSlider.prototype, 'val', {
             configurable: true,
             set: function (v) {
                 this.setKnobToValue(v);

@@ -40,6 +40,10 @@
     color: rgba(255, 255, 255, 0.6);
 }
 
+.material-icons.md-20 {
+    font-size: 20px;
+}
+
 .material-icons.md-24 {
     font-size: 24px;
 }
@@ -61,7 +65,7 @@ i.vert-align {
 i.button-label {
     position: absolute;
     top: 4px;
-    left: 4px;
+    left: 5px;
 }
 
 i.button-label-30 {
@@ -102,7 +106,7 @@ i.button-label:hover,
 
 .axiom-input-area {
     position: absolute;
-    top: 75px;
+    top: 70px;
     left: 40px;
     width: calc(100% - 50px);
 }
@@ -112,26 +116,26 @@ i.button-label:hover,
     top: 10px;
     left: 5px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
+    font-size: 0.8em;
     color: #cccccc;
     font-weight: 700;
     text-align: left;
 }
 
 .input-label.mgb {
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 }
 
 .input-text {
     border: 0;
-    height: 30px;
+    height: 27px;
     width: 100px;
     outline: none;
     text-indent: 10px;
     background: url(/img/input-bg.png) no-repeat 100% 100%;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
-    color: #ffffff;
+    font-size: 0.8em;
+    color: #fff;
     font-weight: 700;
     margin-left: 2px;
 }
@@ -142,14 +146,14 @@ i.button-label:hover,
 
 .prod-input-area {
     position: absolute;
-    top: 150px;
+    top: 140px;
     left: 40px;
     width: calc(100% - 50px);
 }
 
 .prod-input {
     position:absolute;
-    top:24px;
+    top:20px;
     width:350px;
     height:47px;
     transition: top .3s ease-in-out;
@@ -158,12 +162,12 @@ i.button-label:hover,
 .prod-btn {
     position: relative;
     display: inline-block;
-    top: 12px;
-    left: -5px;
+    top: 10px;
+    left: 2px;
 }
 
 .prod-btn img {
-    width: 32px;
+    width: 29px;
 }
 
 .btn-rect {
