@@ -27,21 +27,21 @@ define(function (require) {
         this.productionList = new ProductionInput("prod-input");
 
         this.sliderIteration = new Slider("iteration-slider", "ITERATIONS", 1, 20);
-        this.sliderStartX = new Slider("start-x-slider", "START X", 0, 500);
-        this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 500);
-        this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
         this.lengthSlider = new Slider("length-slider", "SEGMENT LENGTH", 1, 100);
-
         this.sliderAngle = new Slider("angle-slider", "SEGMENT ANGLE", 0, 180);
         this.sliderAngleDecimal = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
+        this.sliderStartX = new Slider("start-x-slider", "START X", 0, 500);
+        this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 500);
+        this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
+
         this.sliderIteration.val = 11;
-        this.sliderStartX.val = 130;
-        this.sliderStartY.val = 250;
-        this.sliderStartAngle.val = 45;
         this.lengthSlider.val = 5;
         this.sliderAngle.val = 20;
         this.sliderAngleDecimal.val = 2;
+        this.sliderStartX.val = 130;
+        this.sliderStartY.val = 250;
+        this.sliderStartAngle.val = 45;
 
 
 
