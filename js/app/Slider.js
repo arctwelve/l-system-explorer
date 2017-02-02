@@ -3,9 +3,11 @@
  * this allows more flexibility for custom GUI items. min and max parameters specify the lowest
  * and highest values of the slider.
  */
-define(function () {
+define(function (require) {
 
     "use strict";
+
+    var MathUtil = require('app/MathUtil');
 
     var Slider = function (elementID, label, min, max) {
 
@@ -67,7 +69,7 @@ define(function () {
     Slider.prototype.knobMouseMove = function (e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
-        mouseX = this.clamp(mouseX, 0, this.HI_BOUND_X);
+        mouseX = MathUtil.clamp(mouseX, 0, this.HI_BOUND_X);
 
         var adjValue = Math.floor((mouseX * this.coefX) + this.min);
         this.sliderVal = (this.hasDecimal) ? adjValue + "." + this.decimal : adjValue;
@@ -85,25 +87,14 @@ define(function () {
 
 
     /*
-     * 'Method used by the 'value' setter instead of directly. Sets both the slider knob
-     * and the value field. Also used for initializing the slider to a value from a saved
-     * configuration or other external changes.
+     * Sets both the slider knob and the value field. Used for initializing the slider to a value
+     * from a saved configuration or from the mousemove event.
      */
     Slider.prototype.setGUIToValue = function (v) {
 
         var mouseX = (v - this.min) * this.invCoefX;
         this.elementBtn.style.left = mouseX + 'px';
         this.valueField.value = (this.decimal === 0) ? Math.floor(v) : v;
-    };
-
-
-    /*
-     * Keeps given value between a range of min and max
-     */
-    Slider.prototype.clamp = function (v, min, max) {
-        if (v > max) return max;
-        if (v < min) return min;
-        return v;
     };
 
 

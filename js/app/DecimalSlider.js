@@ -4,9 +4,11 @@
  * relationship. DecimalSlider never touches the parent GUI elements directly - it only sets
  * the decimal property of its parent slider.
  */
-define(function () {
+define(function (require) {
 
     "use strict";
+
+    var MathUtil = require('app/MathUtil');
 
     var DecimalSlider = function (elementID, parentSlider) {
 
@@ -56,7 +58,7 @@ define(function () {
     DecimalSlider.prototype.knobMouseMove = function (e) {
 
         var mouseX = e.clientX - this.OFFSET_X;
-        mouseX = this.clamp(mouseX, 0, this.HI_BOUND_X);
+        mouseX = MathUtil.clamp(mouseX, 0, this.HI_BOUND_X);
         this.elementBtn.style.left = mouseX + 'px';
 
         var adjValue = Math.floor((mouseX * this.coefX) + this.min);
@@ -74,25 +76,15 @@ define(function () {
 
 
     /*
-     * Used directly to initialize the location of the slider knob
+     * Used directly to initialize the location of the decimal slider knob and parent decimal value
      */
     DecimalSlider.prototype.setKnobToValue = function (v) {
 
-        v = this.clamp(v, this.min, this.max);
+        v = MathUtil.clamp(v, this.min, this.max);
         this.parentSlider.setDecimal(v);
 
         var mouseX = (v - this.min) * this.invCoefX;
         this.elementBtn.style.left = mouseX + 'px';
-    };
-
-
-    /*
-     * Keeps given value between a range of min and max
-     */
-    DecimalSlider.prototype.clamp = function (v, min, max) {
-        if (v > max) return max;
-        if (v < min) return min;
-        return v;
     };
 
 
