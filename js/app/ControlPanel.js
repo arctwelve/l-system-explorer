@@ -51,7 +51,7 @@ define(function (require) {
             app.generate();
         });
         */
-        //this.stepSwitch = new Switch("step-switch");
+        this.stepSwitch = new Switch("step-switch");
     };
 
 
