@@ -4,17 +4,16 @@
     top:700px;
     left:110px;
     width:190px;
-    background: url(/img/switch-track.png) no-repeat;
     background-size: 100% 67px;
 
 }
 
-.step-switch-knob {
+/*.step-switch-knob {
     position: relative;
     top:2px;
     left:2px;
     transition: left .3s ease-in-out;
-}
+}*/
 
 .step-switch:hover {
     cursor: pointer;
