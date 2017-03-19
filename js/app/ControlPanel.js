@@ -9,7 +9,7 @@ define(function (require) {
     var Slider = require('app/Slider');
     var DecimalSlider = require('app/DecimalSlider');
 
-    var Switch = require('app/Switch');
+
     var PushButton = require('app/PushButton');
     var ProductionInput = require('app/ProductionInput');
 
@@ -51,7 +51,7 @@ define(function (require) {
             app.generate();
         });
         */
-        this.stepSwitch = new Switch("step-switch");
+
     };
 
 
