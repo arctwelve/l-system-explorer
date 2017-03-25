@@ -57,11 +57,14 @@
 .play-btn-img {
     width:112px;
     height:32px;
+    cursor: pointer;
 }
 
 
 .play-icon {
     position: absolute;
     margin-top:-4px;
-    margin-left: 40px;
+    margin-left:-10px;
+    padding-left:50px;
+    padding-right:50px;
 }

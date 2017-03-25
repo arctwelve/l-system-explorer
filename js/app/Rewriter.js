@@ -20,7 +20,6 @@ define(function () {
      * Fill production object with properties of each production added
      */
     Rewriter.prototype.addProduction = function (p) {
-
         var pa = p.split("->");
         this.productions[pa[0]] = pa[1];
     };

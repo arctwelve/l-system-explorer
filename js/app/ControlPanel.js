@@ -7,10 +7,9 @@ define(function (require) {
     "use strict";
 
     var Slider = require('app/Slider');
-    var DecimalSlider = require('app/DecimalSlider');
-
-
+    var Rewriter = require('app/Rewriter');
     var PushButton = require('app/PushButton');
+    var DecimalSlider = require('app/DecimalSlider');
     var ProductionInput = require('app/ProductionInput');
 
 
@@ -35,22 +34,21 @@ define(function (require) {
         this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 500);
         this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
 
-        this.sliderIteration.val = 11;
+        // temp settings
+
+        this.axiomField.value = "F-F-F-F";
+        // TODO: need setter for production list slots
+
+        this.sliderIteration.val = 4;
         this.lengthSlider.val = 5;
-        this.sliderAngle.val = 20;
-        this.sliderAngleDecimal.val = 2;
-        this.sliderStartX.val = 130;
-        this.sliderStartY.val = 250;
-        this.sliderStartAngle.val = 45;
+        this.sliderAngle.val = 90;
+        this.sliderAngleDecimal.val = 0;
+        this.sliderStartX.val = 500;
+        this.sliderStartY.val = 500;
+        this.sliderStartAngle.val = 0;
 
-
-
-        /*
-        this.generateBtn = new PushButton("btn-generate", "GENERATE");
-        this.generateBtn.addEventListener("click", function () {
-            app.generate();
-        });
-        */
+        var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
+        playButton.addEventListener("click", this.render.bind(this));
 
     };
 
@@ -63,7 +61,7 @@ define(function (require) {
         var dataObj = {};
         dataObj.axiom = this.axiomField.value;
         dataObj.productions = this.productionList.getValues();
-        dataObj.isShowingSteps = this.stepSwitch.showSteps;
+        dataObj.isShowingSteps = true;//this.stepSwitch.showSteps;
 
         return dataObj;
     };
@@ -82,6 +80,16 @@ define(function (require) {
         }
     };
 
+
+    ControlPanel.prototype.render = function () {
+        var dataObj = this.getData();
+        var r = new Rewriter(dataObj.axiom);
+        r.addProduction(dataObj.productions[0]); // need to iterate here
+
+        r.derive(this.sliderIteration.val);
+        console.log(r.words);
+
+    };
 
     return ControlPanel;
 });
