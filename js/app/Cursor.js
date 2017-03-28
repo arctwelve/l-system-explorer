@@ -9,9 +9,9 @@ define(function () {
     var Cursor = function (px, py, rad) {
 
         this.px = px;
-        this.py = py
+        this.py = py;
         this.rad = rad;
-    }
+    };
 
     return Cursor;
 });

@@ -24,6 +24,35 @@ define(function () {
 
 
     /*
+     * Public method to set the current open input slot. The current open slot is the last
+     * one open starting from the slot at the first position. If all slots are full no production
+     * is set.
+     */
+    ProductionInput.prototype.setProduction = function (inputVal) {
+
+         this.elementBtn.click();
+        /*
+        if (this.numSlots === this.maxSlots) {
+            console.log("Input slot could not be set. Maximum number of slots used.");
+            return;
+        }
+
+        // first slot is empty and open to set
+        if (this.numSlots === 1) {
+
+            this.element.firstElementChild.value = inputVal;
+            this.numSlots++;
+        } else {
+
+
+
+            this.element.firstElementChild.value = inputVal;
+            this.numSlots++;
+        }*/
+    };
+
+
+    /*
      * Event handler for "add" button clicks. Creates a clone input slot and appends it to the DOM.
      * The right-side button on the new clone slot is changed to a remove (-) button, visually and
      * functionally. isClickLock prevents creation of slot on click, during the creation and

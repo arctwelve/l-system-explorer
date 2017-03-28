@@ -56,7 +56,7 @@ define(function () {
         this.ctx.stroke();
 
 
-        var c:Cursor;
+       /* var c:Cursor;
 
         switch(instr) {
             // these should be default
@@ -93,7 +93,7 @@ define(function () {
                 break;
             default :
                 trace("unknown command: " + instr);
-        }
+        }*/
 
         window.requestAnimationFrame(this.render.bind(this));
     };

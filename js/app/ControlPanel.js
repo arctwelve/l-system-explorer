@@ -37,7 +37,8 @@ define(function (require) {
         // temp settings
 
         this.axiomField.value = "F-F-F-F";
-        // TODO: need setters for production list slots
+        this.productionList.setProduction("F->F-F+F-F-F");
+        this.productionList.setProduction("F->F-F-F");
 
         this.sliderIteration.val = 4;
         this.lengthSlider.val = 5;
