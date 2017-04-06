@@ -13,6 +13,8 @@ define(function () {
         this.slotSpaceY = 39;
 
         this.numSlots = 1;
+        this.slotIndex = 0;
+
         this.isClickLock = false;
         this.btnClass = "prod-btn";
         this.className = elementClassName;
@@ -30,25 +32,14 @@ define(function () {
      */
     ProductionInput.prototype.setProduction = function (inputVal) {
 
-         this.elementBtn.click();
-        /*
         if (this.numSlots === this.maxSlots) {
             console.log("Input slot could not be set. Maximum number of slots used.");
             return;
         }
 
-        // first slot is empty and open to set
-        if (this.numSlots === 1) {
-
-            this.element.firstElementChild.value = inputVal;
-            this.numSlots++;
-        } else {
-
-
-
-            this.element.firstElementChild.value = inputVal;
-            this.numSlots++;
-        }*/
+        this.prodInputs = document.getElementsByClassName("prod-input");
+        if (this.numSlots >= 1) this.elementBtn.click();
+        this.prodInputs[this.slotIndex++].children[0].value = inputVal;
     };
 
 
@@ -60,10 +51,9 @@ define(function () {
      */
     ProductionInput.prototype.addInputSlot = function (e) {
 
-        if (e.target.tagName !== 'I' || this.numSlots >= this.maxSlots || this.isClickLock) return;
+        if (this.isIllegalClick(e)) return;
 
         this.isClickLock = true;
-
         var slots = document.getElementsByClassName(this.className);
         var lastSlot = slots[slots.length - 1];
         var slotClone = lastSlot.cloneNode(true);
@@ -205,6 +195,19 @@ define(function () {
         }
     };
 
+
+    /*
+     * Helper method tests if click was legal: can a new slot be created on click? Tests if the
+     * click is on the button symbol, the max num of slots, and that the click state isn't locked
+     * during animation. On '.click()'s from the code, the button symbol check needs to be bypassed.
+     */
+    ProductionInput.prototype.isIllegalClick = function (e) {
+        var isIllegalTag = e.target.tagName !== 'I';
+        var isCodeClick = e.screenX === 0 && e.screenY === 0 && e.clientX === 0 && e.clientY === 0;
+
+        if (isCodeClick) isIllegalTag = false;
+        return (isIllegalTag || this.numSlots >= this.maxSlots || this.isClickLock);
+    }
 
     return ProductionInput;
 });
