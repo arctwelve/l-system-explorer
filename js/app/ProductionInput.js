@@ -30,6 +30,7 @@ define(function () {
      * is set.
      */
     ProductionInput.prototype.setProduction = function (inputVal) {
+        if (this.productions.length >= this.maxSlots) return;
         this.productions.push(inputVal);
     };
 

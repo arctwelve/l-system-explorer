@@ -35,13 +35,29 @@ define(function (require) {
         this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
 
 
-        // temp settings
+        this.testSetters();
+        var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
+        playButton.addEventListener("click", this.render.bind(this));
+
+    };
+
+
+    /*
+     * Temp method to test setters. Setters to be used to read saved settings from DB or some
+     * other data store
+     */
+    ControlPanel.prototype.testSetters = function() {
+
+        // test axiom setter
         this.axiomField.value = "F-F-F-F";
+
+        // test production setters
         this.productionList.setProduction("F->F-F+F-F-F");
         this.productionList.setProduction("F->F-F");
         this.productionList.setProduction("F->F-FG");
         this.productionList.init();
 
+        // test slider setters
         this.sliderIteration.val = 4;
         this.lengthSlider.val = 5;
         this.sliderAngle.val = 90;
@@ -49,11 +65,7 @@ define(function (require) {
         this.sliderStartX.val = 500;
         this.sliderStartY.val = 500;
         this.sliderStartAngle.val = 0;
-
-        var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
-        playButton.addEventListener("click", this.render.bind(this));
-
-    };
+    }
 
 
     /*
