@@ -12,7 +12,7 @@ define(function () {
         this.maxSlots = 3;
         this.slotSpaceY = 39;
         this.numSlots = 1;
-        this.numProds;
+        this.productions = [];
 
         this.isClickLock = false;
         this.btnClass = "prod-btn";
@@ -30,10 +30,7 @@ define(function () {
      * is set.
      */
     ProductionInput.prototype.setProduction = function (inputVal) {
-
-        this.prodInputs = document.getElementsByClassName("prod-input");
-        this.prodInputs[this.numSlots - 1].children[0].value = inputVal;
-        if (this.numSlots < this.numProds) this.elementBtn.click();
+        this.productions.push(inputVal);
     };
 
 
@@ -202,6 +199,21 @@ define(function () {
 
         return e.target.tagName !== 'I' || this.numSlots >= this.maxSlots || this.isClickLock;
     };
+
+
+    /*
+     * Does the actual creation and population of the production slots from the setters
+     */
+    ProductionInput.prototype.init = function () {
+
+        var plen = this.productions.length;
+        for (var x = 0; x < plen; x++) {
+            this.prodInputs = document.getElementsByClassName("prod-input");
+            this.prodInputs[this.numSlots - 1].children[0].value = this.productions[x];
+            if (x < plen -1) this.elementBtn.click();
+        }
+    };
+
 
     return ProductionInput;
 });
