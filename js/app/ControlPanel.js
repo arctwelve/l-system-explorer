@@ -36,8 +36,8 @@ define(function (require) {
 
         // temp settings
         this.axiomField.value = "F-F-F-F";
+        this.productionList.numProds = 2
         this.productionList.setProduction("F->F-F+F-F-F");
-        this.productionList.setProduction("F->F-F");
         this.productionList.setProduction("F->F-FG");
 
         this.sliderIteration.val = 4;

@@ -12,6 +12,7 @@ define(function () {
         this.maxSlots = 3;
         this.slotSpaceY = 39;
         this.numSlots = 1;
+        this.numProds;
 
         this.isClickLock = false;
         this.btnClass = "prod-btn";
@@ -30,10 +31,9 @@ define(function () {
      */
     ProductionInput.prototype.setProduction = function (inputVal) {
 
-        if (this.numSlots > 1) this.elementBtn.click();
-        //this.prodInputs = document.getElementsByClassName("prod-input");
-        //this.prodInputs[this.numSlots - 1].children[0].value = inputVal;
-
+        this.prodInputs = document.getElementsByClassName("prod-input");
+        this.prodInputs[this.numSlots - 1].children[0].value = inputVal;
+        if (this.numSlots < this.numProds) this.elementBtn.click();
     };
 
 
