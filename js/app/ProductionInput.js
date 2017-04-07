@@ -11,9 +11,7 @@ define(function () {
 
         this.maxSlots = 3;
         this.slotSpaceY = 39;
-
         this.numSlots = 1;
-        this.slotIndex = 0;
 
         this.isClickLock = false;
         this.btnClass = "prod-btn";
@@ -32,14 +30,10 @@ define(function () {
      */
     ProductionInput.prototype.setProduction = function (inputVal) {
 
-        if (this.numSlots === this.maxSlots) {
-            console.log("Input slot could not be set. Maximum number of slots used.");
-            return;
-        }
+        if (this.numSlots > 1) this.elementBtn.click();
+        //this.prodInputs = document.getElementsByClassName("prod-input");
+        //this.prodInputs[this.numSlots - 1].children[0].value = inputVal;
 
-        this.prodInputs = document.getElementsByClassName("prod-input");
-        if (this.numSlots >= 1) this.elementBtn.click();
-        this.prodInputs[this.slotIndex++].children[0].value = inputVal;
     };
 
 
@@ -202,12 +196,12 @@ define(function () {
      * during animation. On '.click()'s from the code, the button symbol check needs to be bypassed.
      */
     ProductionInput.prototype.isIllegalClick = function (e) {
-        var isIllegalTag = e.target.tagName !== 'I';
-        var isCodeClick = e.screenX === 0 && e.screenY === 0 && e.clientX === 0 && e.clientY === 0;
 
-        if (isCodeClick) isIllegalTag = false;
-        return (isIllegalTag || this.numSlots >= this.maxSlots || this.isClickLock);
-    }
+        var isCodeClick = e.screenX === 0 && e.screenY === 0 && e.clientX === 0 && e.clientY === 0;
+        if (isCodeClick) return false;
+
+        return e.target.tagName !== 'I' || this.numSlots >= this.maxSlots || this.isClickLock;
+    };
 
     return ProductionInput;
 });

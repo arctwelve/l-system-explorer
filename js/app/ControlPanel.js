@@ -35,11 +35,10 @@ define(function (require) {
         this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
 
         // temp settings
-
         this.axiomField.value = "F-F-F-F";
         this.productionList.setProduction("F->F-F+F-F-F");
         this.productionList.setProduction("F->F-F");
-
+        this.productionList.setProduction("F->F-FG");
 
         this.sliderIteration.val = 4;
         this.lengthSlider.val = 5;
