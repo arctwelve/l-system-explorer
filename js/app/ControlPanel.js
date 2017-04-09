@@ -36,6 +36,7 @@ define(function (require) {
 
 
         this.testSetters();
+
         var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
         playButton.addEventListener("click", this.render.bind(this));
 
@@ -46,7 +47,7 @@ define(function (require) {
      * Temp method to test setters. Setters to be used to read saved settings from DB or some
      * other data store
      */
-    ControlPanel.prototype.testSetters = function() {
+    ControlPanel.prototype.testSetters = function () {
 
         // test axiom setter
         this.axiomField.value = "F-F-F-F";
@@ -65,7 +66,7 @@ define(function (require) {
         this.sliderStartX.val = 500;
         this.sliderStartY.val = 500;
         this.sliderStartAngle.val = 0;
-    }
+    };
 
 
     /*
@@ -76,7 +77,7 @@ define(function (require) {
         var dataObj = {};
         dataObj.axiom = this.axiomField.value;
         dataObj.productions = this.productionList.getValues();
-        dataObj.isShowingSteps = true;//this.stepSwitch.showSteps;
+        dataObj.isShowingSteps = true; //this.stepSwitch.showSteps;
 
         return dataObj;
     };
