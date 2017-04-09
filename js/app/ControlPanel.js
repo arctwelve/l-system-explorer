@@ -34,28 +34,47 @@ define(function (require) {
         this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 500);
         this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
 
-
         this.testSetters();
 
         var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
-        playButton.addEventListener("click", this.render.bind(this));
+        playButton.addEventListener("click", this.playButtonClick.bind(this));
 
     };
 
 
     /*
-     * Temp method to test setters. Setters to be used to read saved settings from DB or some
+     * Event handler when the playbutton has been clicked. Takes the settings and derives the
+     * 'words' -- aka the string of instructions to draw the current system
+     */
+    ControlPanel.prototype.playButtonClick = function () {
+
+        var dataObj = this.getData();
+        var rewriter = new Rewriter(dataObj.axiom);
+
+        for (var i = 0; i < dataObj.productions.length; i++) {
+            rewriter.addProduction(dataObj.productions[i]);
+        }
+
+        rewriter.derive(this.sliderIteration.val);
+
+        // need to go to DrawingCanvas from here with all populated data and settings
+        console.log(rewriter.words);
+        console.log("____________________________________");
+        console.log(rewriter.words.length);
+    };
+
+
+    /*
+     * Temp method to test setters. Setters will be used to read saved settings from a DB or some
      * other data store
      */
     ControlPanel.prototype.testSetters = function () {
 
         // test axiom setter
-        this.axiomField.value = "F-F-F-F";
+        this.axiomField.value = "-F";
 
         // test production setters
-        this.productionList.setProduction("F->F-F+F-F-F");
-        this.productionList.setProduction("F->F-F");
-        this.productionList.setProduction("F->F-FG");
+        this.productionList.setProduction("F->F+F-F-F+F");
         this.productionList.init();
 
         // test slider setters
@@ -70,8 +89,9 @@ define(function (require) {
 
 
     /*
-     * Data model for the App by way of the controls on the panel. Model data Includes the
-     * axiom, 1 to 4, production fields, the step switch state and more TBD
+     * Gets the data model for the system by way of the controls on the panel. Model data includes
+     * the axiom, 1 to 3 productions, the step switch state, number of iterations and other
+     * configurations. More features like line color are TBD.
      */
     ControlPanel.prototype.getData = function () {
         var dataObj = {};
@@ -96,16 +116,6 @@ define(function (require) {
         }
     };
 
-
-    ControlPanel.prototype.render = function () {
-        var dataObj = this.getData();
-        var r = new Rewriter(dataObj.axiom);
-        r.addProduction(dataObj.productions[0]); // need to iterate here
-
-        r.derive(this.sliderIteration.val);
-        console.log(r.words);
-
-    };
 
     return ControlPanel;
 });

@@ -1,6 +1,7 @@
 /*
  * Drawing canvas object. Takes up entire window, including space underneath control panel. Object
- * wraps the html canvas -- the reference to it (this.obj) is grabbed in the constructor.
+ * wraps the html canvas. RenderInstructions takes a completed string of parsed productions (aka
+ * 'words') and draws it onto the canvas.
  */
 define(function () {
 
@@ -16,34 +17,17 @@ define(function () {
 
         window.addEventListener('resize', this.resizeCanvas.bind(this));
         this.resizeCanvas();
+        //this.renderInstructions();
     };
 
 
     DrawingCanvas.prototype.resizeCanvas = function () {
         this.cvs.width = window.innerWidth;
         this.cvs.height = window.innerHeight;
-        //this.render();
     };
 
 
-    DrawingCanvas.prototype.render = function (time) {
-
-        this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
-        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
-
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
-        this.ctx.lineTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
-
-        this.ctx.strokeStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
-        this.ctx.stroke();
-
-
-        window.requestAnimationFrame(this.render.bind(this));
-    };
-
-
-      DrawingCanvas.prototype.renderInstruction = function (instr) {
+    DrawingCanvas.prototype.renderInstruction = function (instr) {
 
         this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
@@ -56,44 +40,44 @@ define(function () {
         this.ctx.stroke();
 
 
-       /* var c:Cursor;
+        /* var c:Cursor;
 
-        switch(instr) {
-            // these should be default
-            case 'R' :
-            case 'L' : // edge rewriting
-            case 'F' :
-            case 'X' : // node rewriting
-            case 'Y' :
-                px = px + d * Math.cos(this.rad);
-                py = py + d * Math.sin(this.rad);
-                this.ctx.lineTo(px, py);
-                break;
-            case 'f' : //lowercase f
-                px = px + d * Math.cos(this.rad);
-                py = py + d * Math.sin(this.rad);
-                this.ctx.moveTo(px, py);
-                break;
-            case '-' :
-                this.rad += a;
-                break;
-            case '+' :
-                this.rad -= a;
-                break;
-            case '[':
-                c = new Cursor(px, py, rad);
-                stack.push(c);
-                break;
-            case ']':
-                c = stack.pop();
-                px = c.px;
-                py = c.py;
-                rad = c.rad;
-                sprite.graphics.moveTo(px, py);
-                break;
-            default :
-                trace("unknown command: " + instr);
-        }*/
+         switch(instr) {
+             // these should be default
+             case 'R' :
+             case 'L' : // edge rewriting
+             case 'F' :
+             case 'X' : // node rewriting
+             case 'Y' :
+                 px = px + d * Math.cos(this.rad);
+                 py = py + d * Math.sin(this.rad);
+                 this.ctx.lineTo(px, py);
+                 break;
+             case 'f' : //lowercase f
+                 px = px + d * Math.cos(this.rad);
+                 py = py + d * Math.sin(this.rad);
+                 this.ctx.moveTo(px, py);
+                 break;
+             case '-' :
+                 this.rad += a;
+                 break;
+             case '+' :
+                 this.rad -= a;
+                 break;
+             case '[':
+                 c = new Cursor(px, py, rad);
+                 stack.push(c);
+                 break;
+             case ']':
+                 c = stack.pop();
+                 px = c.px;
+                 py = c.py;
+                 rad = c.rad;
+                 sprite.graphics.moveTo(px, py);
+                 break;
+             default :
+                 trace("unknown command: " + instr);
+         }*/
 
         window.requestAnimationFrame(this.render.bind(this));
     };
@@ -156,3 +140,20 @@ private function renderInstruction (instr:String):void {
 	}
 
     */
+
+
+/* DrawingCanvas.prototype.render = function (time) {
+
+      this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
+      this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
+
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
+      this.ctx.lineTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
+
+      this.ctx.strokeStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+      this.ctx.stroke();
+
+
+      window.requestAnimationFrame(this.render.bind(this));
+  };*/

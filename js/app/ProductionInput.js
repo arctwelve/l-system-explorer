@@ -25,17 +25,6 @@ define(function () {
 
 
     /*
-     * Public method to set the current open input slot. The current open slot is the last
-     * one open starting from the slot at the first position. If all slots are full no production
-     * is set.
-     */
-    ProductionInput.prototype.setProduction = function (inputVal) {
-        if (this.productions.length >= this.maxSlots) return;
-        this.productions.push(inputVal);
-    };
-
-
-    /*
      * Event handler for "add" button clicks. Creates a clone input slot and appends it to the DOM.
      * The right-side button on the new clone slot is changed to a remove (-) button, visually and
      * functionally. isClickLock prevents creation of slot on click, during the creation and
@@ -66,6 +55,17 @@ define(function () {
 
         cloneButton.addEventListener("click", this.removeInputSlot.bind(this));
         this.numSlots++;
+    };
+
+
+    /*
+     * Public method to set the current open input slot. The current open slot is the last
+     * one open starting from the slot at the first position. If all slots are full no production
+     * is set.
+     */
+    ProductionInput.prototype.setProduction = function (inputVal) {
+        if (this.productions.length >= this.maxSlots) return;
+        this.productions.push(inputVal);
     };
 
 
@@ -190,7 +190,7 @@ define(function () {
 
     /*
      * Helper method tests if click was legal: can a new slot be created on click? Tests if the
-     * click is on the button symbol, the max num of slots, and that the click state isn't locked
+     * click is on the button symbol, if the max num of slots, and that the click state isn't locked
      * during animation. On '.click()'s from the code, the button symbol check needs to be bypassed.
      */
     ProductionInput.prototype.isIllegalClick = function (e) {
