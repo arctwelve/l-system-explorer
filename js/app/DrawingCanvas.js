@@ -27,18 +27,19 @@ define(function (require) {
 
 
     /*
-     * Renders the given L-System. Angles are converted to radians.
-     * TODO: Initial orientation
+     * Renders the given L-System. Angles are in radians
      */
     DrawingCanvas.prototype.render = function (words, iterations, angle, dist) {
 
         console.log(iterations, angle, dist, words.length);
 
-        var rad = 0;
-        var c = null;
+        // start cursor facing down
+        var rad = 3 * Math.PI / 2;
         var a = angle * Math.PI / 180;
-        var px = window.innerWidth / 2;
-        var py = window.innerHeight / 2;
+        var px = this.cvs.width / 2;
+        var py = this.cvs.height / 2;
+        var c = null;
+        var stack = [];
 
         // background
         this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
@@ -92,6 +93,5 @@ define(function (require) {
 
         this.ctx.stroke();
     };
-
     return DrawingCanvas;
 });
