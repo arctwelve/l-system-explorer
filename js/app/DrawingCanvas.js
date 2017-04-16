@@ -27,7 +27,7 @@ define(function (require) {
 
 
     /*
-     * Renders the given L-System
+     * Renders the given L-System. Angles are converted to radians.
      */
     DrawingCanvas.prototype.render = function (words, iterations, angle, dist) {
 
@@ -86,12 +86,10 @@ define(function (require) {
                     break;
                 default:
                     trace("unknown command: " + instr);
-
             }
         }
 
         this.ctx.stroke();
-
     };
 
     return DrawingCanvas;
