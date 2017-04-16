@@ -15,8 +15,6 @@ define(function (require) {
         this.cvs = document.getElementById("drawing-canvas");
         this.ctx = this.cvs.getContext("2d");
 
-        this.rad = 0;
-
         window.addEventListener('resize', this.resizeCanvas.bind(this));
         this.resizeCanvas();
     };
@@ -28,23 +26,26 @@ define(function (require) {
     };
 
 
-
     /*
-     *
+     * Renders the given L-System
      */
     DrawingCanvas.prototype.render = function (words, iterations, angle, dist) {
 
+        console.log(iterations, angle, dist, words.length);
+
+        var rad = 0;
         var c = null;
-        var py = 0;
-        var px = 0;
+        var a = angle * Math.PI / 180;
+        var px = window.innerWidth / 2;
+        var py = window.innerHeight / 2;
 
         // background
-        this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
+        this.ctx.fillStyle = 'rgba(0, 51, 102, 1)';
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
         this.ctx.beginPath();
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 1.0)';
-        this.ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
+        this.ctx.moveTo(px, py);
 
         var len = words.length;
         for (var i = 0; i < len; i++) {
@@ -52,26 +53,25 @@ define(function (require) {
             var w = words[i];
 
             switch (w) {
-                // these should be default
                 case 'R':
                 case 'L': // edge rewriting
                 case 'F':
                 case 'X': // node rewriting
                 case 'Y':
-                    px = px + dist * Math.cos(this.rad);
-                    py = py + dist * Math.sin(this.rad);
+                    px = px + dist * Math.cos(rad);
+                    py = py + dist * Math.sin(rad);
                     this.ctx.lineTo(px, py);
                     break;
-                case 'f': //lowercase f
-                    px = px + dist * Math.cos(this.rad);
-                    py = py + dist * Math.sin(this.rad);
+                case 'f':
+                    px = px + dist * Math.cos(rad);
+                    py = py + dist * Math.sin(rad);
                     this.ctx.moveTo(px, py);
                     break;
                 case '-':
-                    this.rad += angle;
+                    rad += a;
                     break;
                 case '+':
-                    this.rad -= angle;
+                    rad -= a;
                     break;
                 case '[':
                     c = new Cursor(px, py, rad);
@@ -82,80 +82,17 @@ define(function (require) {
                     px = c.px;
                     py = c.py;
                     rad = c.rad;
-                    sprite.graphics.moveTo(px, py);
+                    this.ctx.moveTo(px, py);
                     break;
                 default:
                     trace("unknown command: " + instr);
 
             }
-
-            this.ctx.stroke();
-            window.requestAnimationFrame(this.render.bind(this));
         }
+
+        this.ctx.stroke();
+
     };
 
     return DrawingCanvas;
 });
-
-/*
-private function renderInstruction (instr:String):void {
-
-			var c:Cursor;
-
-			switch(instr) {
-                // these should be default
-				case 'R' :
-				case 'L' : // edge rewriting
-				case 'F' :
-                case 'X' : // node rewriting
-                case 'Y' :
-					px = px + d * Math.cos(rad);
-					py = py + d * Math.sin(rad);
-					sprite.graphics.lineTo(px, py);
-					break;
-				case 'S' : //lowercase f
-					px = px + d * Math.cos(rad);
-					py = py + d * Math.sin(rad);
-					sprite.graphics.moveTo(px, py);
-					break;
-				case '-' :
-					rad += a;
-					break;
-				case '+' :
-					rad -= a;
-					break;
-				case '[':
-					c = new Cursor(px, py, rad);
-					stack.push(c);
-					break;
-				case ']':
-					c = stack.pop();
-					px = c.px;
-					py = c.py;
-					rad = c.rad;
-					sprite.graphics.moveTo(px, py);
-					break;
-				default :
-					trace("unknown command: " + instr);
-			}
-		}
-	}
-
-    */
-
-
-/* DrawingCanvas.prototype.render = function (time) {
-
-      this.ctx.fillStyle = 'rgba(0, 51, 102, 0.02)';
-      this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
-
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
-      this.ctx.lineTo(this.getRandInt(1, 2000), this.getRandInt(1, 2000));
-
-      this.ctx.strokeStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
-      this.ctx.stroke();
-
-
-      window.requestAnimationFrame(this.render.bind(this));
-  };*/

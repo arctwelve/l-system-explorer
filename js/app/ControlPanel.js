@@ -83,7 +83,7 @@ define(function (require) {
 
         // test slider setters
         this.sliderIteration.val = 4;
-        this.lengthSlider.val = 5;
+        this.lengthSlider.val = 10;
         this.sliderAngle.val = 90;
         this.sliderAngleDecimal.val = 0;
         this.sliderStartX.val = 500;
