@@ -28,6 +28,7 @@ define(function (require) {
 
     /*
      * Renders the given L-System. Angles are converted to radians.
+     * TODO: Initial orientation
      */
     DrawingCanvas.prototype.render = function (words, iterations, angle, dist) {
 
@@ -40,11 +41,11 @@ define(function (require) {
         var py = window.innerHeight / 2;
 
         // background
-        this.ctx.fillStyle = 'rgba(0, 51, 102, 1)';
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
         this.ctx.beginPath();
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
+        this.ctx.strokeStyle = 'rgba(255, 255, 0, 1)';
         this.ctx.moveTo(px, py);
 
         var len = words.length;
@@ -85,7 +86,7 @@ define(function (require) {
                     this.ctx.moveTo(px, py);
                     break;
                 default:
-                    trace("unknown command: " + instr);
+                    console.log("unknown command: " + w);
             }
         }
 

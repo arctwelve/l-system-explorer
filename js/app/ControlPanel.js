@@ -26,8 +26,8 @@ define(function (require) {
         this.axiomField = document.getElementById("input-axiom");
         this.productionList = new ProductionInput("prod-input");
 
-        this.sliderIteration = new Slider("iteration-slider", "ITERATIONS", 1, 20);
-        this.lengthSlider = new Slider("length-slider", "SEGMENT LENGTH", 1, 100);
+        this.sliderIteration = new Slider("iteration-slider", "ITERATIONS", 1, 15);
+        this.lengthSlider = new Slider("length-slider", "SEGMENT LENGTH", 1, 30);
         this.sliderAngle = new Slider("angle-slider", "SEGMENT ANGLE", 0, 180);
         this.sliderAngleDecimal = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
