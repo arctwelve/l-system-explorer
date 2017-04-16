@@ -15,6 +15,7 @@ define(function (require) {
 
     var ControlPanel = function (app) {
 
+        this.app = app;
         this.isOpen = false;
         this.openPosX = "-400px";
 
@@ -38,13 +39,12 @@ define(function (require) {
 
         var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
         playButton.addEventListener("click", this.playButtonClick.bind(this));
-
     };
 
 
     /*
      * Event handler when the playbutton has been clicked. Takes the settings and derives the
-     * 'words' -- aka the string of instructions to draw the current system
+     * L-System words -- aka the string of instructions to draw the current system
      */
     ControlPanel.prototype.playButtonClick = function () {
 
@@ -57,10 +57,14 @@ define(function (require) {
 
         rewriter.derive(this.sliderIteration.val);
 
-        // need to go to DrawingCanvas from here with all populated data and settings
-        console.log(rewriter.words);
-        console.log("____________________________________");
-        console.log(rewriter.words.length);
+        // TODO: write a configuration object to pass to the drawing canvas with all the settings
+        var angle = parseFloat(this.sliderAngle.val + "." + this.sliderAngleDecimal.val);
+
+        this.app.drawingCanvas.render(
+            rewriter.words,
+            this.sliderIteration.val,
+            angle,
+            this.lengthSlider.val);
     };
 
 

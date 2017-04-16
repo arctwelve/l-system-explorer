@@ -2,9 +2,6 @@
  * An input field with an add or remove button at the end. Allows user to enter an l-system
  * production value. Functions as its own collection: handling its own siblings, adding or
  * removing them.
- *
- * TODO: Split into Production and ProductionGroup - seperate collection to seperate class.
- *
  */
 define(function () {
 

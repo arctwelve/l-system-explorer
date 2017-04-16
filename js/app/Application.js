@@ -23,7 +23,9 @@ define(function (require) {
      */
     Application.prototype.init =  function() {
         this.canvas = new DrawingCanvas();
+        this.drawingCanvas = new DrawingCanvas();
         this.controlPanel = new ControlPanel(this);
+
         this.controlPanel.toggleControlPanel();
         document.getElementById("drawing-canvas-container").style.visibility = "visible";
 
