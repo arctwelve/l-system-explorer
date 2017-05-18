@@ -27,17 +27,17 @@ define(function (require) {
 
 
     /*
-     * Renders the given L-System. Angles are in radians
+     * Renders the given L-System. Angles are in radians.
      */
-    DrawingCanvas.prototype.render = function (words, iterations, angle, dist) {
+    DrawingCanvas.prototype.render = function (words, config) {
 
-        console.log(iterations, angle, dist, words.length);
+        var a = config.angle;
+        var dist = config.segLength;
 
-        // start cursor facing down
-        var rad = 3 * Math.PI / 2;
-        var a = angle * Math.PI / 180;
-        var px = this.cvs.width / 2;
-        var py = this.cvs.height / 2;
+        var px = config.startX;
+        var py = config.startY;
+        var rad = config.startAngle;
+
         var c = null;
         var stack = [];
 
@@ -46,7 +46,7 @@ define(function (require) {
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
         this.ctx.beginPath();
-        this.ctx.strokeStyle = 'rgba(255, 255, 0, 1)';
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
         this.ctx.moveTo(px, py);
 
         var len = words.length;

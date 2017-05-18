@@ -9,6 +9,7 @@ define(function (require) {
     var Slider = require('app/Slider');
     var Rewriter = require('app/Rewriter');
     var PushButton = require('app/PushButton');
+    var Configuration = require('app/Configuration');
     var DecimalSlider = require('app/DecimalSlider');
     var ProductionInput = require('app/ProductionInput');
 
@@ -31,8 +32,8 @@ define(function (require) {
         this.sliderAngle = new Slider("angle-slider", "SEGMENT ANGLE", 0, 180);
         this.sliderAngleDecimal = new DecimalSlider("angle-slider-decimal", this.sliderAngle);
 
-        this.sliderStartX = new Slider("start-x-slider", "START X", 0, 500);
-        this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 500);
+        this.sliderStartX = new Slider("start-x-slider", "START X", 0, 1000);
+        this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 1000);
         this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
 
         this.testSetters();
@@ -57,14 +58,13 @@ define(function (require) {
 
         rewriter.derive(this.sliderIteration.val);
 
-        // TODO: write a configuration object to pass to the drawing canvas with all the settings
-        var angle = parseFloat(this.sliderAngle.val + "." + this.sliderAngleDecimal.val);
+        var config = new Configuration();
+        config.setStart(this.sliderStartX.val, this.sliderStartY.val,this.sliderStartAngle.val);
+        config.setAngle(this.sliderAngle.val, this.sliderAngleDecimal.val);
+        config.iterations = this.sliderIteration.val;
+        config.segLength = this.lengthSlider.val;
 
-        this.app.drawingCanvas.render(
-            rewriter.words,
-            this.sliderIteration.val,
-            angle,
-            this.lengthSlider.val);
+        this.app.drawingCanvas.render(rewriter.words, config);
     };
 
 
@@ -82,13 +82,13 @@ define(function (require) {
         this.productionList.init();
 
         // test slider setters
-        this.sliderIteration.val = 4;
-        this.lengthSlider.val = 10;
+        this.sliderIteration.val = 5;
+        this.lengthSlider.val = 4;
         this.sliderAngle.val = 90;
         this.sliderAngleDecimal.val = 0;
         this.sliderStartX.val = 500;
         this.sliderStartY.val = 500;
-        this.sliderStartAngle.val = 0;
+        this.sliderStartAngle.val = 270;
     };
 
 
