@@ -15,6 +15,17 @@ define(function (require) {
         this.cvs = document.getElementById("drawing-canvas");
         this.ctx = this.cvs.getContext("2d");
 
+        // background
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
+
+        this.a = 0;
+        this.dist = 0;
+
+        this.len = 0;
+        this.wcount = 0;
+        this.words = null;
+
         window.addEventListener('resize', this.resizeCanvas.bind(this));
         this.resizeCanvas();
     };
@@ -27,7 +38,81 @@ define(function (require) {
 
 
     /*
-     * Renders the given L-System. Angles are in radians.
+     * Renders the given L-System in discrete steps instead of all at once. Angles are in radians.
+     */
+    DrawingCanvas.prototype.stepRender = function (words, config) {
+
+        this.a = config.angle;
+        this.dist = config.segLength;
+
+        this.words = words;
+        this.len = words.length;
+
+        var px = config.startX;
+        var py = config.startY;
+        var rad = config.startAngle;
+
+        var c = null;
+        var stack = [];
+
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        this.stepAnimate(px, py, rad);
+    };
+
+
+    /*
+     * The requestAnimationFrame loop function for stepRender(...)
+     */
+    DrawingCanvas.prototype.stepAnimate = function (px, py, rad) {
+
+        var w = this.words[this.wcount];
+
+        switch (w) {
+            case 'R':
+            case 'L': // edge rewriting
+            case 'F':
+            case 'X': // node rewriting
+            case 'Y':
+                this.ctx.beginPath();
+                this.ctx.moveTo(px, py);
+                px = px + this.dist * Math.cos(rad);
+                py = py + this.dist * Math.sin(rad);
+                this.ctx.lineTo(px, py);
+                this.ctx.stroke();
+                break;
+            case 'f':
+                px = px + this.dist * Math.cos(rad);
+                py = py + this.dist * Math.sin(rad);
+                this.ctx.moveTo(px, py);
+                break;
+            case '-':
+                rad += this.a;
+                break;
+            case '+':
+                rad -= this.a;
+                break;
+            case '[':
+                c = new Cursor(px, py, rad);
+                stack.push(c);
+                break;
+            case ']':
+                c = stack.pop();
+                px = c.px;
+                py = c.py;
+                rad = c.rad;
+                this.ctx.moveTo(px, py);
+                break;
+            default:
+                console.log("unknown command: " + w);
+        }
+
+        if (++this.wcount >= this.len) return;
+        window.requestAnimationFrame(this.stepAnimate.bind(this, px, py, rad));
+    };
+
+
+    /*
+     * Renders the given L-System in a single step. Angles are in radians.
      */
     DrawingCanvas.prototype.render = function (words, config) {
 
@@ -40,10 +125,6 @@ define(function (require) {
 
         var c = null;
         var stack = [];
-
-        // background
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
         this.ctx.beginPath();
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
@@ -90,8 +171,8 @@ define(function (require) {
                     console.log("unknown command: " + w);
             }
         }
-
         this.ctx.stroke();
     };
+
     return DrawingCanvas;
 });

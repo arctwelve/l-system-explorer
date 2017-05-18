@@ -64,7 +64,8 @@ define(function (require) {
         config.iterations = this.sliderIteration.val;
         config.segLength = this.lengthSlider.val;
 
-        this.app.drawingCanvas.render(rewriter.words, config);
+        //this.app.drawingCanvas.render(rewriter.words, config);
+        this.app.drawingCanvas.stepRender(rewriter.words, config);
     };
 
 
@@ -82,8 +83,8 @@ define(function (require) {
         this.productionList.init();
 
         // test slider setters
-        this.sliderIteration.val = 5;
-        this.lengthSlider.val = 4;
+        this.sliderIteration.val = 4;
+        this.lengthSlider.val = 11;
         this.sliderAngle.val = 90;
         this.sliderAngleDecimal.val = 0;
         this.sliderStartX.val = 500;
