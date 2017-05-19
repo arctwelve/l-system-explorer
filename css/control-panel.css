@@ -75,8 +75,7 @@ i.button-label-30 {
 }
 
 i.vert-align:hover,
-i.button-label:hover,
-.step-switch:hover i.button-label-30 {
+i.button-label:hover {
     color: #6699cc;
     cursor: pointer;
 }
@@ -152,10 +151,10 @@ i.button-label:hover,
 }
 
 .prod-input {
-    position:absolute;
-    top:20px;
-    width:350px;
-    height:47px;
+    position: absolute;
+    top: 20px;
+    width: 350px;
+    height: 47px;
     transition: top .3s ease-in-out;
 }
 
@@ -172,9 +171,9 @@ i.button-label:hover,
 
 .btn-rect {
     position: absolute;
-    top:425px;
-    left:40px;
-    cursor:pointer;
+    top: 425px;
+    left: 40px;
+    cursor: pointer;
 }
 
 .btn-rect-label {
@@ -185,7 +184,7 @@ i.button-label:hover,
     text-align: center;
     color: #cccccc;
     font-weight: 400;
-    padding: 16px  1px;
+    padding: 16px 1px;
     margin: -16px -1px;
 }
 

@@ -36,10 +36,18 @@ define(function (require) {
         this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 1000);
         this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
 
-        this.testSetters();
 
         var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
         playButton.addEventListener("click", this.playButtonClick.bind(this));
+
+        var rewindButton = new PushButton("rewind-btn", "img/btn-thin-down.png");
+        rewindButton.addEventListener("click", this.rewindButtonClick.bind(this));
+
+        var stepButton = new PushButton("step-btn", "img/btn-thin-down.png");
+        stepButton.addEventListener("click", this.stepButtonClick.bind(this));
+
+
+        this.testSetters();
     };
 
 
@@ -59,7 +67,7 @@ define(function (require) {
         rewriter.derive(this.sliderIteration.val);
 
         var config = new Configuration();
-        config.setStart(this.sliderStartX.val, this.sliderStartY.val,this.sliderStartAngle.val);
+        config.setStart(this.sliderStartX.val, this.sliderStartY.val, this.sliderStartAngle.val);
         config.setAngle(this.sliderAngle.val, this.sliderAngleDecimal.val);
         config.iterations = this.sliderIteration.val;
         config.segLength = this.lengthSlider.val;
@@ -67,6 +75,23 @@ define(function (require) {
         //this.app.drawingCanvas.render(rewriter.words, config);
         this.app.drawingCanvas.stepRender(rewriter.words, config);
     };
+
+
+    /*
+     * Event handler when rewind button is clicked. Sets the cursor and canvas to initial state
+     */
+    ControlPanel.prototype.rewindButtonClick = function () {
+
+    }
+
+
+    /*
+     * Event handler when the step button is clicked. When on the current l-system and settins are
+     * shown one instruction at a time, instead of instantly.
+     */
+    ControlPanel.prototype.rewindButtonClick = function () {
+
+    }
 
 
     /*
