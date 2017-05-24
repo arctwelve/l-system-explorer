@@ -29,32 +29,6 @@
 
         <div id="control-panel-body" class="no-select">
 
-            <!-- axiom -->
-            <div class="axiom-input-area">
-                <div class="input-label mgb no-select">AXIOM</div>
-                <input type="text" class="input-text" spellcheck="false" id="input-axiom">
-            </div>
-
-
-            <!-- productions -->
-            <div class="prod-input-area no-select">
-                <div class="input-label no-select">PRODUCTIONS</div>
-                <!-- individual field and button -->
-                <div class="prod-input">
-                    <input type="text" class="input-text large" spellcheck="false">
-                    <div class="prod-btn no-select">
-                        <i class="material-icons no-select md-lightgray button-label md-20">add</i>
-                        <img src="img/btn-sm-square.png">
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- first separator -->
-            <div class="separator first no-select">
-                <img src="img/separator.png">
-            </div>
-
 
             <!-- sliders -->
             <div class="small-slider" id="iteration-slider">
@@ -84,7 +58,7 @@
                 </div>
             </div>
 
-             <div class="small-slider" id="start-x-slider">
+            <div class="small-slider" id="start-x-slider">
                 <div class="slider-label"></div>
                 <input type="text" class="small-slider-input-text no-select" spellcheck="false" readonly>
                 <div class="small-slider-knob no-select">
@@ -101,11 +75,39 @@
                 </div>
             </div>
 
-             <div class="small-slider" id="start-angle-slider">
+            <div class="small-slider" id="start-angle-slider">
                 <div class="slider-label"></div>
                 <input type="text" class="small-slider-input-text no-select" spellcheck="false" readonly>
                 <div class="small-slider-knob no-select">
                     <img src="img/slider-knob.png">
+                </div>
+            </div>
+
+
+
+             <!-- first separator -->
+            <div class="separator first no-select">
+                <img src="img/separator.png">
+            </div>
+
+
+             <!-- axiom -->
+            <div class="axiom-input-area">
+                <div class="input-label mgb no-select">AXIOM</div>
+                <input type="text" class="input-text" spellcheck="false" id="input-axiom">
+            </div>
+
+
+            <!-- productions -->
+            <div class="prod-input-area no-select">
+                <div class="input-label no-select">PRODUCTIONS</div>
+                <!-- individual field and button -->
+                <div class="prod-input">
+                    <input type="text" class="input-text large" spellcheck="false">
+                    <div class="prod-btn no-select">
+                        <i class="material-icons no-select md-lightgray button-label md-20">add</i>
+                        <img src="img/btn-sm-square.png">
+                    </div>
                 </div>
             </div>
 
@@ -116,27 +118,31 @@
 
             <!-- step button -->
             <div class="step-btn no-select" id="step-btn">
-                <div class="status-light"><img src="img/step-light-on.png"></div>
+                <div class="status-light"><img src="img/step-light-off.png" class="button-light"></div>
                 <div>
                     <div class="step-btn-label">STEPS</div>
-                    <img src="img/btn-thin.png">
+                    <img src="img/btn-thin.png" class="button-image">
                 </div>
             </div>
 
             <!-- rewind button -->
             <div class="rewind-btn no-select" id="rewind-btn">
                 <div class="rewind-btn-inner">
-                   <i class="material-icons md-light vert-align no-select rewind-icon">skip_previous</i>
-                    <img src="img/btn-thin.png" class="rewind-btn-img">
+                    <i class="material-icons md-light vert-align no-select rewind-icon">skip_previous</i>
+                    <img src="img/btn-thin-short.png" class="rewind-btn-img button-image">
                 </div>
             </div>
 
-             <!-- play button -->
+            <!-- play button -->
             <div class="play-btn no-select" id="play-btn">
                 <div class="play-btn-inner">
-                   <i class="material-icons md-light vert-align no-select play-icon">play_arrow</i>
-                    <img src="img/btn-thin.png" class="play-btn-img no-select">
+                    <i class="material-icons md-light vert-align no-select play-icon">play_arrow</i>
+                    <img src="img/btn-thin.png" class="play-btn-img no-select button-image">
                 </div>
+            </div>
+
+            <div class="select-lsystem">
+
             </div>
         </div>
     </div>

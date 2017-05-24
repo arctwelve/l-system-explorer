@@ -14,7 +14,7 @@ define(function () {
         this.element.addEventListener("mouseout", this.buttonUp.bind(this));
         this.element.addEventListener("mousedown", this.buttonDown.bind(this));
 
-        this.image = this.element.getElementsByTagName("img")[0];
+        this.image = this.element.getElementsByClassName("button-image")[0];
         this.upImage = this.image.src;
         this.downImage = downImagePath;
     };

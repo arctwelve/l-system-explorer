@@ -4,7 +4,7 @@
 
 .step-btn {
     position: absolute;
-    top: 700px;
+    top: 460px;
     left: 40px;
 }
 
@@ -26,7 +26,6 @@
     color: #6699cc;
 }
 
-
 .status-light {
     position: absolute;
     top: 1px;
@@ -35,26 +34,25 @@
 
 .rewind-btn {
     position: absolute;
-    top: 700px;
-    left: 190px;
+    top: 460px;
+    left: 184px;
 }
 
 .rewind-btn-img {
-    width: 50px;
+    width: 63px;
     height: 32px;
 }
 
 .rewind-icon {
     position: absolute;
     margin-top: -4px;
-    margin-left: 0px;
-    padding-left: 13px;
-    padding-right: 13px;
+    padding-left: 20px;
+    padding-right: 18px;
 }
 
 .play-btn {
     position: absolute;
-    top: 700px;
+    top: 460px;
     left: 250px;
 }
 

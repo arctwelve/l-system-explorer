@@ -105,7 +105,7 @@ i.button-label:hover {
 
 .axiom-input-area {
     position: absolute;
-    top: 70px;
+    top: 575px;
     left: 40px;
     width: calc(100% - 50px);
 }
@@ -115,7 +115,7 @@ i.button-label:hover {
     top: 10px;
     left: 5px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.8em;
+    font-size: 0.7em;
     color: #cccccc;
     font-weight: 700;
     text-align: left;
@@ -145,14 +145,14 @@ i.button-label:hover {
 
 .prod-input-area {
     position: absolute;
-    top: 140px;
+    top: 635px;
     left: 40px;
     width: calc(100% - 50px);
 }
 
 .prod-input {
     position: absolute;
-    top: 20px;
+    top: 18px;
     width: 350px;
     height: 47px;
     transition: top .3s ease-in-out;
@@ -180,7 +180,7 @@ i.button-label:hover {
     position: relative;
     top: 36px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.9em;
+    font-size: 0.8em;
     text-align: center;
     color: #cccccc;
     font-weight: 400;

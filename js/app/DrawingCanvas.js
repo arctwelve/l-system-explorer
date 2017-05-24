@@ -38,6 +38,14 @@ define(function (require) {
 
 
     /*
+     * Clears any drawing and stops any iterative processses like requestAnimationFrame
+     */
+     DrawingCanvas.prototype.reset = function () {
+
+    };
+
+
+    /*
      * Renders the given L-System in discrete steps instead of all at once. Angles are in radians.
      */
     DrawingCanvas.prototype.stepRender = function (words, config) {

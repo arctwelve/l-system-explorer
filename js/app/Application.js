@@ -1,7 +1,5 @@
 /*
- * Main application object for the L-Systems Explorer.
- *
- * TODO: 'ignored' words = symbols that don't get drawn if they are specificed (i.e., defaults)
+ * Main application object for the L-Systems Explorer
  */
 define(function (require) {
 
@@ -39,7 +37,7 @@ define(function (require) {
 
 
         //this.msgBubble = new MessageBubble();
-        //this.msgBubble.setMessage(500, 600, "YOU MUST INSERT A NUDE TAIN", "left");
+        //this.msgBubble.setMessage(500, 600, "HELLO WORLD", "left");
 
         //var rewriter = new Rewriter("X");
         //rewriter.addProduction("X->F[+X][-X]FX");

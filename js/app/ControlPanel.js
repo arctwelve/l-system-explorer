@@ -40,12 +40,12 @@ define(function (require) {
         var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
         playButton.addEventListener("click", this.playButtonClick.bind(this));
 
-        var rewindButton = new PushButton("rewind-btn", "img/btn-thin-down.png");
+        var rewindButton = new PushButton("rewind-btn", "img/btn-thin-short-down.png");
         rewindButton.addEventListener("click", this.rewindButtonClick.bind(this));
 
-        var stepButton = new PushButton("step-btn", "img/btn-thin-down.png");
-        stepButton.addEventListener("click", this.stepButtonClick.bind(this));
-
+        this.stepButton = new PushButton("step-btn", "img/btn-thin-down.png");
+        this.stepButton.addEventListener("click", this.stepButtonClick.bind(this));
+        this.showSteps = false;
 
         this.testSetters();
     };
@@ -72,8 +72,11 @@ define(function (require) {
         config.iterations = this.sliderIteration.val;
         config.segLength = this.lengthSlider.val;
 
-        //this.app.drawingCanvas.render(rewriter.words, config);
-        this.app.drawingCanvas.stepRender(rewriter.words, config);
+        if (this.showSteps) {
+            this.app.drawingCanvas.stepRender(rewriter.words, config);
+        } else {
+            this.app.drawingCanvas.render(rewriter.words, config);
+        }
     };
 
 
@@ -81,17 +84,23 @@ define(function (require) {
      * Event handler when rewind button is clicked. Sets the cursor and canvas to initial state
      */
     ControlPanel.prototype.rewindButtonClick = function () {
-
-    }
+        this.app.canvas.reset();
+    };
 
 
     /*
-     * Event handler when the step button is clicked. When on the current l-system and settins are
+     * Event handler when the step button is clicked. When on the current l-system and settings are
      * shown one instruction at a time, instead of instantly.
      */
-    ControlPanel.prototype.rewindButtonClick = function () {
+    ControlPanel.prototype.stepButtonClick = function () {
 
-    }
+        var lightImg = this.stepButton.element.getElementsByClassName("button-light")[0];
+        var lightSrc = lightImg.src;
+
+        this.showSteps = ! this.showSteps;
+        lightSrc = (this.showSteps) ? lightSrc.replace("off", "on") : lightSrc.replace("on", "off");
+        lightImg.src = lightSrc;
+    };
 
 
     /*
