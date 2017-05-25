@@ -4,8 +4,6 @@
 # NPM
 node_modules
 
-# minified css
-css/production/style.min.css
 
-# read to delete
-resources/dead
+resources/other/
+css/production/styles.min.css

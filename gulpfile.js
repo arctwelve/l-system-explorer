@@ -24,7 +24,7 @@ gulp.task('jshint', function () {
 gulp.task('css-files', function () {
     return gulp.src('css/*.css')
         .pipe(cleanCSS())
-        .pipe(concat('style.min.css'))
+        .pipe(concat('styles.min.css'))
         .pipe(gulp.dest('css/production'))
 });
 
