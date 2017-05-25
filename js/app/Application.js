@@ -31,26 +31,6 @@ define(function (require) {
     };
 
 
-    Application.prototype.generate =  function() {
-        var panelData = this.controlPanel.getData();
-        this.validateInput(panelData);
-
-
-        //this.msgBubble = new MessageBubble();
-        //this.msgBubble.setMessage(500, 600, "HELLO WORLD", "left");
-
-        //var rewriter = new Rewriter("X");
-        //rewriter.addProduction("X->F[+X][-X]FX");
-        //rewriter.addProduction("F->FF");
-        //rewriter.derive(7);
-    };
-
-
-    Application.prototype.validateInput =  function(input) {
-        // return true;
-    };
-
-
     Application.prototype.testState =  function() {
         if (document.readyState === "complete") {
             this.init();

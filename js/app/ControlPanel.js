@@ -36,7 +36,6 @@ define(function (require) {
         this.sliderStartY = new Slider("start-y-slider", "START Y", 0, 1000);
         this.sliderStartAngle = new Slider("start-angle-slider", "START ANGLE", 0, 360);
 
-
         var playButton = new PushButton("play-btn", "img/btn-thin-down.png");
         playButton.addEventListener("click", this.playButtonClick.bind(this));
 
@@ -73,9 +72,9 @@ define(function (require) {
         config.segLength = this.lengthSlider.val;
 
         if (this.showSteps) {
-            this.app.drawingCanvas.stepRender(rewriter.words, config);
+            this.app.drawingCanvas.renderSteps(rewriter.words, config);
         } else {
-            this.app.drawingCanvas.render(rewriter.words, config);
+            this.app.drawingCanvas.renderAll(rewriter.words, config);
         }
     };
 
@@ -84,7 +83,7 @@ define(function (require) {
      * Event handler when rewind button is clicked. Sets the cursor and canvas to initial state
      */
     ControlPanel.prototype.rewindButtonClick = function () {
-        this.app.canvas.reset();
+        this.app.drawingCanvas.reset();
     };
 
 

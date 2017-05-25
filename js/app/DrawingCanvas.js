@@ -15,22 +15,137 @@ define(function (require) {
         this.cvs = document.getElementById("drawing-canvas");
         this.ctx = this.cvs.getContext("2d");
 
-        // background
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
+        this.setBackground(0, 0, 0, 1);
+        this.reqID = null;
+        this.isStep = false;
 
         this.a = 0;
+        this.rad = 0;
+
+        this.px = 0;
+        this.py = 0;
         this.dist = 0;
 
-        this.len = 0;
-        this.wcount = 0;
+        this.wlen = 0;
+        this.widx = 0;
         this.words = null;
+        this.cstack = [];
 
         window.addEventListener('resize', this.resizeCanvas.bind(this));
         this.resizeCanvas();
     };
 
 
+
+    /*
+     * Renders the given L-System in a single step. Angles are in radians.
+     */
+    DrawingCanvas.prototype.renderAll = function (words, config) {
+
+        this.initPath(false, words, config);
+        for (var i = 0; i < this.wlen; i++) {
+            this.processWord(words[i]);
+        }
+        this.ctx.stroke();
+    };
+
+
+    /*
+     * Renders the given L-System in discrete steps instead of all at once. Angles are in radians.
+     */
+    DrawingCanvas.prototype.renderSteps = function (words, config) {
+
+        this.initPath(true, words, config);
+        this.stepAnimateLoop();
+    };
+
+
+    DrawingCanvas.prototype.initPath = function (isStep, words, config) {
+        this.isStep = isStep;
+        this.configMembers(words, config);
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, .1)';
+        this.ctx.moveTo(this.px, this.py);
+    };
+
+
+    /*
+     * The requestAnimationFrame loop function for stepRender(...)
+     */
+    DrawingCanvas.prototype.stepAnimateLoop = function () {
+
+        this.processWord(this.words[this.widx]);
+        if (++this.widx >= this.wlen) return;
+        this.reqID = window.requestAnimationFrame(this.stepAnimateLoop.bind(this));
+    };
+
+
+    /*
+     * Handles the actual rules for each case of a particular word
+     */
+    DrawingCanvas.prototype.processWord = function (w) {
+        switch (w) {
+            case 'R':
+            case 'L': // edge rewriting
+            case 'F':
+            case 'X': // node rewriting
+            case 'Y':
+                this.px = this.px + this.dist * Math.cos(this.rad);
+                this.py = this.py + this.dist * Math.sin(this.rad);
+                this.ctx.lineTo(this.px, this.py);
+                if (this.isStep) this.ctx.stroke();
+                break;
+            case 'f':
+                this.px = this.px + this.dist * Math.cos(this.rad);
+                this.py = this.py + this.dist * Math.sin(this.rad);
+                this.ctx.moveTo(this.px, this.py);
+                break;
+            case '-':
+                this.rad += this.a;
+                break;
+            case '+':
+                this.rad -= this.a;
+                break;
+            case '[':
+                c = new Cursor(this.px, this.py, this.rad);
+                stack.push(c);
+                break;
+            case ']':
+                c = stack.pop();
+                this.px = c.px;
+                this.py = c.py;
+                this.rad = c.rad;
+                this.ctx.moveTo(this.px, this.py);
+                break;
+            default:
+                console.log("unknown command: " + w);
+        }
+    };
+
+
+    /*
+     * Clears any drawing, stops any iterative processses like requestAnimationFrame and resets
+     * word array index
+     */
+    DrawingCanvas.prototype.reset = function () {
+        window.cancelAnimationFrame(this.reqID);
+        this.setBackground(0, 0, 0, 1);
+        this.widx = 0;
+    };
+
+
+    /*
+     * Sets the background. Will erase any existing drawing.
+     */
+    DrawingCanvas.prototype.setBackground = function (r, g, b, a) {
+        this.ctx.fillStyle = 'rgba(' + a + ',' + g + ',' + b + ',' + a + ')';
+        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
+    };
+
+
+    /*
+     * Resets the size of the canvas on user resize
+     */
     DrawingCanvas.prototype.resizeCanvas = function () {
         this.cvs.width = window.innerWidth;
         this.cvs.height = window.innerHeight;
@@ -38,149 +153,22 @@ define(function (require) {
 
 
     /*
-     * Clears any drawing and stops any iterative processses like requestAnimationFrame
+     * Sets all class members from the passed words array and config object
      */
-     DrawingCanvas.prototype.reset = function () {
+    DrawingCanvas.prototype.configMembers = function (words, config) {
 
-    };
+        this.words = words;
+        this.wlen = words.length;
 
-
-    /*
-     * Renders the given L-System in discrete steps instead of all at once. Angles are in radians.
-     */
-    DrawingCanvas.prototype.stepRender = function (words, config) {
+        this.px = config.startX;
+        this.py = config.startY;
 
         this.a = config.angle;
         this.dist = config.segLength;
-
-        this.words = words;
-        this.len = words.length;
-
-        var px = config.startX;
-        var py = config.startY;
-        var rad = config.startAngle;
-
-        var c = null;
-        var stack = [];
-
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-        this.stepAnimate(px, py, rad);
+        this.rad = config.startAngle;
     };
 
 
-    /*
-     * The requestAnimationFrame loop function for stepRender(...)
-     */
-    DrawingCanvas.prototype.stepAnimate = function (px, py, rad) {
-
-        var w = this.words[this.wcount];
-
-        switch (w) {
-            case 'R':
-            case 'L': // edge rewriting
-            case 'F':
-            case 'X': // node rewriting
-            case 'Y':
-                this.ctx.beginPath();
-                this.ctx.moveTo(px, py);
-                px = px + this.dist * Math.cos(rad);
-                py = py + this.dist * Math.sin(rad);
-                this.ctx.lineTo(px, py);
-                this.ctx.stroke();
-                break;
-            case 'f':
-                px = px + this.dist * Math.cos(rad);
-                py = py + this.dist * Math.sin(rad);
-                this.ctx.moveTo(px, py);
-                break;
-            case '-':
-                rad += this.a;
-                break;
-            case '+':
-                rad -= this.a;
-                break;
-            case '[':
-                c = new Cursor(px, py, rad);
-                stack.push(c);
-                break;
-            case ']':
-                c = stack.pop();
-                px = c.px;
-                py = c.py;
-                rad = c.rad;
-                this.ctx.moveTo(px, py);
-                break;
-            default:
-                console.log("unknown command: " + w);
-        }
-
-        if (++this.wcount >= this.len) return;
-        window.requestAnimationFrame(this.stepAnimate.bind(this, px, py, rad));
-    };
-
-
-    /*
-     * Renders the given L-System in a single step. Angles are in radians.
-     */
-    DrawingCanvas.prototype.render = function (words, config) {
-
-        var a = config.angle;
-        var dist = config.segLength;
-
-        var px = config.startX;
-        var py = config.startY;
-        var rad = config.startAngle;
-
-        var c = null;
-        var stack = [];
-
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
-        this.ctx.moveTo(px, py);
-
-        var len = words.length;
-        for (var i = 0; i < len; i++) {
-
-            var w = words[i];
-
-            switch (w) {
-                case 'R':
-                case 'L': // edge rewriting
-                case 'F':
-                case 'X': // node rewriting
-                case 'Y':
-                    px = px + dist * Math.cos(rad);
-                    py = py + dist * Math.sin(rad);
-                    this.ctx.lineTo(px, py);
-                    break;
-                case 'f':
-                    px = px + dist * Math.cos(rad);
-                    py = py + dist * Math.sin(rad);
-                    this.ctx.moveTo(px, py);
-                    break;
-                case '-':
-                    rad += a;
-                    break;
-                case '+':
-                    rad -= a;
-                    break;
-                case '[':
-                    c = new Cursor(px, py, rad);
-                    stack.push(c);
-                    break;
-                case ']':
-                    c = stack.pop();
-                    px = c.px;
-                    py = c.py;
-                    rad = c.rad;
-                    this.ctx.moveTo(px, py);
-                    break;
-                default:
-                    console.log("unknown command: " + w);
-            }
-        }
-        this.ctx.stroke();
-    };
 
     return DrawingCanvas;
 });
