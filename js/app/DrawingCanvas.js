@@ -15,7 +15,9 @@ define(function (require) {
         this.cvs = document.getElementById("drawing-canvas");
         this.ctx = this.cvs.getContext("2d");
 
-        this.setBackground(0, 0, 0, 1);
+        this.setBackground(34, 33, 44, 1);
+        this.setStrokeStyle(255, 255, 255, 1);
+
         this.reqID = null;
         this.isStep = false;
 
@@ -36,16 +38,13 @@ define(function (require) {
     };
 
 
-
     /*
      * Renders the given L-System in a single step. Angles are in radians.
      */
     DrawingCanvas.prototype.renderAll = function (words, config) {
 
         this.initPath(false, words, config);
-        for (var i = 0; i < this.wlen; i++) {
-            this.processWord(words[i]);
-        }
+        for (var i = 0; i < this.wlen; i++) this.processWord(words[i]);
         this.ctx.stroke();
     };
 
@@ -57,15 +56,6 @@ define(function (require) {
 
         this.initPath(true, words, config);
         this.stepAnimateLoop();
-    };
-
-
-    DrawingCanvas.prototype.initPath = function (isStep, words, config) {
-        this.isStep = isStep;
-        this.configMembers(words, config);
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, .1)';
-        this.ctx.moveTo(this.px, this.py);
     };
 
 
@@ -90,6 +80,10 @@ define(function (require) {
             case 'F':
             case 'X': // node rewriting
             case 'Y':
+                if (this.isStep) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.px, this.py);
+                }
                 this.px = this.px + this.dist * Math.cos(this.rad);
                 this.py = this.py + this.dist * Math.sin(this.rad);
                 this.ctx.lineTo(this.px, this.py);
@@ -124,12 +118,26 @@ define(function (require) {
 
 
     /*
+     * Clears and initializes the path for both step and instant drawing
+     */
+    DrawingCanvas.prototype.initPath = function (isStep, words, config) {
+        this.reset();
+        this.isStep = isStep;
+        this.configMembers(words, config);
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = this.strokeStyle;
+        this.ctx.moveTo(this.px, this.py);
+    };
+
+
+    /*
      * Clears any drawing, stops any iterative processses like requestAnimationFrame and resets
      * word array index
      */
     DrawingCanvas.prototype.reset = function () {
         window.cancelAnimationFrame(this.reqID);
-        this.setBackground(0, 0, 0, 1);
+        this.ctx.fillStyle = this.background;
+        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
         this.widx = 0;
     };
 
@@ -138,17 +146,30 @@ define(function (require) {
      * Sets the background. Will erase any existing drawing.
      */
     DrawingCanvas.prototype.setBackground = function (r, g, b, a) {
-        this.ctx.fillStyle = 'rgba(' + a + ',' + g + ',' + b + ',' + a + ')';
+        this.background = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+        console.log(this.background);
+        this.ctx.fillStyle = this.background;
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
     };
 
 
     /*
-     * Resets the size of the canvas on user resize
+     * Sets the color and opacity of the path. Keeps the interface the same as setBackground(...)
+     */
+    DrawingCanvas.prototype.setStrokeStyle = function (r, g, b, a) {
+        this.strokeStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+    };
+
+
+    /*
+     * Resets the canvas on user resize
      */
     DrawingCanvas.prototype.resizeCanvas = function () {
         this.cvs.width = window.innerWidth;
         this.cvs.height = window.innerHeight;
+
+        this.ctx.fillStyle = this.background;
+        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
     };
 
 
@@ -167,8 +188,6 @@ define(function (require) {
         this.dist = config.segLength;
         this.rad = config.startAngle;
     };
-
-
 
     return DrawingCanvas;
 });
