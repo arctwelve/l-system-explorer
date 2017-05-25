@@ -4,6 +4,5 @@
 # NPM
 node_modules
 
-
+# non essential stuff
 resources/other/
-css/production/styles.min.css
