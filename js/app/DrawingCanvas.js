@@ -14,16 +14,14 @@ define(function (require) {
         this.container = document.getElementById("drawing-canvas-container");
         this.cvs = document.getElementById("drawing-canvas");
         this.ctx = this.cvs.getContext("2d");
-
-        this.setBackground(34, 33, 44, 1);
-        this.setStrokeStyle(255, 255, 255, 1);
+        this.background = null;
+        this.strokeStyle = null;
 
         this.reqID = null;
         this.isStep = false;
 
         this.a = 0;
         this.rad = 0;
-
         this.px = 0;
         this.py = 0;
         this.dist = 0;
@@ -33,6 +31,18 @@ define(function (require) {
         this.words = null;
         this.cstack = [];
 
+        this.init();
+    };
+
+
+    /*
+     * Set events and properties of the object here. Sets the color of the background and path
+     * and adds a browser resize event handler
+     */
+    DrawingCanvas.prototype.init = function () {
+
+        this.setBackground(34, 33, 44, 1);
+        this.setStrokeStyle(255, 255, 255, 0.4);
         window.addEventListener('resize', this.resizeCanvas.bind(this));
         this.resizeCanvas();
     };
@@ -147,7 +157,6 @@ define(function (require) {
      */
     DrawingCanvas.prototype.setBackground = function (r, g, b, a) {
         this.background = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
-        console.log(this.background);
         this.ctx.fillStyle = this.background;
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
     };
