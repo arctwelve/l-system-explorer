@@ -26,8 +26,6 @@ define(function (require) {
 
         this.controlPanel.toggleControlPanel();
         document.getElementById("drawing-canvas-container").style.visibility = "visible";
-
-
     };
 
 
