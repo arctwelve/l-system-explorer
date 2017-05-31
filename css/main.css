@@ -1,6 +1,5 @@
 /*
- * CSS styles for html and body as well as utility styles
- *
+ * CSS styles for global html
  */
 
 html,
@@ -21,4 +20,8 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+*:focus {
+    outline: none;
 }
