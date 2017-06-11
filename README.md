@@ -1,5 +1,5 @@
 # l-system-explorer
-###L-system explorer written in JavaScript
+## L-system explorer written in JavaScript
 
 An example of a complex SPA with custom interface components, using pure OO JavaScript and zero-frameworks.  
 
